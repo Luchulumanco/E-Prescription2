@@ -60,48 +60,41 @@
                 
                 <input asp-for="Input.AddressLine2" class="form-control" autocomplete="addressline1" aria-required="true"/>
                 <label asp-for="Input.AddressLine2"></label>
-                @*<span asp-validation-for="Input.AddressLine2" class="text-danger"></span>*@
+                
              </div>
              
             
 
-             @*<div class="row">
-               <div class="col-md-4">
-                   <div class="form-floating">
-               <label asp-for="Input.Province" class="form-control" autocomplete="suburbid" aria-required="true" > </label>
-                <select asp-for="Input.Province"  >
-                    <option value="0"></option>
-                </select>
-                <span asp-validation-for="Input.Province" class="text-danger"></span>
-             </div>
-               </div>
-             </div>*@
-
              
-            @* <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true"></label>
-             <select id=Input.ProvinceId class="form-select" aria-label="Default select example" >
-                 
-                <option selected>Please select a province</option>
-                <option value="ProvinceName"></option>
-                <span asp-validation-for="Input.Province" class="text-danger"></span>
-                
-             </select>*@
-
-             <select asp-for="SelectedProvinceId" asp-items="@Model.ProvinceItem" class="form-select" aria-label="Default select example" >
+             <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true">
+                  Province
+                 <select asp-for="SelectedProvinceId" asp-items="@Model.ProvinceItem" class="form-select" aria-label="Default select example" >
                  <option>Select a Province</option>
+                  
              </select>
-
-             <select asp-for="SelectedCityId" asp-items="@Model.CityItem" class="form-select" aria-label="Default select example" >
+             </label>
+            
+             <label asp-for="Input.City" class="form-control" autocomplete="cityId" aria-required="true">
+                 City
+                 <select asp-for="SelectedCityId" asp-items="@Model.CityItem" class="form-select" aria-label="Default select example" >
                  <option>Select a City</option>
                  </select>
-
-                  <select asp-for="SelectedSuburbId" asp-items="@Model.SuburbItem" class="form-select" aria-label="Default select example" >
+             </label>
+             
+                  <label asp-for="Input.Suburb" class="form-control" autocomplete="suburbId" aria-required="true">
+                      Suburb
+                      <select asp-for="SelectedSuburbId" asp-items="@Model.SuburbItem" class="form-select" aria-label="Default select example" >
                  <option>Select a Suburb</option>
                  </select>
-
-                  <select asp-for="SelectedPostalCodeId" asp-items="@Model.PostalCodeItem" class="form-select" aria-label="Default select example" >
+                  </label>  
+                  
+                  <label asp-for="Input.PostalCode" class="form-control" autocomplete="postalcodeId" aria-required="true">
+                       Postal Code
+                      <select asp-for="SelectedPostalCodeId" asp-items="@Model.PostalCodeItem" class="form-select" aria-label="Default select example" >
                  <option>Select a Postal Code</option>
                  </select>
+                  </label>
+                 
 
 
                 

@@ -101,6 +101,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Identification Number")]
             [MaxLength(13)]
+            [MinLength(13, ErrorMessage = "A minimum of 13 characters is needed for an ID number, Please enter a valid ID number")]
             [RegularExpression("([0-9]+)",ErrorMessage = "Please enter a valid ID number")]
             public string IdNumber { get; set; }
             
