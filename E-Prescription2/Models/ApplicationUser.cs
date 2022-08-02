@@ -8,6 +8,8 @@ namespace E_Prescription2.Models
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        
+        public string? IdNumber { get; set; }
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
 
