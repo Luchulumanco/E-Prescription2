@@ -24,6 +24,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace E_Prescription2.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
@@ -90,11 +91,19 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "First Name")]
+            [DataType(DataType.Text)]
             public string FirstName { get; set; }
             [Required]
             [Display(Name = "Last Name")]
+            [DataType(DataType.Text)]
             public string LastName { get; set; }
 
+            [Required]
+            [Display(Name = "Identification Number")]
+            [MaxLength(13)]
+            [RegularExpression("([0-9]+)",ErrorMessage = "Please enter a valid ID number")]
+            public string IdNumber { get; set; }
+            
 
 
             /// <summary>
@@ -104,8 +113,8 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
+            [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
-
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -114,6 +123,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
+            
             public string Password { get; set; }
 
             /// <summary>
@@ -202,6 +212,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
+                    IdNumber = Input.IdNumber,
                     AddressLine1 =Input.AddressLine1,
                     AddressLine2 =Input.AddressLine2,
                     ProvinceId = SelectedProvinceId,
