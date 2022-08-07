@@ -10,6 +10,11 @@ namespace E_Prescription2.Models
         public string? LastName { get; set; }
         
         public string? IdNumber { get; set; }
+
+        [ForeignKey("Gender")]
+        public int? GenderId { get; set; }
+        public virtual Gender? Genders { get; set; }
+
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
 

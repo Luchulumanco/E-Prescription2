@@ -5,12 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class Pete : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "Identity");
+
+            migrationBuilder.CreateTable(
+                name: "Genders",
+                schema: "Identity",
+                columns: table => new
+                {
+                    GenderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GenderType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genders", x => x.GenderId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "PostalCodes",
@@ -165,6 +179,7 @@ namespace E_Prescription2.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenderId = table.Column<int>(type: "int", nullable: true),
                     AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProvinceId = table.Column<int>(type: "int", nullable: true),
@@ -197,6 +212,12 @@ namespace E_Prescription2.Migrations
                         principalSchema: "Identity",
                         principalTable: "Cities",
                         principalColumn: "CityId");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Genders_GenderId",
+                        column: x => x.GenderId,
+                        principalSchema: "Identity",
+                        principalTable: "Genders",
+                        principalColumn: "GenderId");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_PostalCodes_PostalCodeId",
                         column: x => x.PostalCodeId,
@@ -324,6 +345,12 @@ namespace E_Prescription2.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_GenderId",
+                schema: "Identity",
+                table: "AspNetUsers",
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_PostalCodeId",
                 schema: "Identity",
                 table: "AspNetUsers",
@@ -432,6 +459,10 @@ namespace E_Prescription2.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Genders",
                 schema: "Identity");
 
             migrationBuilder.DropTable(

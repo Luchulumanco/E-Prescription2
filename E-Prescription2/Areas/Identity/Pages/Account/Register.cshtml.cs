@@ -54,6 +54,9 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             _context = applicationDb;
         }
         [BindProperty]
+        public int SelectedGenderId { get; set; }
+
+        [BindProperty]
         public int SelectedProvinceId { set; get; }
 
         [BindProperty]
@@ -104,7 +107,14 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [MinLength(13, ErrorMessage = "A minimum of 13 characters is needed for an ID number, Please enter a valid ID number")]
             [RegularExpression("([0-9]+)",ErrorMessage = "Please enter a valid ID number")]
             public string IdNumber { get; set; }
-            
+
+            [Required]
+            [Display(Name = "Gender")]
+            [ForeignKey("Genders")]
+            public int GenderID { get; set; }
+            public virtual Gender Genders { get; set; }
+
+
 
 
             /// <summary>
@@ -173,7 +183,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
            
         }
-
+        public List<SelectListItem> GenderItem { set; get; }
         public List<SelectListItem> ProvinceItem { set; get; }
         public List<SelectListItem> CityItem { set;get; }
         public List<SelectListItem> SuburbItem { set; get; }
@@ -181,6 +191,11 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            GenderItem = _context.Genders.Select(g => new SelectListItem
+            {
+                Value = g.GenderId.ToString(),
+                Text = g.GenderType
+            }).ToList();
             ProvinceItem = _context.Provinces.Select(p => new SelectListItem { Value = p.ProvinceId.ToString(),
                 Text = p.ProvinceName}).ToList(); 
             CityItem = _context.Cities.Select(c => new SelectListItem { Value = c.CityId.ToString(), 
@@ -197,6 +212,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            var SelectedGenderId = this.SelectedGenderId;
             var SelectedProvinceId = this.SelectedProvinceId;
             var SelectedCityId = this.SelectedCityId;
             var SelectedSuburbId = this.SelectedSuburbId;
@@ -214,6 +230,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     IdNumber = Input.IdNumber,
+                    GenderId = SelectedGenderId,
                     AddressLine1 =Input.AddressLine1,
                     AddressLine2 =Input.AddressLine2,
                     ProvinceId = SelectedProvinceId,

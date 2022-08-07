@@ -13,6 +13,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
+    public virtual DbSet<Gender>? Genders { get; set; }
     public virtual DbSet<Province>? Provinces { get; set; }
     public virtual DbSet<City>? Cities { get; set; }
     public virtual DbSet<Suburb>? Suburbs { get; set; }

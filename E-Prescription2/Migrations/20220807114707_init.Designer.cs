@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220802202521_Pete")]
-    partial class Pete
+    [Migration("20220807114707_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,9 @@ namespace E_Prescription2.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("IdNumber")
                         .HasColumnType("nvarchar(max)");
@@ -114,6 +117,8 @@ namespace E_Prescription2.Migrations
 
                     b.HasIndex("CityId");
 
+                    b.HasIndex("GenderId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -150,6 +155,23 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Cities", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.Gender", b =>
+                {
+                    b.Property<int>("GenderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenderId"), 1L, 1);
+
+                    b.Property<string>("GenderType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GenderId");
+
+                    b.ToTable("Genders", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PostalCode", b =>
@@ -401,6 +423,10 @@ namespace E_Prescription2.Migrations
                         .WithMany()
                         .HasForeignKey("CityId");
 
+                    b.HasOne("E_Prescription2.Models.Gender", "Genders")
+                        .WithMany()
+                        .HasForeignKey("GenderId");
+
                     b.HasOne("E_Prescription2.Models.PostalCode", "PostalCodes")
                         .WithMany()
                         .HasForeignKey("PostalCodeId");
@@ -414,6 +440,8 @@ namespace E_Prescription2.Migrations
                         .HasForeignKey("SuburbId");
 
                     b.Navigation("Cities");
+
+                    b.Navigation("Genders");
 
                     b.Navigation("PostalCodes");
 

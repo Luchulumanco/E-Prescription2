@@ -33,6 +33,13 @@
                 <label asp-for="Input.IdNumber"></label>
                 <span asp-validation-for="Input.IdNumber" class="text-danger"></span>
              </div>
+             <label asp-for="Input.Genders" class="form-control" autocomplete="GenderId" aria-required="true">
+                  Gender
+                 <select asp-for="SelectedGenderId" asp-items="@Model.GenderItem" class="form-select" aria-label="Default select example" >
+                 <option>Select a GenderType</option>
+                  
+             </select>
+             </label>
 
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
