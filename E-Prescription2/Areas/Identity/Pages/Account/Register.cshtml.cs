@@ -93,16 +93,16 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "First Name")]
+            [Display(Name = "First Name*")]
             [DataType(DataType.Text)]
             public string FirstName { get; set; }
             [Required]
-            [Display(Name = "Last Name")]
+            [Display(Name = "Last Name*")]
             [DataType(DataType.Text)]
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name = "Identification Number")]
+            [Display(Name = "Identification Number*")]
             [MaxLength(13)]
             [MinLength(13, ErrorMessage = "A minimum of 13 characters is needed for an ID number, Please enter a valid ID number")]
             [RegularExpression("([0-9]+)",ErrorMessage = "Please enter a valid ID number")]
@@ -123,7 +123,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Email*")]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
             /// <summary>
@@ -133,7 +133,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Password*")]
             
             public string Password { get; set; }
 
@@ -142,13 +142,13 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirm password*")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
 
             [Required]
-            [Display(Name = "Address Line 1")]
+            [Display(Name = "Address Line 1*")]
             public string AddressLine1 { get; set; }
             //[Required]
             [Display(Name = "Address Line 2")]

@@ -6,56 +6,70 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
+
+   
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-             <div class="form-floating">
+            <div class="row g-1">
+             <div class="col-md-6">
+                 <div class="form-floating">
                  
                  <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true"/>
                  <label asp-for="Input.FirstName"></label>
                  <span asp-validation-for="Input.FirstName" class="text-danger"></span>
               </div>
-             <div class="form-floating">
+             </div>
+             
+             <div class="col-md-6">
+                 <div class="form-floating">
                 
                 <input asp-for="Input.LastName" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.LastName"></label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
              </div>
-
+             </div>
+             
+             <div class="col-md-6">
              <div class="form-floating">
                 
                 <input asp-for="Input.IdNumber" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.IdNumber"></label>
                 <span asp-validation-for="Input.IdNumber" class="text-danger"></span>
              </div>
+             </div>
+             <div class="col-md-6">
+             
              <label asp-for="Input.Genders" class="form-control" autocomplete="GenderId" aria-required="true">
-                  Gender
+                 
                  <select asp-for="SelectedGenderId" asp-items="@Model.GenderItem" class="form-select" aria-label="Default select example" >
-                 <option>Select a GenderType</option>
+                 <option>-- select your gender --</option>
                   
              </select>
              </label>
+            
+             </div>
 
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+            <div class="col-md-6">
             <div class="form-floating">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+            </div>
+             <div class="col-md-6">
             <div class="form-floating">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+             </div>
 
             <div class="form-floating">
                 
@@ -72,47 +86,54 @@
              
             
 
-             
+              <div class="col-md-3">
              <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true">
                   Province
                  <select asp-for="SelectedProvinceId" asp-items="@Model.ProvinceItem" class="form-select" aria-label="Default select example" >
-                 <option>Select a Province</option>
+                 <option>-- select a province --</option>
                   
              </select>
              </label>
+             </div>
             
+              <div class="col-md-3">
              <label asp-for="Input.City" class="form-control" autocomplete="cityId" aria-required="true">
                  City
                  <select asp-for="SelectedCityId" asp-items="@Model.CityItem" class="form-select" aria-label="Default select example" >
-                 <option>Select a City</option>
+                 <option>-- select a city --</option>
                  </select>
              </label>
-             
+             </div>
+              <div class="col-md-3">
                   <label asp-for="Input.Suburb" class="form-control" autocomplete="suburbId" aria-required="true">
                       Suburb
                       <select asp-for="SelectedSuburbId" asp-items="@Model.SuburbItem" class="form-select" aria-label="Default select example" >
-                 <option>Select a Suburb</option>
+                 <option>-- select a suburb --</option>
                  </select>
-                  </label>  
+                  </label> 
+                  </div>
                   
+                   <div class="col-md-2">
                   <label asp-for="Input.PostalCode" class="form-control" autocomplete="postalcodeId" aria-required="true">
                        Postal Code
                       <select asp-for="SelectedPostalCodeId" asp-items="@Model.PostalCodeItem" class="form-select" aria-label="Default select example" >
-                 <option>Select a Postal Code</option>
+                 <option>-- select a postal code --</option>
                  </select>
                   </label>
+                  </div>
                  
 
 
                 
 
-
-           <div>
+          </div>
+          
+           <div class="form-floating">
                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
            </div> 
         </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
+    
+ @*   <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to register.</h3>
             <hr />
@@ -141,8 +162,8 @@
                 }
             }
         </section>
-    </div>
-</div>
+    </div>*@
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
