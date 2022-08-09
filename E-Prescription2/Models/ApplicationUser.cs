@@ -15,6 +15,7 @@ namespace E_Prescription2.Models
         public int? GenderId { get; set; }
         public virtual Gender? Genders { get; set; }
 
+        public string? PhoneNumber { get; set; }
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
 
