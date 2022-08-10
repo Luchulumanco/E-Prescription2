@@ -14,32 +14,37 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row g-1">
              <div class="col-md-6">
+                  <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                  <div class="form-floating">
                  
                  <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true"/>
                  <label asp-for="Input.FirstName"></label>
-                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+
               </div>
              </div>
              
              <div class="col-md-6">
+                   <span asp-validation-for="Input.LastName" class="text-danger"></span>
                  <div class="form-floating">
                 
                 <input asp-for="Input.LastName" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.LastName"></label>
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+              
              </div>
              </div>
+
+             
              
              <div class="col-md-6">
+                    <span asp-validation-for="Input.IdNumber" class="text-danger"></span>
              <div class="form-floating">
                 
                 <input asp-for="Input.IdNumber" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.IdNumber"></label>
-                <span asp-validation-for="Input.IdNumber" class="text-danger"></span>
+             
              </div>
              </div>
-             <div class="col-md-6">
+             <div class="col-md-3">
              
              <label asp-for="Input.Genders" class="form-control" autocomplete="GenderId" aria-required="true">
                  
@@ -50,44 +55,58 @@
              </label>
             
              </div>
+            
 
              <div class="col-md-6">
+                  <span asp-validation-for="Input.Email" class="text-danger"></span>
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+               
             </div>
             </div>
             
              <div class="col-md-6">
+                  <span asp-validation-for="Input.DOB" class="text-danger"></span>
+                 <div class="form-floating">
+                
+                <input asp-for="Input.DOB" class="form-control" autocomplete="dateofbirth" aria-required="true" />
+                <label asp-for="Input.DOB"></label>
+               
+             </div>
+             </div>
+
+             
+                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             <div class="form-floating">
                 <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.PhoneNumber"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                
             </div>
-            </div>
+            
 
 
             <div class="col-md-6">
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
             <div class="form-floating">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                
             </div>
             </div>
              <div class="col-md-6">
+                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             <div class="form-floating">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                
             </div>
              </div>
-
+              <span asp-validation-for="Input.AddressLine1" class="text-danger"></span>
             <div class="form-floating">
-                
                 <input asp-for="Input.AddressLine1" class="form-control" autocomplete="addressline1" aria-required="true" />
                <label asp-for="Input.AddressLine1"></label>
-                <span asp-validation-for="Input.AddressLine1" class="text-danger"></span>
+               
              </div>
              <div class="form-floating">
                 
@@ -97,7 +116,7 @@
              </div>
              
             
-
+               <div class="row g-1">
               <div class="col-md-3">
              <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true">
                   Province
@@ -107,7 +126,9 @@
              </select>
              </label>
              </div>
+             </div>
             
+             <div class="row g-1">
               <div class="col-md-3">
              <label asp-for="Input.City" class="form-control" autocomplete="cityId" aria-required="true">
                  City
@@ -116,6 +137,8 @@
                  </select>
              </label>
              </div>
+             </div>
+             <div class="row g-1">
               <div class="col-md-3">
                   <label asp-for="Input.Suburb" class="form-control" autocomplete="suburbId" aria-required="true">
                       Suburb
@@ -124,8 +147,9 @@
                  </select>
                   </label> 
                   </div>
+                  </div>
                   
-                   <div class="col-md-2">
+                   <div class="col-md-3">
                   <label asp-for="Input.PostalCode" class="form-control" autocomplete="postalcodeId" aria-required="true">
                        Postal Code
                       <select asp-for="SelectedPostalCodeId" asp-items="@Model.PostalCodeItem" class="form-select" aria-label="Default select example" >

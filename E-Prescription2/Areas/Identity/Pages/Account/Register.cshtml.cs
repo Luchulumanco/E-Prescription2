@@ -102,6 +102,12 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
+            [Display(Name ="Date Of Birth*")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+            public DateTime DOB { get; set; }
+
+            [Required]
             [Display(Name = "Identification Number*")]
             [MaxLength(13)]
             [MinLength(13, ErrorMessage = "A minimum of 13 characters is needed for an ID number, Please enter a valid ID number")]
@@ -115,8 +121,9 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             public int GenderID { get; set; }
             public virtual Gender Genders { get; set; }
 
-            
+            [Required]
             [Phone]
+            [Display(Name = "Phone Number*")]
             [MaxLength(10)]
             [MinLength(10, ErrorMessage = "A minimum of 10 characters is needed for a phone number")]
             [RegularExpression("([0-9]+)", ErrorMessage = "Please enter a valid phone number")]
@@ -131,7 +138,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Email*")]
+            [Display(Name = "Email Address*")]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
             /// <summary>
@@ -238,6 +245,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     IdNumber = Input.IdNumber,
+                    DOB = Input.DOB,
                     PhoneNumber = Input.PhoneNumber,
                     GenderId = SelectedGenderId,
                     AddressLine1 =Input.AddressLine1,
