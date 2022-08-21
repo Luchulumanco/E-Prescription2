@@ -72,7 +72,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
             //[EmailAddress]
             [Required]
-            [Display(Name = "Email Address / Username")]
+            [Display(Name = "Email Address ")]
             public string Email { get; set; }
 
             /// <summary>
