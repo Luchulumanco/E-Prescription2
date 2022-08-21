@@ -7,10 +7,88 @@
 
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
+<form id="profile-form" method="post" enctype="multipart/form-data">
 <div class="row">
     <div class="col-md-6">
-        <form id="profile-form" method="post">
+       
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating">
+                 <input asp-for="Input.FirstName" class="form-control" />
+                <label asp-for="Input.FirstName"></label>
+                   <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                
+                <input asp-for="Input.LastName" class="form-control" />
+                <label asp-for="Input.LastName"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                <input asp-for="Input.IdNumber" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.IdNumber"></label>
+                </div>
+                 <div class="col-md-8">
+             <label asp-for="Input.Genders" class="form-control" autocomplete="GenderId" aria-required="true">
+                 
+                 <select asp-for="SelectedGenderId" asp-items="@Model.GenderItem" class="form-select" aria-label="Default select example" >
+                 <option>-- select your gender --</option>
+                  
+             </select>
+             </label>
+             </div>
+              
+                  <span asp-validation-for="Input.DOB" class="text-danger"></span>
+                 <div class="form-floating">
+                
+                <input asp-for="Input.DOB" class="form-control" autocomplete="dateofbirth" aria-required="true" />
+                <label asp-for="Input.DOB"></label>
+                </div>
+             
+              <span asp-validation-for="Input.AddressLine1" class="text-danger"></span>
+            <div class="form-floating">
+                <input asp-for="Input.AddressLine1" class="form-control" autocomplete="addressline1" aria-required="true" />
+               <label asp-for="Input.AddressLine1"></label>
+               
+             </div>
+             <div class="form-floating">
+                
+                <input asp-for="Input.AddressLine2" class="form-control" autocomplete="addressline1" aria-required="true"/>
+                <label asp-for="Input.AddressLine2"></label>
+                
+             </div>
+              <div class="col-md-8">
+             <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true">
+                  Province:
+                 <select asp-for="SelectedProvinceId" asp-items="@Model.ProvinceItem" class="form-select" aria-label="Default select example" >
+                 <option>-- select a province --</option>
+                  
+             </select>
+             </label>
+             </div>
+             <div class="col-md-8">
+             <label asp-for="Input.City" class="form-control" autocomplete="cityId" aria-required="true">
+                 City:
+                 <select asp-for="SelectedCityId" asp-items="@Model.CityItem" class="form-select" aria-label="Default select example" >
+                 <option>-- select a city --</option>
+                 </select>
+             </label>
+             </div>
+             <div class="col-md-8">
+                  <label asp-for="Input.Suburb" class="form-control" autocomplete="suburbId" aria-required="true">
+                      Suburb:
+                      <select asp-for="SelectedSuburbId" asp-items="@Model.SuburbItem" class="form-select" aria-label="Default select example" >
+                 <option>-- select a suburb --</option>
+                 </select>
+                  </label> 
+                  </div>
+                   <div class="col-md-8">
+                  <label asp-for="Input.PostalCode" class="form-control" autocomplete="postalcodeId" aria-required="true">
+                       Postal Code:
+                      <select asp-for="SelectedPostalCodeId" asp-items="@Model.PostalCodeItem" class="form-select" aria-label="Default select example" >
+                 <option>-- select a postal code --</option>
+                 </select>
+                  </label>
+                  </div>
             <div class="form-floating">
                 <input asp-for="Username" class="form-control" disabled />
                 <label asp-for="Username" class="form-label"></label>
@@ -21,9 +99,31 @@
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
+        
     </div>
+    <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.ProfilePicture" style="width: 100%;"></label>
+                @if (Model.Input.ProfilePicture != null)
+                {
+                    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Input.ProfilePicture))">
+                }
+                else
+                {
+                    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="">
+                }
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="Input.ProfilePicture"
+                       class="form-control"
+                       style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                       onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
+            </div>
+        </div>
 </div>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

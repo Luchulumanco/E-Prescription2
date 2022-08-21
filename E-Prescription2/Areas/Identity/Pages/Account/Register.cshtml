@@ -44,10 +44,10 @@
              
              </div>
              </div>
-             <div class="col-md-3">
+             <div class="col-md-6">
              
              <label asp-for="Input.Genders" class="form-control" autocomplete="GenderId" aria-required="true">
-                 
+                
                  <select asp-for="SelectedGenderId" asp-items="@Model.GenderItem" class="form-select" aria-label="Default select example" >
                  <option>-- select your gender --</option>
                   
@@ -76,12 +76,15 @@
              </div>
              </div>
 
-             
+              <div class="row g-1">
+              <div class="col-md-6">
                  <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             <div class="form-floating">
                 <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.PhoneNumber"></label>
                 
+            </div>
+            </div>
             </div>
             
 
@@ -116,42 +119,42 @@
              </div>
              
             
-               <div class="row g-1">
+               
               <div class="col-md-3">
              <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true">
-                  Province
+                  Province:
                  <select asp-for="SelectedProvinceId" asp-items="@Model.ProvinceItem" class="form-select" aria-label="Default select example" >
                  <option>-- select a province --</option>
                   
              </select>
              </label>
              </div>
-             </div>
+             
             
-             <div class="row g-1">
+             
               <div class="col-md-3">
              <label asp-for="Input.City" class="form-control" autocomplete="cityId" aria-required="true">
-                 City
+                 City:
                  <select asp-for="SelectedCityId" asp-items="@Model.CityItem" class="form-select" aria-label="Default select example" >
                  <option>-- select a city --</option>
                  </select>
              </label>
              </div>
-             </div>
-             <div class="row g-1">
+             
+             
               <div class="col-md-3">
                   <label asp-for="Input.Suburb" class="form-control" autocomplete="suburbId" aria-required="true">
-                      Suburb
+                      Suburb:
                       <select asp-for="SelectedSuburbId" asp-items="@Model.SuburbItem" class="form-select" aria-label="Default select example" >
                  <option>-- select a suburb --</option>
                  </select>
                   </label> 
                   </div>
-                  </div>
+                 
                   
                    <div class="col-md-3">
                   <label asp-for="Input.PostalCode" class="form-control" autocomplete="postalcodeId" aria-required="true">
-                       Postal Code
+                       Postal Code:
                       <select asp-for="SelectedPostalCodeId" asp-items="@Model.PostalCodeItem" class="form-select" aria-label="Default select example" >
                  <option>-- select a postal code --</option>
                  </select>

@@ -127,7 +127,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [MaxLength(10)]
             [MinLength(10, ErrorMessage = "A minimum of 10 characters is needed for a phone number")]
             [RegularExpression("([0-9]+)", ErrorMessage = "Please enter a valid phone number")]
-            public virtual string PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; }
 
 
 
@@ -176,7 +176,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             public virtual Province Province { get; set; }
 
             [Required]
-            [Display(Name = "City")]
+            [Display(Name = "City / Town")]
             [ForeignKey("Cities")]
             public int CityId { get; set; }
             public virtual City City { get; set; }
