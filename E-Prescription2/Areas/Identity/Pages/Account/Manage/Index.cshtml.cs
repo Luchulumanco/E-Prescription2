@@ -58,6 +58,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -148,7 +149,8 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var firstName = user.FirstName;
             var lastName = user.LastName;
-            
+            var profilePicture = user.ProfilePicture;
+
             var dob = user.DOB;
             var idNumber = user.IdNumber;
             var addressLine1 = user.AddressLine1;
@@ -158,7 +160,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
             var SelectedCityId = this.SelectedCityId;
             var SelectedSuburbId = this.SelectedSuburbId;
             var SelectedPostalCodeId = this.SelectedPostalCodeId;
-            var profilePicture = user.ProfilePicture;
+            
             Username = userName;
 
             Input = new InputModel
@@ -244,6 +246,18 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
             var selectedCityId = this.SelectedCityId;
             var selectedSuburbId = this.SelectedSuburbId;
             var selectedPostalCodeId = this.SelectedPostalCodeId;
+
+            if (Request.Form.Files.Count > 0)
+            {
+                IFormFile file = Request.Form.Files.FirstOrDefault();
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    user.ProfilePicture = dataStream.ToArray();
+                }
+                await _userManager.UpdateAsync(user);
+            }
+
             if (Input.FirstName != firstName)
             {
                 user.FirstName = Input.FirstName;
@@ -289,17 +303,10 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
                 this.SelectedPostalCodeId = SelectedPostalCodeId;
                 await _userManager.UpdateAsync(user);
             }
-
-            if (Request.Form.Files.Count > 0)
-            {
-                IFormFile file = Request.Form.Files.FirstOrDefault();
-                using (var dataStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(dataStream);
-                    user.ProfilePicture = dataStream.ToArray();
-                }
-                await _userManager.UpdateAsync(user);
-            }
+            
+            
+              
+            
 
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
