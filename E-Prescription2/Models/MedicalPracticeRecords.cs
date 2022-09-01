@@ -1,26 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Prescription2.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class MedicalPracticeRecords
     {
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public DateTime? DOB { get; set; }
-        
-        public string? IdNumber { get; set; }
-
-        [ForeignKey("Gender")]
-        public int? GenderId { get; set; }
-        public virtual Gender? Genders { get; set; }
-
-        public override string? PhoneNumber { get; set; }
+        [Key]
+        public int PracticeNumber { get; set; }
+        public string? PracticeName { get; set; }
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
-
-
         [ForeignKey("Province")]
         public int? ProvinceId { get; set; }
         public virtual Province? Provinces { get; set; }
@@ -39,12 +28,9 @@ namespace E_Prescription2.Models
         public int? PostalCodeId { get; set; }
         public virtual PostalCode? PostalCodes { get; set; }
 
-        //[Required]
-        
+        public string? ContactNumber { get; set; }
+        public string? EmailAddress { get; set; }
 
-
-        public int UsernameChangeLimit { get; set; } = 10;
-        public byte[]? ProfilePicture { get; set; }
 
     }
 }
