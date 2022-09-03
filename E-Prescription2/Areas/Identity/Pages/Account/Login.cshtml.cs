@@ -143,8 +143,30 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+
                     _logger.LogInformation("User logged in.");
+
+                    var user = await _userManager.FindByNameAsync(userName);
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    if (roles.Contains("Admin"))
+                    {
+                        return Redirect("~/Admin/Index");
+                    }
+                    else if(roles.Contains("Patient"))
+                    {
+                        return Redirect("~/Patient/Index");
+                    }
+                    else if(roles.Contains("Pharmacist"))
+                    {
+                        return Redirect("~/Pharmacist/Index");
+                    }
+                    else if(roles.Contains("Doctor"))
+                    {
+                        return Redirect("~/Doctor/Index");
+                    }
                     return LocalRedirect(returnUrl);
+
                 }
                 if (result.RequiresTwoFactor)
                 {

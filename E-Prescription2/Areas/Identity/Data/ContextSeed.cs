@@ -24,7 +24,7 @@ namespace E_Prescription2.Areas.Identity.Data
                 Email = "admin@gmail.com",
                 FirstName = "Mukesh",
                 LastName = "Murugan",
-               
+                
 
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
