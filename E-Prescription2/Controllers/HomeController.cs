@@ -13,7 +13,7 @@ namespace E_Prescription2.Controllers
         {
             _logger = logger;
         }
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             return View();
