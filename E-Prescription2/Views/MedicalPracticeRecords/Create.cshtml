@@ -1,0 +1,78 @@
+﻿@model E_Prescription2.Models.MedicalPracticeRecord
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Medical Practice Record</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PracticeName" class="control-label"> Practice Name</label>
+                <input asp-for="PracticeName" class="form-control" />
+                <span asp-validation-for="PracticeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressLine1" class="control-label">Address Line 1</label>
+                <input asp-for="AddressLine1" class="form-control" />
+                <span asp-validation-for="AddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressLine2" class="control-label">Address Line 2</label>
+                <input asp-for="AddressLine2" class="form-control" />
+                <span asp-validation-for="AddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinceId" class="control-label">Province</label>
+                <select asp-for="ProvinceId" class ="form-control" asp-items="ViewBag.ProvinceId">
+                    <option value="0">--Please choose a province--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SuburbId" class="control-label">Suburb</label>
+                <select asp-for="SuburbId" class ="form-control" asp-items="ViewBag.SuburbId">
+                    <option value="0">--Please choose a suburb--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityId" class="control-label">City</label>
+                <select asp-for="CityId" class ="form-control" asp-items="ViewBag.CityId">
+                    <option value="0">--Please choose a city--</option>
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="PostalCodeId" class="control-label">Postal Code</label>
+                <select asp-for="PostalCodeId" class ="form-control" asp-items="ViewBag.PostalCodeId">
+                    <option value="0">--Please choose a suburb--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNumber" class="control-label">Contact Number</label>
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label">Email Address</label>
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
