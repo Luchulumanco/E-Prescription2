@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class init : Migration
+    public partial class Pete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -240,6 +240,52 @@ namespace E_Prescription2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MedicalPracticeRecords",
+                schema: "Identity",
+                columns: table => new
+                {
+                    PracticeNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PracticeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceId = table.Column<int>(type: "int", nullable: true),
+                    SuburbId = table.Column<int>(type: "int", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: true),
+                    PostalCodeId = table.Column<int>(type: "int", nullable: true),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicalPracticeRecords", x => x.PracticeNumber);
+                    table.ForeignKey(
+                        name: "FK_MedicalPracticeRecords_Cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "Identity",
+                        principalTable: "Cities",
+                        principalColumn: "CityId");
+                    table.ForeignKey(
+                        name: "FK_MedicalPracticeRecords_PostalCodes_PostalCodeId",
+                        column: x => x.PostalCodeId,
+                        principalSchema: "Identity",
+                        principalTable: "PostalCodes",
+                        principalColumn: "PostalCodeId");
+                    table.ForeignKey(
+                        name: "FK_MedicalPracticeRecords_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalSchema: "Identity",
+                        principalTable: "Provinces",
+                        principalColumn: "ProvinceId");
+                    table.ForeignKey(
+                        name: "FK_MedicalPracticeRecords_Suburbs_SuburbId",
+                        column: x => x.SuburbId,
+                        principalSchema: "Identity",
+                        principalTable: "Suburbs",
+                        principalColumn: "SuburbId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserClaims",
                 schema: "Identity",
                 columns: table => new
@@ -384,6 +430,30 @@ namespace E_Prescription2.Migrations
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MedicalPracticeRecords_CityId",
+                schema: "Identity",
+                table: "MedicalPracticeRecords",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalPracticeRecords_PostalCodeId",
+                schema: "Identity",
+                table: "MedicalPracticeRecords",
+                column: "PostalCodeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalPracticeRecords_ProvinceId",
+                schema: "Identity",
+                table: "MedicalPracticeRecords",
+                column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalPracticeRecords_SuburbId",
+                schema: "Identity",
+                table: "MedicalPracticeRecords",
+                column: "SuburbId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "Identity",
                 table: "Role",
@@ -430,6 +500,10 @@ namespace E_Prescription2.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "MedicalPracticeRecords",
+                schema: "Identity");
+
             migrationBuilder.DropTable(
                 name: "RoleClaims",
                 schema: "Identity");

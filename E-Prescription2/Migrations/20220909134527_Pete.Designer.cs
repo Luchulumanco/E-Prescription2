@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220904143140_init")]
-    partial class init
+    [Migration("20220909134527_Pete")]
+    partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,6 +175,54 @@ namespace E_Prescription2.Migrations
                     b.HasKey("GenderId");
 
                     b.ToTable("Genders", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.MedicalPracticeRecord", b =>
+                {
+                    b.Property<int>("PracticeNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PracticeNumber"), 1L, 1);
+
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostalCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PracticeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SuburbId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PracticeNumber");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("PostalCodeId");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.HasIndex("SuburbId");
+
+                    b.ToTable("MedicalPracticeRecords", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PostalCode", b =>
@@ -462,6 +510,33 @@ namespace E_Prescription2.Migrations
                         .IsRequired();
 
                     b.Navigation("Provinces");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.MedicalPracticeRecord", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.City", "Cities")
+                        .WithMany()
+                        .HasForeignKey("CityId");
+
+                    b.HasOne("E_Prescription2.Models.PostalCode", "PostalCodes")
+                        .WithMany()
+                        .HasForeignKey("PostalCodeId");
+
+                    b.HasOne("E_Prescription2.Models.Province", "Provinces")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId");
+
+                    b.HasOne("E_Prescription2.Models.Suburb", "Suburbs")
+                        .WithMany()
+                        .HasForeignKey("SuburbId");
+
+                    b.Navigation("Cities");
+
+                    b.Navigation("PostalCodes");
+
+                    b.Navigation("Provinces");
+
+                    b.Navigation("Suburbs");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.Suburb", b =>
