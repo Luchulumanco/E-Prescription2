@@ -43,6 +43,14 @@ namespace E_Prescription2.Models
         
         public string? RegistrationNumber { get; set; }
 
+        public string? HighestQualification { get; set; }
+
+        [ForeignKey("MedicalPracticeRecord")]
+        public int? PracticeNumber { get; set; }
+        public virtual MedicalPracticeRecord? MedicalPracticeRecords { get; set; }
+
+        public string? HealthCouncilRegistrationNumber { get; set; }
+
         [ForeignKey("PharmacyRecord")]
         public int? PharmacyId { get; set; }
         public virtual PharmacyRecord? PharmacyRecords { get; set; }
