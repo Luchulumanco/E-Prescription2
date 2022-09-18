@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220909134527_Pete")]
+    [Migration("20220918161525_Pete")]
     partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace E_Prescription2.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("Identity")
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -85,6 +85,9 @@ namespace E_Prescription2.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PharmacyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -99,6 +102,9 @@ namespace E_Prescription2.Migrations
 
                     b.Property<int?>("ProvinceId")
                         .HasColumnType("int");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -223,6 +229,64 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("SuburbId");
 
                     b.ToTable("MedicalPracticeRecords", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>
+                {
+                    b.Property<int>("PharmacyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PharmacyId"), 1L, 1);
+
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicenseNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PharmacyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostalCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SuburbId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PharmacyId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("PostalCodeId");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.HasIndex("SuburbId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("PharmacyRecords", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PostalCode", b =>
@@ -539,6 +603,41 @@ namespace E_Prescription2.Migrations
                     b.Navigation("Suburbs");
                 });
 
+            modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.City", "Cities")
+                        .WithMany()
+                        .HasForeignKey("CityId");
+
+                    b.HasOne("E_Prescription2.Models.PostalCode", "PostalCodes")
+                        .WithMany()
+                        .HasForeignKey("PostalCodeId");
+
+                    b.HasOne("E_Prescription2.Models.Province", "Provinces")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId");
+
+                    b.HasOne("E_Prescription2.Models.Suburb", "Suburbs")
+                        .WithMany()
+                        .HasForeignKey("SuburbId");
+
+                    b.HasOne("E_Prescription2.Models.ApplicationUser", "User")
+                        .WithOne("PharmacyRecords")
+                        .HasForeignKey("E_Prescription2.Models.PharmacyRecord", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cities");
+
+                    b.Navigation("PostalCodes");
+
+                    b.Navigation("Provinces");
+
+                    b.Navigation("Suburbs");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("E_Prescription2.Models.Suburb", b =>
                 {
                     b.HasOne("E_Prescription2.Models.City", "Cities")
@@ -607,6 +706,11 @@ namespace E_Prescription2.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("PharmacyRecords");
                 });
 #pragma warning restore 612, 618
         }
