@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220918161525_Pete")]
+    [Migration("20220918174633_Pete")]
     partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,12 @@ namespace E_Prescription2.Migrations
                     b.Property<int?>("GenderId")
                         .HasColumnType("int");
 
+                    b.Property<string>("HealthCouncilRegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestQualification")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -73,6 +79,9 @@ namespace E_Prescription2.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("MedicalPracticeRecordsPracticeNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -95,6 +104,9 @@ namespace E_Prescription2.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("PostalCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PracticeNumber")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("ProfilePicture")
@@ -127,6 +139,8 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("GenderId");
+
+                    b.HasIndex("MedicalPracticeRecordsPracticeNumber");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -542,6 +556,10 @@ namespace E_Prescription2.Migrations
                         .WithMany()
                         .HasForeignKey("GenderId");
 
+                    b.HasOne("E_Prescription2.Models.MedicalPracticeRecord", "MedicalPracticeRecords")
+                        .WithMany()
+                        .HasForeignKey("MedicalPracticeRecordsPracticeNumber");
+
                     b.HasOne("E_Prescription2.Models.PostalCode", "PostalCodes")
                         .WithMany()
                         .HasForeignKey("PostalCodeId");
@@ -557,6 +575,8 @@ namespace E_Prescription2.Migrations
                     b.Navigation("Cities");
 
                     b.Navigation("Genders");
+
+                    b.Navigation("MedicalPracticeRecords");
 
                     b.Navigation("PostalCodes");
 

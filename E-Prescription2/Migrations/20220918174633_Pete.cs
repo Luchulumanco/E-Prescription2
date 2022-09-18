@@ -171,77 +171,6 @@ namespace E_Prescription2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                schema: "Identity",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GenderId = table.Column<int>(type: "int", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProvinceId = table.Column<int>(type: "int", nullable: true),
-                    SuburbId = table.Column<int>(type: "int", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: true),
-                    PostalCodeId = table.Column<int>(type: "int", nullable: true),
-                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PharmacyId = table.Column<int>(type: "int", nullable: true),
-                    UsernameChangeLimit = table.Column<int>(type: "int", nullable: false),
-                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Cities_CityId",
-                        column: x => x.CityId,
-                        principalSchema: "Identity",
-                        principalTable: "Cities",
-                        principalColumn: "CityId");
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Genders_GenderId",
-                        column: x => x.GenderId,
-                        principalSchema: "Identity",
-                        principalTable: "Genders",
-                        principalColumn: "GenderId");
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_PostalCodes_PostalCodeId",
-                        column: x => x.PostalCodeId,
-                        principalSchema: "Identity",
-                        principalTable: "PostalCodes",
-                        principalColumn: "PostalCodeId");
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Provinces_ProvinceId",
-                        column: x => x.ProvinceId,
-                        principalSchema: "Identity",
-                        principalTable: "Provinces",
-                        principalColumn: "ProvinceId");
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Suburbs_SuburbId",
-                        column: x => x.SuburbId,
-                        principalSchema: "Identity",
-                        principalTable: "Suburbs",
-                        principalColumn: "SuburbId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MedicalPracticeRecords",
                 schema: "Identity",
                 columns: table => new
@@ -281,6 +210,87 @@ namespace E_Prescription2.Migrations
                         principalColumn: "ProvinceId");
                     table.ForeignKey(
                         name: "FK_MedicalPracticeRecords_Suburbs_SuburbId",
+                        column: x => x.SuburbId,
+                        principalSchema: "Identity",
+                        principalTable: "Suburbs",
+                        principalColumn: "SuburbId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenderId = table.Column<int>(type: "int", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceId = table.Column<int>(type: "int", nullable: true),
+                    SuburbId = table.Column<int>(type: "int", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: true),
+                    PostalCodeId = table.Column<int>(type: "int", nullable: true),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HighestQualification = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PracticeNumber = table.Column<int>(type: "int", nullable: true),
+                    MedicalPracticeRecordsPracticeNumber = table.Column<int>(type: "int", nullable: true),
+                    HealthCouncilRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmacyId = table.Column<int>(type: "int", nullable: true),
+                    UsernameChangeLimit = table.Column<int>(type: "int", nullable: false),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "Identity",
+                        principalTable: "Cities",
+                        principalColumn: "CityId");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Genders_GenderId",
+                        column: x => x.GenderId,
+                        principalSchema: "Identity",
+                        principalTable: "Genders",
+                        principalColumn: "GenderId");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_MedicalPracticeRecords_MedicalPracticeRecordsPracticeNumber",
+                        column: x => x.MedicalPracticeRecordsPracticeNumber,
+                        principalSchema: "Identity",
+                        principalTable: "MedicalPracticeRecords",
+                        principalColumn: "PracticeNumber");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_PostalCodes_PostalCodeId",
+                        column: x => x.PostalCodeId,
+                        principalSchema: "Identity",
+                        principalTable: "PostalCodes",
+                        principalColumn: "PostalCodeId");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalSchema: "Identity",
+                        principalTable: "Provinces",
+                        principalColumn: "ProvinceId");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Suburbs_SuburbId",
                         column: x => x.SuburbId,
                         principalSchema: "Identity",
                         principalTable: "Suburbs",
@@ -455,6 +465,12 @@ namespace E_Prescription2.Migrations
                 column: "GenderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_MedicalPracticeRecordsPracticeNumber",
+                schema: "Identity",
+                table: "AspNetUsers",
+                column: "MedicalPracticeRecordsPracticeNumber");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_PostalCodeId",
                 schema: "Identity",
                 table: "AspNetUsers",
@@ -589,10 +605,6 @@ namespace E_Prescription2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MedicalPracticeRecords",
-                schema: "Identity");
-
-            migrationBuilder.DropTable(
                 name: "PharmacyRecords",
                 schema: "Identity");
 
@@ -630,6 +642,10 @@ namespace E_Prescription2.Migrations
 
             migrationBuilder.DropTable(
                 name: "Genders",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "MedicalPracticeRecords",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
