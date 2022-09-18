@@ -41,7 +41,11 @@ namespace E_Prescription2.Models
 
         //[Required]
         
+        public string? RegistrationNumber { get; set; }
 
+        [ForeignKey("PharmacyRecord")]
+        public int? PharmacyId { get; set; }
+        public virtual PharmacyRecord? PharmacyRecords { get; set; }
 
         public int UsernameChangeLimit { get; set; } = 10;
         public byte[]? ProfilePicture { get; set; }

@@ -188,6 +188,8 @@ namespace E_Prescription2.Migrations
                     SuburbId = table.Column<int>(type: "int", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: true),
                     PostalCodeId = table.Column<int>(type: "int", nullable: true),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmacyId = table.Column<int>(type: "int", nullable: true),
                     UsernameChangeLimit = table.Column<int>(type: "int", nullable: false),
                     ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -279,6 +281,61 @@ namespace E_Prescription2.Migrations
                         principalColumn: "ProvinceId");
                     table.ForeignKey(
                         name: "FK_MedicalPracticeRecords_Suburbs_SuburbId",
+                        column: x => x.SuburbId,
+                        principalSchema: "Identity",
+                        principalTable: "Suburbs",
+                        principalColumn: "SuburbId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PharmacyRecords",
+                schema: "Identity",
+                columns: table => new
+                {
+                    PharmacyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PharmacyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceId = table.Column<int>(type: "int", nullable: true),
+                    SuburbId = table.Column<int>(type: "int", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: true),
+                    PostalCodeId = table.Column<int>(type: "int", nullable: true),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PharmacyRecords", x => x.PharmacyId);
+                    table.ForeignKey(
+                        name: "FK_PharmacyRecords_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Identity",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PharmacyRecords_Cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "Identity",
+                        principalTable: "Cities",
+                        principalColumn: "CityId");
+                    table.ForeignKey(
+                        name: "FK_PharmacyRecords_PostalCodes_PostalCodeId",
+                        column: x => x.PostalCodeId,
+                        principalSchema: "Identity",
+                        principalTable: "PostalCodes",
+                        principalColumn: "PostalCodeId");
+                    table.ForeignKey(
+                        name: "FK_PharmacyRecords_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalSchema: "Identity",
+                        principalTable: "Provinces",
+                        principalColumn: "ProvinceId");
+                    table.ForeignKey(
+                        name: "FK_PharmacyRecords_Suburbs_SuburbId",
                         column: x => x.SuburbId,
                         principalSchema: "Identity",
                         principalTable: "Suburbs",
@@ -454,6 +511,37 @@ namespace E_Prescription2.Migrations
                 column: "SuburbId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PharmacyRecords_CityId",
+                schema: "Identity",
+                table: "PharmacyRecords",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PharmacyRecords_PostalCodeId",
+                schema: "Identity",
+                table: "PharmacyRecords",
+                column: "PostalCodeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PharmacyRecords_ProvinceId",
+                schema: "Identity",
+                table: "PharmacyRecords",
+                column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PharmacyRecords_SuburbId",
+                schema: "Identity",
+                table: "PharmacyRecords",
+                column: "SuburbId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PharmacyRecords_UserId",
+                schema: "Identity",
+                table: "PharmacyRecords",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "Identity",
                 table: "Role",
@@ -502,6 +590,10 @@ namespace E_Prescription2.Migrations
         {
             migrationBuilder.DropTable(
                 name: "MedicalPracticeRecords",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "PharmacyRecords",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
