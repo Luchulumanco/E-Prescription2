@@ -52,11 +52,11 @@ namespace E_Prescription2.Controllers
         // GET: PharmacyRecords/Create
         public IActionResult Create()
         {
-            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityId");
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeId");
-            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceId");
-            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbId");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName");
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName");
+            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName");
+            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName");
             return View();
         }
 
@@ -67,17 +67,18 @@ namespace E_Prescription2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(pharmacyRecord);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityId", pharmacyRecord.CityId);
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeId", pharmacyRecord.PostalCodeId);
-            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceId", pharmacyRecord.ProvinceId);
-            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbId", pharmacyRecord.SuburbId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pharmacyRecord.UserId);
+            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName", pharmacyRecord.CityId);
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", pharmacyRecord.PostalCodeId);
+            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", pharmacyRecord.ProvinceId);
+            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", pharmacyRecord.SuburbId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", pharmacyRecord.UserId);
             return View(pharmacyRecord);
         }
 
@@ -94,11 +95,11 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityId", pharmacyRecord.CityId);
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeId", pharmacyRecord.PostalCodeId);
-            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceId", pharmacyRecord.ProvinceId);
-            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbId", pharmacyRecord.SuburbId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pharmacyRecord.UserId);
+            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName", pharmacyRecord.CityId);
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", pharmacyRecord.PostalCodeId);
+            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", pharmacyRecord.ProvinceId);
+            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", pharmacyRecord.SuburbId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", pharmacyRecord.UserId);
             return View(pharmacyRecord);
         }
 
@@ -134,11 +135,11 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityId", pharmacyRecord.CityId);
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeId", pharmacyRecord.PostalCodeId);
-            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceId", pharmacyRecord.ProvinceId);
-            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbId", pharmacyRecord.SuburbId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pharmacyRecord.UserId);
+            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName", pharmacyRecord.CityId);
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", pharmacyRecord.PostalCodeId);
+            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", pharmacyRecord.ProvinceId);
+            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", pharmacyRecord.SuburbId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", pharmacyRecord.UserId);
             return View(pharmacyRecord);
         }
 
