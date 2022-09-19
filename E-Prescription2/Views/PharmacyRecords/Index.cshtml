@@ -61,16 +61,16 @@
                 @Html.DisplayFor(modelItem => item.AddressLine2)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provinces.ProvinceId)
+                @Html.DisplayFor(modelItem => item.Provinces.ProvinceName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Suburbs.SuburbId)
+                @Html.DisplayFor(modelItem => item.Suburbs.SuburbName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cities.CityId)
+                @Html.DisplayFor(modelItem => item.Cities.CityName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PostalCodes.PostalCodeId)
+                @Html.DisplayFor(modelItem => item.PostalCodes.PostalCodeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ContactNumber)
@@ -82,7 +82,7 @@
                 @Html.DisplayFor(modelItem => item.LicenseNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.User.FirstName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PharmacyId">Edit</a> |
