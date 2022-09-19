@@ -21,6 +21,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<MedicalPracticeRecord>? MedicalPracticeRecords { get; set; }
     public virtual DbSet<PharmacyRecord>? PharmacyRecords { get; set; }
    
+   
  
 
 

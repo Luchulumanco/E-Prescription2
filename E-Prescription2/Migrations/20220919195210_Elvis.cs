@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class Pete : Migration
+    public partial class Elvis : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -311,10 +311,9 @@ namespace E_Prescription2.Migrations
                     SuburbId = table.Column<int>(type: "int", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: true),
                     PostalCodeId = table.Column<int>(type: "int", nullable: true),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -324,8 +323,7 @@ namespace E_Prescription2.Migrations
                         column: x => x.UserId,
                         principalSchema: "Identity",
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PharmacyRecords_Cities_CityId",
                         column: x => x.CityId,
@@ -555,7 +553,8 @@ namespace E_Prescription2.Migrations
                 schema: "Identity",
                 table: "PharmacyRecords",
                 column: "UserId",
-                unique: true);
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

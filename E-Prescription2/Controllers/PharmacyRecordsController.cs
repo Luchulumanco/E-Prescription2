@@ -65,9 +65,8 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
+        public async Task<IActionResult> Create([Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
         {
-
             if (ModelState.IsValid)
             {
                 _context.Add(pharmacyRecord);
@@ -108,7 +107,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
+        public async Task<IActionResult> Edit(int id, [Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
         {
             if (id != pharmacyRecord.PharmacyId)
             {
@@ -187,7 +186,7 @@ namespace E_Prescription2.Controllers
 
         private bool PharmacyRecordExists(int id)
         {
-          return (_context.PharmacyRecords?.Any(e => e.PharmacyId == id)).GetValueOrDefault();
+          return _context.PharmacyRecords.Any(e => e.PharmacyId == id);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace E_Prescription2.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("Identity")
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -260,9 +260,6 @@ namespace E_Prescription2.Migrations
                     b.Property<int?>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ContactNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -282,7 +279,6 @@ namespace E_Prescription2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PharmacyId");
@@ -296,7 +292,8 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("SuburbId");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("PharmacyRecords", "Identity");
                 });
@@ -641,9 +638,7 @@ namespace E_Prescription2.Migrations
 
                     b.HasOne("E_Prescription2.Models.ApplicationUser", "User")
                         .WithOne("PharmacyRecords")
-                        .HasForeignKey("E_Prescription2.Models.PharmacyRecord", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("E_Prescription2.Models.PharmacyRecord", "UserId");
 
                     b.Navigation("Cities");
 
