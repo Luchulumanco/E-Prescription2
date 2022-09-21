@@ -27,13 +27,12 @@ namespace E_Prescription2.Models
         [ForeignKey("PostalCode")]
         public int? PostalCodeId { get; set; }
         public virtual PostalCode? PostalCodes { get; set; }
-
-        public string? ContactNumber { get; set; }
         public string? EmailAddress { get; set; }
         public string? LicenseNumber { get; set; }
-
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+       
+        [ForeignKey("ApplicatiionUser")]
+        public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
     }
 }
