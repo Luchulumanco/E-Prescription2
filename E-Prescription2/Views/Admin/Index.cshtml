@@ -14,9 +14,9 @@
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
+        <div class="sidebar pe-50 pb-60">
             <nav class="navbar bg-light navbar-light">
-            <a asp-area="" asp-controller="Admin" asp-action="Index" class="navbar-brand mx-4 mb-3">
+            @*<a asp-area="" asp-controller="Admin" asp-action="Index" class="navbar-brand mx-4 mb-3"></a>*@
                     <h3 class="text-primary"><i class="fa  me-2"></i>ADMIN</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -32,30 +32,30 @@
                     </div>*@
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                @*<a asp-area="" asp-controller="Admin" asp-action="Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>*@
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Roles</a>
+                    <a class="nav-item nav-link active dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user-md "></i>Roles</a>
                         <div class="dropdown-menu bg-transparent border-0">
                         <a asp-area="" asp-controller="UserRoles" asp-action="Index" class="dropdown-item">Asign Roles To Users</a>
                         <a asp-area="" asp-controller="RoleManager" asp-action="Index" class="dropdown-item">Add New Roles</a>
                             
                         </div>
                     </div>
-                <a asp-area="" asp-controller="MedicalPracticeRecords" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>MedicalPrac Records</a>
+                @*<a asp-area="" asp-controller="MedicalPracticeRecords" asp-action="Index" class="nav-item nav-link"><i class="fa fa-hospital-o "></i>MedicalPrac Records</a>*@
                     
-                <a asp-area="Identity" asp-page="/Account/PharmacistRegister" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Register Pharmacist</a>
+                <a asp-area="Identity" asp-page="/Account/PharmacistRegister" class="nav-item nav-link"><i class="fa fa-stethoscope "></i>Register Pharmacist</a>
                     
-                <a asp-area="" asp-controller="PharmacyRecords" asp-action="Index" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Pharmacy Records</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                <a asp-area="Identity" asp-page="/Account/DoctorRegister" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Register Doctor</a>
-                    <div class="nav-item dropdown">
+               @* <a asp-area="" asp-controller="PharmacyRecords" asp-action="Index" class="nav-item nav-link"><i class="fa fa-hospital-o "></i>Pharmacy Records</a>*@
+                    @*<a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar "></i>Charts</a>*@
+                <a asp-area="Identity" asp-page="/Account/DoctorRegister" class="nav-item nav-link"><i class="fa fa-user-md me-2"></i>Register Doctor</a>
+                    @*<div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">Login</a>
                             <a href="signup.html" class="dropdown-item">Register</a>
                             
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </nav>
         </div>
@@ -152,47 +152,57 @@
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                        <i class="fa fa-heartbeat fa-3x text-primary"></i>
+                        
                             <div class="ms-3">
-                                <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                            <a asp-area="" asp-controller="ActiveIngredientRecords" asp-action="Index" class="nav-item nav-link">Active Ingredients</a>
+                                @*<h6 class="mb-0">$1234</h6>*@
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                        <i  class="fa fa-h-square fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                            <a asp-area="" asp-controller="DosageForms" asp-action="Index" class="nav-item nav-link">Dosage Forms</a>
+                              @*  <h6 class="mb-0">$1234</h6>*@
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                        <i class="fa fa-hospital-o fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                               <a asp-area="" asp-controller="MedicalPracticeRecords" asp-action="Index" class="nav-item nav-link">Medical Practice Records</a>
+                               @* <h6 class="mb-0">$1234</h6>*@
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <i class="fa fa-medkit fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                               <a asp-area="" asp-controller="PharmacyRecords" asp-action="Index" class="nav-item nav-link">Pharmacy Records</a>
+                                @*<h6 class="mb-0">$1234</h6>*@
                             </div>
                         </div>
                     </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-ambulance fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <a asp-area="" asp-controller="MedicationRecords" asp-action="Index" class="nav-item nav-link">Medication Records</a>
+                            @*<h6 class="mb-0">$1234</h6>*@
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
             <!-- Sale & Revenue End -->
 
 
             <!-- Sales Chart Start -->
-            <div class="container-fluid pt-4 px-4">
+           @* <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
@@ -213,7 +223,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <!-- Sales Chart End -->
 
 

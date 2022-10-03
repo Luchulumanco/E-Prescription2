@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220919195210_Elvis")]
-    partial class Elvis
+    [Migration("20221001163226_Pete")]
+    partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,22 @@ namespace E_Prescription2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("E_Prescription2.Models.ActiveIngredientRecord", b =>
+                {
+                    b.Property<int>("ActiveIngredientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActiveIngredientId"), 1L, 1);
+
+                    b.Property<string>("ActiveIngredientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ActiveIngredientId");
+
+                    b.ToTable("ActiveIngredientRecords", "Identity");
+                });
 
             modelBuilder.Entity("E_Prescription2.Models.ApplicationUser", b =>
                 {
@@ -180,6 +196,22 @@ namespace E_Prescription2.Migrations
                     b.ToTable("Cities", "Identity");
                 });
 
+            modelBuilder.Entity("E_Prescription2.Models.DosageForm", b =>
+                {
+                    b.Property<int>("DosageFormId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DosageFormId"), 1L, 1);
+
+                    b.Property<string>("DosageFormName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DosageFormId");
+
+                    b.ToTable("DosageForms", "Identity");
+                });
+
             modelBuilder.Entity("E_Prescription2.Models.Gender", b =>
                 {
                     b.Property<int>("GenderId")
@@ -243,6 +275,48 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("SuburbId");
 
                     b.ToTable("MedicalPracticeRecords", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.MedicationActiveIngredient", b =>
+                {
+                    b.Property<int>("MedicationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActiveIngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Strength")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MedicationId", "ActiveIngredientId");
+
+                    b.HasIndex("ActiveIngredientId");
+
+                    b.ToTable("MedicationActiveIngredient", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
+                {
+                    b.Property<int>("MedicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedicationId"), 1L, 1);
+
+                    b.Property<int?>("DosageFormId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MedicationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Schedule")
+                        .HasColumnType("int");
+
+                    b.HasKey("MedicationId");
+
+                    b.HasIndex("DosageFormId");
+
+                    b.ToTable("MedicationRecords", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>
@@ -620,6 +694,34 @@ namespace E_Prescription2.Migrations
                     b.Navigation("Suburbs");
                 });
 
+            modelBuilder.Entity("E_Prescription2.Models.MedicationActiveIngredient", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecords")
+                        .WithMany("MedicationActiveIngredients")
+                        .HasForeignKey("ActiveIngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_Prescription2.Models.MedicationRecord", "MedicationRecords")
+                        .WithMany("MedicationActiveIngredients")
+                        .HasForeignKey("MedicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActiveIngredientRecords");
+
+                    b.Navigation("MedicationRecords");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.DosageForm", "DosageForms")
+                        .WithMany()
+                        .HasForeignKey("DosageFormId");
+
+                    b.Navigation("DosageForms");
+                });
+
             modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>
                 {
                     b.HasOne("E_Prescription2.Models.City", "Cities")
@@ -723,9 +825,19 @@ namespace E_Prescription2.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("E_Prescription2.Models.ActiveIngredientRecord", b =>
+                {
+                    b.Navigation("MedicationActiveIngredients");
+                });
+
             modelBuilder.Entity("E_Prescription2.Models.ApplicationUser", b =>
                 {
                     b.Navigation("PharmacyRecords");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
+                {
+                    b.Navigation("MedicationActiveIngredients");
                 });
 #pragma warning restore 612, 618
         }

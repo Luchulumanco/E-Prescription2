@@ -20,6 +20,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<PostalCode>? PostalCodes { get; set; }
     public virtual DbSet<MedicalPracticeRecord>? MedicalPracticeRecords { get; set; }
     public virtual DbSet<PharmacyRecord>? PharmacyRecords { get; set; }
+    public virtual DbSet<MedicationRecord>? MedicationRecords { get; set; }
+    public virtual DbSet<ActiveIngredientRecord>? ActiveIngredientRecords { get; set; }
+    public virtual DbSet<DosageForm>? DosageForms { get; set; }
+    public virtual DbSet<MedicationActiveIngredient>? MedicationActiveIngredient { get; set; }
    
    
  
@@ -27,6 +31,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        //Composite primary key for MedicationActiveIngredient
+        builder.Entity<MedicationActiveIngredient>()
+            .HasKey(ba => new { ba.MedicationId, ba.ActiveIngredientId });
+        //one-to-many relationship between MedicationRecords and MedicationRecordsActiveIngredient
+        builder.Entity<MedicationActiveIngredient>()
+            .HasOne(ba => ba.MedicationRecords)
+            .WithMany(b => b.MedicationActiveIngredients)
+            .HasForeignKey(ba => ba.MedicationId);
+        //one-to-many relationship between ActiveIngredientRecords and MedicationRecordsActiveIngredient
+        builder.Entity<MedicationActiveIngredient>()
+            .HasOne(ba => ba.ActiveIngredientRecords)
+            .WithMany(a => a.MedicationActiveIngredients)
+            .HasForeignKey(ba => ba.ActiveIngredientId);
+            
+            
+
         
         base.OnModelCreating(builder);
         builder.HasDefaultSchema("Identity");

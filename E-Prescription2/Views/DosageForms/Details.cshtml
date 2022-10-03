@@ -1,0 +1,24 @@
+﻿@model E_Prescription2.Models.DosageForm
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DosageForm</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DosageFormName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DosageFormName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.DosageFormId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

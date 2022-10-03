@@ -206,4 +206,31 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SelectedProvinceId").change(function () {
+                $.getJSON("/Register.cshtml/CityItem", { id: $("#SelectedProvinceId").val() }, function (d) {
+                    var row = "";
+                    $("#SelectedCityId").empty();
+                    $("#SelectedSuburbId").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#SelectedCityId").html(row);
+                })
+            })
+
+            $("#SelectedCityId").change(function () {
+                $.getJSON("/Register.cshtml/SuburbItem", { id: $("#SelectedCityId").val() }, function (d) {
+                    var row = "";
+                    $("#SelectedSuburbId").empty();
+                    $.each(d, function (i, v) {
+                        row += "<option value=" + v.value + ">" + v.text + "</option>";
+                    });
+                    $("#SelectedSuburbId").html(row);
+                })
+            })
+        })
+    </script>
 }
+
