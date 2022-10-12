@@ -13,6 +13,6 @@ namespace E_Prescription2.Models
         public string? ActiveIngredientName { get; set; }
 
         //public virtual ICollection<MedicationRecord> Medications { get; set; }
-        public virtual ICollection<MedicationActiveIngredient> MedicationActiveIngredients { get; set; }
+        
     }
 }

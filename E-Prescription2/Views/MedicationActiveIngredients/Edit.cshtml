@@ -12,12 +12,31 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MedicationId" />
-            <input type="hidden" asp-for="ActiveIngredientId" />
+            <input type="hidden" asp-for="MediActiveId" />
+            <div class="form-group">
+                <label asp-for="MedicationId" class="control-label"></label>
+                <select asp-for="MedicationId" class="form-control" asp-items="ViewBag.MedicationId"></select>
+                <span asp-validation-for="MedicationId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Strength" class="control-label"></label>
                 <input asp-for="Strength" class="form-control" />
                 <span asp-validation-for="Strength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActiveIngredientId" class="control-label"></label>
+                <select asp-for="ActiveIngredientId" class="form-control" asp-items="ViewBag.ActiveIngredientId"></select>
+                <span asp-validation-for="ActiveIngredientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduleId" class="control-label"></label>
+                <select asp-for="ScheduleId" class="form-control" asp-items="ViewBag.ScheduleId"></select>
+                <span asp-validation-for="ScheduleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DosageFormId" class="control-label"></label>
+                <select asp-for="DosageFormId" class="form-control" asp-items="ViewBag.DosageFormId"></select>
+                <span asp-validation-for="DosageFormId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

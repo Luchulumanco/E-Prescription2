@@ -22,7 +22,7 @@ namespace E_Prescription2.Controllers
         // GET: MedicationRecords
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.MedicationRecords.Include(m => m.DosageForms);
+            var applicationDbContext = _context.MedicationRecords.Include(m => m.DosageForms).Include(m => m.Schedules);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,6 +36,7 @@ namespace E_Prescription2.Controllers
 
             var medicationRecord = await _context.MedicationRecords
                 .Include(m => m.DosageForms)
+                .Include(m => m.Schedules)
                 .FirstOrDefaultAsync(m => m.MedicationId == id);
             if (medicationRecord == null)
             {
@@ -48,11 +49,8 @@ namespace E_Prescription2.Controllers
         // GET: MedicationRecords/Create
         public IActionResult Create()
         {
-            
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId");
-            //medication.MedicationActiveIngredients.Add(new MedicationActiveIngredient() { MedicationId=1,ActiveIngredientId=1});
-            //medication.MedicationActiveIngredients.Add(new MedicationActiveIngredient() { MedicationId=2,ActiveIngredientId=2});
-            //medication.MedicationActiveIngredients.Add(new MedicationActiveIngredient(){ MedicationId=3,ActiveIngredientId=3});
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId");
             return View();
         }
 
@@ -61,15 +59,8 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MedicationId,MedicationName,Schedule,DosageFormId")] MedicationRecord medicationRecord)
+        public async Task<IActionResult> Create([Bind("MedicationId,MedicationName,ScheduleId,DosageFormId")] MedicationRecord medicationRecord)
         {
-            //foreach(MedicationActiveIngredient medicationActiveIngredient in medicationRecord.MedicationActiveIngredients)
-            //{
-            //    if(medicationActiveIngredient.Strength ==null || medicationActiveIngredient.Strength.Length ==0)
-            //    {
-            //        medicationRecord.MedicationActiveIngredients.Remove(medicationActiveIngredient);
-            //    }
-            //}
             if (ModelState.IsValid)
             {
                 _context.Add(medicationRecord);
@@ -77,6 +68,7 @@ namespace E_Prescription2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId", medicationRecord.DosageFormId);
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId", medicationRecord.ScheduleId);
             return View(medicationRecord);
         }
 
@@ -94,6 +86,7 @@ namespace E_Prescription2.Controllers
                 return NotFound();
             }
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId", medicationRecord.DosageFormId);
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId", medicationRecord.ScheduleId);
             return View(medicationRecord);
         }
 
@@ -102,7 +95,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MedicationId,MedicationName,Schedule,DosageFormId")] MedicationRecord medicationRecord)
+        public async Task<IActionResult> Edit(int id, [Bind("MedicationId,MedicationName,ScheduleId,DosageFormId")] MedicationRecord medicationRecord)
         {
             if (id != medicationRecord.MedicationId)
             {
@@ -130,6 +123,7 @@ namespace E_Prescription2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId", medicationRecord.DosageFormId);
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId", medicationRecord.ScheduleId);
             return View(medicationRecord);
         }
 
@@ -143,6 +137,7 @@ namespace E_Prescription2.Controllers
 
             var medicationRecord = await _context.MedicationRecords
                 .Include(m => m.DosageForms)
+                .Include(m => m.Schedules)
                 .FirstOrDefaultAsync(m => m.MedicationId == id);
             if (medicationRecord == null)
             {

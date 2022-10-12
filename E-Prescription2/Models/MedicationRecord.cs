@@ -14,13 +14,17 @@ namespace E_Prescription2.Models
         [Key]
         public int MedicationId { get; set; }
         public string? MedicationName { get; set; }
-        public int? Schedule { get; set; }
+
+        [ForeignKey("Schedule")]
+        public int? ScheduleId { get; set; }
+        public virtual Schedule? Schedules { get; set; }
+
         [ForeignKey("DosageForm")]
         public int? DosageFormId { get; set; }
         public virtual DosageForm? DosageForms { get; set; }
 
         //public virtual ICollection<ActiveIngredientRecord> ActiveIngredients { get; set; }
-        public virtual ICollection<MedicationActiveIngredient> MedicationActiveIngredients { get; set; }
+        
 
 
 

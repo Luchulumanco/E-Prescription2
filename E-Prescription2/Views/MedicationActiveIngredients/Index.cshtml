@@ -13,13 +13,19 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.MedicationRecords)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Strength)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MedicationRecords)
+                @Html.DisplayNameFor(model => model.Schedules)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DosageForms)
             </th>
             <th></th>
         </tr>
@@ -28,18 +34,24 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.MedicationRecords.MedicationName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Strength)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientId)
+                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MedicationRecords.MedicationId)
+                @Html.DisplayFor(modelItem => item.Schedules.ScheduleName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.DosageForms.DosageFormName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MediActiveId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MediActiveId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MediActiveId">Delete</a>
             </td>
         </tr>
 }

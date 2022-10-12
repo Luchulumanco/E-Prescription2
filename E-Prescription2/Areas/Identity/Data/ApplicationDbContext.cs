@@ -24,6 +24,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<ActiveIngredientRecord>? ActiveIngredientRecords { get; set; }
     public virtual DbSet<DosageForm>? DosageForms { get; set; }
     public virtual DbSet<MedicationActiveIngredient>? MedicationActiveIngredient { get; set; }
+    public virtual DbSet<Schedule>? Schedule { get; set; }
    
    
  
@@ -32,22 +33,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         //Composite primary key for MedicationActiveIngredient
-        builder.Entity<MedicationActiveIngredient>()
-            .HasKey(ba => new { ba.MedicationId, ba.ActiveIngredientId });
+        //builder.Entity<MedicationActiveIngredient>()
+        //    .HasKey(ba => new { ba.MedicationId, ba.ActiveIngredientId });
         //one-to-many relationship between MedicationRecords and MedicationRecordsActiveIngredient
         builder.Entity<MedicationActiveIngredient>()
             .HasOne(ba => ba.MedicationRecords)
-            .WithMany(b => b.MedicationActiveIngredients)
+            .WithMany()
             .HasForeignKey(ba => ba.MedicationId);
         //one-to-many relationship between ActiveIngredientRecords and MedicationRecordsActiveIngredient
         builder.Entity<MedicationActiveIngredient>()
             .HasOne(ba => ba.ActiveIngredientRecords)
-            .WithMany(a => a.MedicationActiveIngredients)
+            .WithMany()
             .HasForeignKey(ba => ba.ActiveIngredientId);
-            
-            
 
-        
+
+
+
         base.OnModelCreating(builder);
         builder.HasDefaultSchema("Identity");
         builder.Entity<IdentityUser>(entity =>

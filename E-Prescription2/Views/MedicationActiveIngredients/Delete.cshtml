@@ -12,6 +12,12 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MedicationRecords)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MedicationRecords.MedicationName)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Strength)
         </dt>
         <dd class = "col-sm-10">
@@ -21,19 +27,24 @@
             @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActiveIngredientRecords.ActiveIngredientId)
+            @Html.DisplayFor(model => model.ActiveIngredientRecords.ActiveIngredientName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicationRecords)
+            @Html.DisplayNameFor(model => model.Schedules)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicationRecords.MedicationId)
+            @Html.DisplayFor(model => model.Schedules.ScheduleName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DosageForms)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DosageForms.DosageFormName)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="MedicationId" />
-        <input type="hidden" asp-for="ActiveIngredientId" />
+        <input type="hidden" asp-for="MediActiveId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

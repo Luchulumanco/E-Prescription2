@@ -18,7 +18,7 @@ namespace E_Prescription2.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("Identity")
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -277,18 +277,37 @@ namespace E_Prescription2.Migrations
 
             modelBuilder.Entity("E_Prescription2.Models.MedicationActiveIngredient", b =>
                 {
-                    b.Property<int>("MedicationId")
+                    b.Property<int>("MediActiveId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ActiveIngredientId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MediActiveId"), 1L, 1);
+
+                    b.Property<int?>("ActiveIngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DosageFormId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MedicationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ScheduleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Strength")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MedicationId", "ActiveIngredientId");
+                    b.HasKey("MediActiveId");
 
                     b.HasIndex("ActiveIngredientId");
+
+                    b.HasIndex("DosageFormId");
+
+                    b.HasIndex("MedicationId");
+
+                    b.HasIndex("ScheduleId");
 
                     b.ToTable("MedicationActiveIngredient", "Identity");
                 });
@@ -307,12 +326,14 @@ namespace E_Prescription2.Migrations
                     b.Property<string>("MedicationName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Schedule")
+                    b.Property<int?>("ScheduleId")
                         .HasColumnType("int");
 
                     b.HasKey("MedicationId");
 
                     b.HasIndex("DosageFormId");
+
+                    b.HasIndex("ScheduleId");
 
                     b.ToTable("MedicationRecords", "Identity");
                 });
@@ -402,6 +423,23 @@ namespace E_Prescription2.Migrations
                     b.HasKey("ProvinceId");
 
                     b.ToTable("Provinces", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.Schedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"), 1L, 1);
+
+                    b.Property<string>("ScheduleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ScheduleId");
+
+                    b.ToTable("Schedule", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.Suburb", b =>
@@ -695,20 +733,28 @@ namespace E_Prescription2.Migrations
             modelBuilder.Entity("E_Prescription2.Models.MedicationActiveIngredient", b =>
                 {
                     b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecords")
-                        .WithMany("MedicationActiveIngredients")
-                        .HasForeignKey("ActiveIngredientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ActiveIngredientId");
+
+                    b.HasOne("E_Prescription2.Models.DosageForm", "DosageForms")
+                        .WithMany()
+                        .HasForeignKey("DosageFormId");
 
                     b.HasOne("E_Prescription2.Models.MedicationRecord", "MedicationRecords")
-                        .WithMany("MedicationActiveIngredients")
-                        .HasForeignKey("MedicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("MedicationId");
+
+                    b.HasOne("E_Prescription2.Models.Schedule", "Schedules")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId");
 
                     b.Navigation("ActiveIngredientRecords");
 
+                    b.Navigation("DosageForms");
+
                     b.Navigation("MedicationRecords");
+
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
@@ -717,7 +763,13 @@ namespace E_Prescription2.Migrations
                         .WithMany()
                         .HasForeignKey("DosageFormId");
 
+                    b.HasOne("E_Prescription2.Models.Schedule", "Schedules")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId");
+
                     b.Navigation("DosageForms");
+
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>
@@ -823,19 +875,9 @@ namespace E_Prescription2.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Prescription2.Models.ActiveIngredientRecord", b =>
-                {
-                    b.Navigation("MedicationActiveIngredients");
-                });
-
             modelBuilder.Entity("E_Prescription2.Models.ApplicationUser", b =>
                 {
                     b.Navigation("PharmacyRecords");
-                });
-
-            modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
-                {
-                    b.Navigation("MedicationActiveIngredients");
                 });
 #pragma warning restore 612, 618
         }
