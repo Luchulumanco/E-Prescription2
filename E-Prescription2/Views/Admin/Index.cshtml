@@ -17,8 +17,8 @@
         <div class="sidebar pe-50 pb-60">
             <nav class="navbar bg-light navbar-light">
             @*<a asp-area="" asp-controller="Admin" asp-action="Index" class="navbar-brand mx-4 mb-3"></a>*@
-                    <h3 class="text-primary"><i class="fa  me-2"></i>ADMIN</h3>
-                </a>
+                    
+            <a class="" href="~/Admin/Index"><h3 class="text-primary"><i class="fa  me-2"></i>ADMIN</h3></a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                        @* <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">*@
@@ -34,7 +34,7 @@
                 <div class="navbar-nav w-100">
                 @*<a asp-area="" asp-controller="Admin" asp-action="Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>*@
                     <div class="nav-item dropdown">
-                    <a class="nav-item nav-link active dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user-md "></i>Roles</a>
+                    <a class="nav-item nav-link active dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user "></i>Roles</a>
                         <div class="dropdown-menu bg-transparent border-0">
                         <a asp-area="" asp-controller="UserRoles" asp-action="Index" class="dropdown-item">Asign Roles To Users</a>
                         <a asp-area="" asp-controller="RoleManager" asp-action="Index" class="dropdown-item">Add New Roles</a>
@@ -180,7 +180,7 @@
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-medkit fa-3x text-primary"></i>
+                        <i class="fa-sharp fa-3x fa-solid fa-house-chimney-medical text-primary"></i>
                             <div class="ms-3">
                                <a asp-area="" asp-controller="PharmacyRecords" asp-action="Index" class="nav-item nav-link">Pharmacy Records</a>
                                 @*<h6 class="mb-0">$1234</h6>*@
@@ -189,7 +189,7 @@
                     </div>
                 <div class="col-sm-6 col-xl-3">
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-ambulance fa-3x text-primary"></i>
+                        <i class="fa-sharp fa-3x fa-solid fa-pills text-primary"></i>
                         <div class="ms-3">
                             <a asp-area="" asp-controller="MedicationActiveIngredients" asp-action="Index" class="nav-item nav-link">Medications</a>
                             @*<h6 class="mb-0">$1234</h6>*@
@@ -207,7 +207,7 @@
                 </div>
                 <div class="col-sm-6 col-xl-3">
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-ambulance fa-3x text-primary"></i>
+                        <i class="fa-sharp fa-3x fa-solid fa-clipboard-list text-primary"></i>
                         <div class="ms-3">
                             <a asp-area="" asp-controller="Schedules" asp-action="Index" class="nav-item nav-link">Schedule Records</a>
                             @*<h6 class="mb-0">$1234</h6>*@
@@ -248,7 +248,7 @@
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
+                    @*<div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
                         <a href="">Show All</a>
                     </div>
@@ -312,8 +312,8 @@
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
                                 </tr>
                             </tbody>
-                        </table>
-                    </div>
+                        </table>*@
+                   @* </div>*@
                 </div>
             </div>
             <!-- Recent Sales End -->
@@ -324,7 +324,7 @@
                 <div class="row g-4">
                     <div class="col-sm-12 col-md-6 col-xl-4">
                         <div class="h-100 bg-light rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
+                            @*<div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0">Messages</h6>
                                 <a href="">Show All</a>
                             </div>
@@ -367,7 +367,7 @@
                                     </div>
                                     <span>Short message goes here...</span>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 col-xl-4">
@@ -385,15 +385,15 @@
                                 <h6 class="mb-0">To Do List</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <div class="d-flex mb-2">
+                            @*<div class="d-flex mb-2">
                                 <input class="form-control bg-transparent" type="text" placeholder="Enter task">
                                 <button type="button" class="btn btn-primary ms-2">Add</button>
-                            </div>
+                            </div>*@
                             <div class="d-flex align-items-center border-bottom py-2">
                                 <input class="form-check-input m-0" type="checkbox">
                                 <div class="w-100 ms-3">
                                     <div class="d-flex w-100 align-items-center justify-content-between">
-                                        <span>Short task goes here...</span>
+                                        <span>Add a new Pharmacist...</span>
                                         <button class="btn btn-sm"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
