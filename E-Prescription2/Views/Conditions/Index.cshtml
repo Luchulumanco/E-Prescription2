@@ -1,0 +1,41 @@
+﻿@model IEnumerable<E_Prescription2.Models.Condition>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead class="table-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ICD_10_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diagnosis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ICD_10_CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diagnosis)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ConditionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ConditionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ConditionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -20,10 +20,38 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: MedicationActiveIngredients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var applicationDbContext = _context.MedicationActiveIngredient.Include(m => m.ActiveIngredientRecords).Include(m => m.DosageForms).Include(m => m.MedicationRecords).Include(m => m.Schedules);
-            return View(await applicationDbContext.ToListAsync());
+            
+            //.Where(b => b.MedicationRecords.MedicationName.Equals("Concerta"));
+
+            ViewData["CurrentFilter"] = SearchString;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                ViewData["CurrentFilter"] = SearchString;
+                var applicationDbContexts = _context.MedicationActiveIngredient
+                  .Include(m => m.ActiveIngredientRecords)
+                  .Include(m => m.DosageForms)
+                  .Include(m => m.MedicationRecords)
+                  .Include(m => m.Schedules)
+                  .Where(b=>b.MedicationRecords.MedicationName.Contains(SearchString));
+
+                return View(await applicationDbContexts.ToListAsync());
+
+            }
+            else
+            {
+                var applicationDbContext = _context.MedicationActiveIngredient
+                .Include(m => m.ActiveIngredientRecords)
+                .Include(m => m.DosageForms)
+                .Include(m => m.MedicationRecords)
+                .Include(m => m.Schedules);
+                return View(await applicationDbContext.ToListAsync());
+            }
+
+           
+            
         }
 
         // GET: MedicationActiveIngredients/Details/5

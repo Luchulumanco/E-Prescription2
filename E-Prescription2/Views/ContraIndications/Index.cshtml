@@ -1,0 +1,41 @@
+﻿@model IEnumerable<E_Prescription2.Models.ContraIndication>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead class="table-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Conditions)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conditions.ConditionId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ContraId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ContraId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ContraId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
