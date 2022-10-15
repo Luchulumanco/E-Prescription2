@@ -25,6 +25,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<DosageForm>? DosageForms { get; set; }
     public virtual DbSet<MedicationActiveIngredient>? MedicationActiveIngredient { get; set; }
     public virtual DbSet<Schedule>? Schedule { get; set; }
+    public virtual DbSet<Condition>? Conditions { get; set; }
+    public virtual DbSet<ContraIndication> ContraIndications { get; set; }
    
    
  
@@ -45,6 +47,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasOne(ba => ba.ActiveIngredientRecords)
             .WithMany()
             .HasForeignKey(ba => ba.ActiveIngredientId);
+        //one-to-many relationship between ActiveIngredientRecords and ContraIndication
+        builder.Entity<ContraIndication>()
+            .HasOne(ba => ba.ActiveIngredientRecords)
+            .WithMany()
+            .HasForeignKey(ba => ba.ActiveIngredientId);
+        //one-to-many relationship between Condition and ContraIndication
+        builder.Entity<ContraIndication>()
+            .HasOne(ba => ba.Conditions)
+            .WithMany()
+            .HasForeignKey(ba => ba.ConditionId);
+
 
 
 

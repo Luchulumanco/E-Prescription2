@@ -194,6 +194,48 @@ namespace E_Prescription2.Migrations
                     b.ToTable("Cities", "Identity");
                 });
 
+            modelBuilder.Entity("E_Prescription2.Models.Condition", b =>
+                {
+                    b.Property<int>("ConditionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConditionId"), 1L, 1);
+
+                    b.Property<string>("Diagnosis")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ICD_10_CODE")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ConditionId");
+
+                    b.ToTable("Conditions", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ContraIndication", b =>
+                {
+                    b.Property<int>("ContraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContraId"), 1L, 1);
+
+                    b.Property<int>("ActiveIngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ConditionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContraId");
+
+                    b.HasIndex("ActiveIngredientId");
+
+                    b.HasIndex("ConditionId");
+
+                    b.ToTable("ContraIndications", "Identity");
+                });
+
             modelBuilder.Entity("E_Prescription2.Models.DosageForm", b =>
                 {
                     b.Property<int>("DosageFormId")
@@ -701,6 +743,25 @@ namespace E_Prescription2.Migrations
                         .IsRequired();
 
                     b.Navigation("Provinces");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ContraIndication", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecords")
+                        .WithMany()
+                        .HasForeignKey("ActiveIngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_Prescription2.Models.Condition", "Conditions")
+                        .WithMany()
+                        .HasForeignKey("ConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActiveIngredientRecords");
+
+                    b.Navigation("Conditions");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.MedicalPracticeRecord", b =>

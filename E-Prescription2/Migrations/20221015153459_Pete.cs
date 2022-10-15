@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class init : Migration
+    public partial class Pete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,6 +24,21 @@ namespace E_Prescription2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActiveIngredientRecords", x => x.ActiveIngredientId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Conditions",
+                schema: "Identity",
+                columns: table => new
+                {
+                    ConditionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ICD_10_CODE = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Diagnosis = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Conditions", x => x.ConditionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,6 +150,35 @@ namespace E_Prescription2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContraIndications",
+                schema: "Identity",
+                columns: table => new
+                {
+                    ContraId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ActiveIngredientId = table.Column<int>(type: "int", nullable: false),
+                    ConditionId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContraIndications", x => x.ContraId);
+                    table.ForeignKey(
+                        name: "FK_ContraIndications_ActiveIngredientRecords_ActiveIngredientId",
+                        column: x => x.ActiveIngredientId,
+                        principalSchema: "Identity",
+                        principalTable: "ActiveIngredientRecords",
+                        principalColumn: "ActiveIngredientId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ContraIndications_Conditions_ConditionId",
+                        column: x => x.ConditionId,
+                        principalSchema: "Identity",
+                        principalTable: "Conditions",
+                        principalColumn: "ConditionId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -613,6 +657,18 @@ namespace E_Prescription2.Migrations
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ContraIndications_ActiveIngredientId",
+                schema: "Identity",
+                table: "ContraIndications",
+                column: "ActiveIngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContraIndications_ConditionId",
+                schema: "Identity",
+                table: "ContraIndications",
+                column: "ConditionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MedicalPracticeRecords_CityId",
                 schema: "Identity",
                 table: "MedicalPracticeRecords",
@@ -752,6 +808,10 @@ namespace E_Prescription2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ContraIndications",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
                 name: "MedicationActiveIngredient",
                 schema: "Identity");
 
@@ -781,6 +841,10 @@ namespace E_Prescription2.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Conditions",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
