@@ -1,5 +1,7 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "CascadeDropdown";
+   
 }
 
 <div class="container">
@@ -8,28 +10,38 @@
             <form method="post">
                 <div class="form-group">
                     <label>Province</label>
-                    <select class="form-control" id="Province">
-                        <option>---select province---</option>
+                    <select class="form-control" id="pageProvinceElement" >
+                        
+                        @foreach (Province p in ViewBag.Provinces)
+                        {
+                            <option value="@p.ProvinceId">@p.ProvinceName</option>
+                        }
                     </select>
 
                 </div>
                 <div class="form-group">
                     <label>City</label>
-                    <select class="form-control" id="City">
-                        <option>---select city---</option>
+                    <select class="form-control"  id="pageCityElement">
+                        @foreach (City c in ViewBag.Cities)
+                        {
+                            <option value="@c.CityId">@c.CityName</option>
+                        }
                     </select>
 
                 </div>
                 <div class="form-group">
                     <label>Suburb</label>
-                    <select class="form-control" id="Suburb">
-                        <option>---select suburb---</option>
+                    <select class="form-control" id="pageSuburbElement">
+                        @foreach (Suburb c in ViewBag.Suburbs)
+                        {
+                            <option value="@c.SuburbId">@c.SuburbName</option>
+                        }
                     </select>
 
                 </div>
                 <div class="form-group">
                     <label>Postal Code</label>
-                    <select class="form-control" id="PostalCode">
+                    <select class="form-control" id="pagePostalCodeElement">
                         <option>---select postal code---</option>
                     </select>
 
@@ -44,5 +56,116 @@
 
 @*<a href="~/lib/jquery/dist/jquery.min.map">~/lib/jquery/dist/jquery.min.map</a>*@
 @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/chusta.js"></script>
+<script>
+    
+     var srlProvs = "@(ViewBag.Prov_s)";
+    var srlCities = "@(ViewBag.City_s)";
+    var srlSuburbs = "@(ViewBag.Suburb_s)";
+    var srlPostalCodes = "@ViewBag.PostalCode_s";
+
+    var thisProvinces = document.getElementById('pageProvinceElement');
+    var thisCities = document.getElementById('pageCityElement');
+    var thisSuburbs = document.getElementById('pageSuburbElement');
+    var thisPostalCodes = document.getElementById('pagePostalCodeElement');
+    if (typeof srlProvs !== "undefined") {
+        const allProvs = JSON.parse(srlProvs.replace(/&quot;/g, '"'));
+        const allCities = JSON.parse(srlCities.replace(/&quot;/g, '"'));
+        const allSuburbs = JSON.parse(srlSuburbs.replace(/&quot;/g, '"'));
+        const allPostalCodes = JSON.parse(srlPostalCodes.replace(/&quot;/g, '"'));
+        //thisCities.innerHTML = "";
+        for (var i = 0; i < allCities.length; i++) {
+            var obj = allCities[i];
+            let selectedProvince = thisProvinces.options[thisProvinces.selectedIndex].value;
+            if (selectedProvince == obj["ProvinceId"]) {
+                let newOption = new Option(obj["CityName"], obj["CityId"]);
+                thisCities.add(newOption, undefined);
+            }
+        }
+        thisSuburbs.innerHTML = "";
+        for (var i = 0; i < allSuburbs.length; i++) {
+            var obj = allSuburbs[i];
+            let selectedCity = thisCities.options[thisCities.selectedIndex].value;
+            if (selectedCity == obj["CityId"]) {
+                let newOption = new Option(obj["SuburbName"], obj["SuburbId"]);
+                thisSuburbs.add(newOption, undefined);
+            }
+        }
+        thisPostalCodes.innerHTML = "";
+        for (var i = 0; i < allPostalCodes.length; i++) {
+            var obj = allPostalCodes[i];
+            let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+            if (selectedSuburb == obj["PostalCodeId"]) {
+                let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                thisPostalCodes.add(newOption, undefined);
+            }
+        }
+
+        if (thisProvinces) {
+            thisProvinces.addEventListener("change", function () {
+                thisCities.innerHTML = "";
+                for (var i = 0; i < allCities.length; i++) {
+                    var obj = allCities[i];
+                    let selectedProvince = thisProvinces.options[thisProvinces.selectedIndex].value;
+                    if (selectedProvince == obj["ProvinceId"]) {
+                        let newOption = new Option(obj["CityName"], obj["CityId"]);
+                        thisCities.add(newOption, undefined);
+                    }
+                }
+                thisSuburbs.innerHTML = "";
+                for (var i = 0; i < allSuburbs.length; i++) {
+                    var obj = allSuburbs[i];
+                    let selectedCity = thisCities.options[thisCities.selectedIndex].value;
+                    if (selectedCity == obj["CityId"]) {
+                        let newOption = new Option(obj["SuburbName"], obj["SuburbId"]);
+                        thisSuburbs.add(newOption, undefined);
+                    }
+                }
+                thisPostalCodes.innerHTML = "";
+                for (var i = 0; i < allPostalCodes.length; i++) {
+                    var obj = allPostalCodes[i];
+                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                    if (selectedSuburb == obj["PostalCodeId"]) {
+                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                        thisPostalCodes.add(newOption, undefined);
+                    }
+                }
+            })
+        }
+        if (thisCities) {
+            thisCities.addEventListener("change", function () {
+                thisSuburbs.innerHTML = "";
+                for (var i = 0; i < allSuburbs.length; i++) {
+                    var obj = allSuburbs[i];
+                    let selectedCity = thisCities.options[thisCities.selectedIndex].value;
+                    console.log(selectedCity);
+                    if (selectedCity == obj["CityId"]) {
+                        let newOption = new Option(obj["SuburbName"], obj["SuburbId"]);
+                        thisSuburbs.add(newOption, undefined);
+                    }
+                }
+                thisPostalCodes.innerHTML = "";
+                for (var i = 0; i < allPostalCodes.length; i++) {
+                    var obj = allPostalCodes[i];
+                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                    if (selectedSuburb == obj["PostalCodeId"]) {
+                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                        thisPostalCodes.add(newOption, undefined);
+                    }
+                }
+            });
+        }
+        if (thisSuburbs) {
+            thisSuburbs.addEventListener("change", function () {
+                thisPostalCodes.innerHTML = "";
+                for (var i = 0; i < allPostalCodes.length; i++) {
+                    var obj = allPostalCodes[i];
+                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                    if (selectedSuburb == obj["PostalCodeId"]) {
+                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                        thisPostalCodes.add(newOption, undefined);
+                    }
+                }
+            });
+        }
+    }
+</script>

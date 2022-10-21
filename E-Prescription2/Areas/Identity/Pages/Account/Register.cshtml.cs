@@ -211,14 +211,27 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                 Value = g.GenderId.ToString(),
                 Text = g.GenderType
             }).ToList();
-            ProvinceItem = _context.Provinces.Select(p => new SelectListItem { Value = p.ProvinceId.ToString(),
-                Text = p.ProvinceName}).ToList(); 
-            CityItem = _context.Cities.Select(c => new SelectListItem { Value = c.CityId.ToString(), 
-                Text = c.CityName}).ToList();
-            SuburbItem = _context.Suburbs.Select(s => new SelectListItem { Value = s.SuburbId.ToString(), 
-                Text = s.SuburbName }).ToList();
-            PostalCodeItem = _context.PostalCodes.Select(c => new SelectListItem { Value = c.PostalCodeId.ToString(), 
-                Text = c.PostalCodeName}).ToList();
+            ProvinceItem = _context.Provinces.Select(p => new SelectListItem
+            { 
+                Value = p.ProvinceId.ToString(),
+                Text = p.ProvinceName
+            }).ToList();
+            CityItem = _context.Cities.Select(c => new SelectListItem
+            {
+                Value = c.CityId.ToString(),
+                Text = c.CityName,
+                
+            }).ToList();
+            SuburbItem = _context.Suburbs.Select(s => new SelectListItem 
+            { 
+                Value = s.SuburbId.ToString(), 
+                Text = s.SuburbName 
+            }).ToList();
+            PostalCodeItem = _context.PostalCodes.Select(c => new SelectListItem 
+            { 
+                Value = c.PostalCodeId.ToString(), 
+                Text = c.PostalCodeName
+            }).ToList();
 
                                                            
             ReturnUrl = returnUrl;

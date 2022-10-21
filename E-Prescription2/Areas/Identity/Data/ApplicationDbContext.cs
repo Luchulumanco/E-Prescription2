@@ -26,7 +26,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<MedicationActiveIngredient>? MedicationActiveIngredient { get; set; }
     public virtual DbSet<Schedule>? Schedule { get; set; }
     public virtual DbSet<Condition>? Conditions { get; set; }
-    public virtual DbSet<ContraIndication> ContraIndications { get; set; }
+    public virtual DbSet<ContraIndication>? ContraIndications { get; set; }
    
    
  
@@ -57,6 +57,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasOne(ba => ba.Conditions)
             .WithMany()
             .HasForeignKey(ba => ba.ConditionId);
+
+        //builder.Entity<City>()
+        //    .HasOne(ba=>ba.Provinces)
+        //    .WithMany()
+        //    .HasForeignKey(ba=>ba.ProvinceId);
+        //builder.Entity<Province>();
+
+        //builder.Entity<Suburb>()
+        //    .HasOne(ba => ba.Cities)
+        //    .WithMany()
+        //    .HasForeignKey(ba => ba.CityId);
+        //builder.Entity<Suburb>()
+        //    .HasOne(ba=>ba.PostalCodes)
+        //    .WithMany()
+        //    .HasForeignKey(ba=>ba.PostalCodeId);
+        //builder.Entity<PostalCode>();
+          
+           
 
 
 
