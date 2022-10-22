@@ -6,7 +6,7 @@ namespace E_Prescription2.Models
     public class MedicalPracticeRecord
     {
         [Key]
-        public int PracticeNumber { get; set; }
+        public int PracticeNumberId { get; set; }
         public string? PracticeName { get; set; }
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
@@ -29,6 +29,7 @@ namespace E_Prescription2.Models
         public virtual PostalCode? PostalCodes { get; set; }
         public string? ContactNumber { get; set; }
         public string? EmailAddress { get; set; }
+        public string? PracticeNumber { get; set; }
 
 
     }

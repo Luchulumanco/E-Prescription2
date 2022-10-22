@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class Pete : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,7 +90,7 @@ namespace E_Prescription2.Migrations
                 {
                     ProvinceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -331,7 +331,7 @@ namespace E_Prescription2.Migrations
                 schema: "Identity",
                 columns: table => new
                 {
-                    PracticeNumber = table.Column<int>(type: "int", nullable: false)
+                    PracticeNumberId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PracticeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -341,11 +341,12 @@ namespace E_Prescription2.Migrations
                     CityId = table.Column<int>(type: "int", nullable: true),
                     PostalCodeId = table.Column<int>(type: "int", nullable: true),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PracticeNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicalPracticeRecords", x => x.PracticeNumber);
+                    table.PrimaryKey("PK_MedicalPracticeRecords", x => x.PracticeNumberId);
                     table.ForeignKey(
                         name: "FK_MedicalPracticeRecords_Cities_CityId",
                         column: x => x.CityId,
@@ -393,7 +394,7 @@ namespace E_Prescription2.Migrations
                     RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HighestQualification = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PracticeNumber = table.Column<int>(type: "int", nullable: true),
-                    MedicalPracticeRecordsPracticeNumber = table.Column<int>(type: "int", nullable: true),
+                    MedicalPracticeRecordsPracticeNumberId = table.Column<int>(type: "int", nullable: true),
                     HealthCouncilRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PharmacyId = table.Column<int>(type: "int", nullable: true),
                     UsernameChangeLimit = table.Column<int>(type: "int", nullable: false),
@@ -428,11 +429,11 @@ namespace E_Prescription2.Migrations
                         principalTable: "Genders",
                         principalColumn: "GenderId");
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_MedicalPracticeRecords_MedicalPracticeRecordsPracticeNumber",
-                        column: x => x.MedicalPracticeRecordsPracticeNumber,
+                        name: "FK_AspNetUsers_MedicalPracticeRecords_MedicalPracticeRecordsPracticeNumberId",
+                        column: x => x.MedicalPracticeRecordsPracticeNumberId,
                         principalSchema: "Identity",
                         principalTable: "MedicalPracticeRecords",
-                        principalColumn: "PracticeNumber");
+                        principalColumn: "PracticeNumberId");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_PostalCodes_PostalCodeId",
                         column: x => x.PostalCodeId,
@@ -619,10 +620,10 @@ namespace E_Prescription2.Migrations
                 column: "GenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_MedicalPracticeRecordsPracticeNumber",
+                name: "IX_AspNetUsers_MedicalPracticeRecordsPracticeNumberId",
                 schema: "Identity",
                 table: "AspNetUsers",
-                column: "MedicalPracticeRecordsPracticeNumber");
+                column: "MedicalPracticeRecordsPracticeNumberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_PostalCodeId",

@@ -94,7 +94,7 @@ namespace E_Prescription2.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("MedicalPracticeRecordsPracticeNumber")
+                    b.Property<int?>("MedicalPracticeRecordsPracticeNumberId")
                         .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
@@ -154,7 +154,7 @@ namespace E_Prescription2.Migrations
 
                     b.HasIndex("GenderId");
 
-                    b.HasIndex("MedicalPracticeRecordsPracticeNumber");
+                    b.HasIndex("MedicalPracticeRecordsPracticeNumberId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -271,11 +271,11 @@ namespace E_Prescription2.Migrations
 
             modelBuilder.Entity("E_Prescription2.Models.MedicalPracticeRecord", b =>
                 {
-                    b.Property<int>("PracticeNumber")
+                    b.Property<int>("PracticeNumberId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PracticeNumber"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PracticeNumberId"), 1L, 1);
 
                     b.Property<string>("AddressLine1")
                         .HasColumnType("nvarchar(max)");
@@ -298,13 +298,16 @@ namespace E_Prescription2.Migrations
                     b.Property<string>("PracticeName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PracticeNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ProvinceId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SuburbId")
                         .HasColumnType("int");
 
-                    b.HasKey("PracticeNumber");
+                    b.HasKey("PracticeNumberId");
 
                     b.HasIndex("CityId");
 
@@ -460,6 +463,7 @@ namespace E_Prescription2.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProvinceId"), 1L, 1);
 
                     b.Property<string>("ProvinceName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProvinceId");
@@ -707,7 +711,7 @@ namespace E_Prescription2.Migrations
 
                     b.HasOne("E_Prescription2.Models.MedicalPracticeRecord", "MedicalPracticeRecords")
                         .WithMany()
-                        .HasForeignKey("MedicalPracticeRecordsPracticeNumber");
+                        .HasForeignKey("MedicalPracticeRecordsPracticeNumberId");
 
                     b.HasOne("E_Prescription2.Models.PostalCode", "PostalCodes")
                         .WithMany()

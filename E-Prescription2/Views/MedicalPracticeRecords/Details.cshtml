@@ -32,25 +32,25 @@
             @Html.DisplayNameFor(model => model.Provinces)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Provinces.ProvinceName)
+            @Html.DisplayFor(model => model.Provinces.ProvinceId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Suburbs)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Suburbs.SuburbName)
+            @Html.DisplayFor(model => model.Suburbs.SuburbId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cities)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cities.CityName)
+            @Html.DisplayFor(model => model.Cities.CityId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PostalCodes)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostalCodes.PostalCodeName)
+            @Html.DisplayFor(model => model.PostalCodes.PostalCodeId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ContactNumber)
@@ -64,9 +64,15 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.EmailAddress)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PracticeNumber)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PracticeNumber">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.PracticeNumberId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

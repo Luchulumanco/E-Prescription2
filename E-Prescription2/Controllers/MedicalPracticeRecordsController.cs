@@ -40,7 +40,7 @@ namespace E_Prescription2.Controllers
                 .Include(m => m.PostalCodes)
                 .Include(m => m.Provinces)
                 .Include(m => m.Suburbs)
-                .FirstOrDefaultAsync(m => m.PracticeNumber == id);
+                .FirstOrDefaultAsync(m => m.PracticeNumberId == id);
             if (medicalPracticeRecord == null)
             {
                 return NotFound();
@@ -50,16 +50,12 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: MedicalPracticeRecords/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ViewBag.Provinces = await _context.Provinces.ToListAsync();
-            ViewBag.Prov_s = JsonConvert.SerializeObject(_context.Provinces.ToList());
-            ViewBag.Cities = await _context.Cities.ToListAsync();
-            ViewBag.City_s = JsonConvert.SerializeObject(_context.Cities.ToList());
-            ViewBag.Suburbs = await _context.Suburbs.ToListAsync();
-            ViewBag.Suburb_s = JsonConvert.SerializeObject(_context.Suburbs.ToList());
-            ViewBag.PostalCodes = await _context.PostalCodes.ToListAsync();
-            ViewBag.PostalCode_s = JsonConvert.SerializeObject(_context.PostalCodes.ToList());
+            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName");
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName");
+            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName");
+            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName");
             return View();
         }
 
@@ -68,7 +64,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PracticeNumber,PracticeName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress")] MedicalPracticeRecord medicalPracticeRecord)
+        public async Task<IActionResult> Create([Bind("PracticeNumberId,PracticeName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress,PracticeNumber")] MedicalPracticeRecord medicalPracticeRecord)
         {
             if (ModelState.IsValid)
             {
@@ -77,10 +73,9 @@ namespace E_Prescription2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName", medicalPracticeRecord.CityId);
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", medicalPracticeRecord.PostalCodeId);
-            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", medicalPracticeRecord.ProvinceId);
-            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", medicalPracticeRecord.SuburbId);
-            
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeName", "PostalCodeId", medicalPracticeRecord.PostalCodeId);
+            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "Province", medicalPracticeRecord.ProvinceId);
+            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbId", medicalPracticeRecord.SuburbId);
             return View(medicalPracticeRecord);
         }
 
@@ -109,9 +104,9 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PracticeNumber,PracticeName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress")] MedicalPracticeRecord medicalPracticeRecord)
+        public async Task<IActionResult> Edit(int id, [Bind("PracticeNumberId,PracticeName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,ContactNumber,EmailAddress,PracticeNumber")] MedicalPracticeRecord medicalPracticeRecord)
         {
-            if (id != medicalPracticeRecord.PracticeNumber)
+            if (id != medicalPracticeRecord.PracticeNumberId)
             {
                 return NotFound();
             }
@@ -125,7 +120,7 @@ namespace E_Prescription2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MedicalPracticeRecordExists(medicalPracticeRecord.PracticeNumber))
+                    if (!MedicalPracticeRecordExists(medicalPracticeRecord.PracticeNumberId))
                     {
                         return NotFound();
                     }
@@ -137,7 +132,7 @@ namespace E_Prescription2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName", medicalPracticeRecord.CityId);
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", medicalPracticeRecord.PostalCodeId);
+            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeName", "PostalCodeName", medicalPracticeRecord.PostalCodeId);
             ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", medicalPracticeRecord.ProvinceId);
             ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", medicalPracticeRecord.SuburbId);
             return View(medicalPracticeRecord);
@@ -156,7 +151,7 @@ namespace E_Prescription2.Controllers
                 .Include(m => m.PostalCodes)
                 .Include(m => m.Provinces)
                 .Include(m => m.Suburbs)
-                .FirstOrDefaultAsync(m => m.PracticeNumber == id);
+                .FirstOrDefaultAsync(m => m.PracticeNumberId == id);
             if (medicalPracticeRecord == null)
             {
                 return NotFound();
@@ -186,9 +181,7 @@ namespace E_Prescription2.Controllers
 
         private bool MedicalPracticeRecordExists(int id)
         {
-          return (_context.MedicalPracticeRecords?.Any(e => e.PracticeNumber == id)).GetValueOrDefault();
+            return (_context.MedicalPracticeRecords?.Any(e => e.PracticeNumberId == id)).GetValueOrDefault();
         }
-
-        
     }
 }
