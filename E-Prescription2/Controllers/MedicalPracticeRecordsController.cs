@@ -50,12 +50,16 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: MedicalPracticeRecords/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName");
-            ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName");
-            ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName");
-            ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName");
+            ViewBag.Provinces = await _context.Provinces.ToListAsync();
+            ViewBag.Prov_s = JsonConvert.SerializeObject(_context.Provinces.ToList());
+            ViewBag.Cities = await _context.Cities.ToListAsync();
+            ViewBag.City_s = JsonConvert.SerializeObject(_context.Cities.ToList());
+            ViewBag.Suburbs = await _context.Suburbs.ToListAsync();
+            ViewBag.Suburb_s = JsonConvert.SerializeObject(_context.Suburbs.ToList());
+            ViewBag.PostalCodes = await _context.PostalCodes.ToListAsync();
+            ViewBag.PostalCode_s = JsonConvert.SerializeObject(_context.PostalCodes.ToList());
             return View();
         }
 

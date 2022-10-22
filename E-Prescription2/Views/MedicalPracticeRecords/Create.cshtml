@@ -6,57 +6,74 @@
 
 <h1>Create</h1>
 
-<h4>MedicalPracticeRecord</h4>
+<h4>Medical Practice Record</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PracticeName" class="control-label"></label>
+                <label asp-for="PracticeName" class="control-label"> Practice Name</label>
                 <input asp-for="PracticeName" class="form-control" />
                 <span asp-validation-for="PracticeName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressLine1" class="control-label"></label>
+                <label asp-for="AddressLine1" class="control-label">Address Line 1</label>
                 <input asp-for="AddressLine1" class="form-control" />
                 <span asp-validation-for="AddressLine1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressLine2" class="control-label"></label>
+                <label asp-for="AddressLine2" class="control-label">Address Line 2</label>
                 <input asp-for="AddressLine2" class="form-control" />
                 <span asp-validation-for="AddressLine2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProvinceId" class="control-label"></label>
-                <select class="form-control" id="pageProvinceElement">
+                <label asp-for="ProvinceId" class="control-label">Province</label>
+                <select class="form-control" id="pageProvinceElement" asp-for="ProvinceId">
 
                     @foreach (Province p in ViewBag.Provinces)
                     {
                         <option value="@p.ProvinceId">@p.ProvinceName</option>
                     }
                 </select>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="CityId" class="control-label"></label>
-                <select asp-for="CityId" class ="form-control" asp-items="ViewBag.CityId"></select>
+
+
             </div>
             <div class="form-group">
-                <label asp-for="SuburbId" class="control-label"></label>
-                <select asp-for="SuburbId" class="form-control" asp-items="ViewBag.SuburbId"></select>
+
+
+                <label asp-for="CityId" class="control-label">City</label>
+                <select class="form-control" id="pageCityElement" asp-for="CityId">
+                    @foreach (City c in ViewBag.Cities)
+                    {
+                        <option value="@c.CityId">@c.CityName</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="PostalCodeId" class="control-label"></label>
-                <select asp-for="PostalCodeId" class ="form-control" asp-items="ViewBag.PostalCodeId"></select>
+                <label asp-for="SuburbId" class="control-label">Suburb</label>
+                <select class="form-control" id="pageSuburbElement" asp-for="SuburbId">
+                    @foreach (Suburb c in ViewBag.Suburbs)
+                    {
+                        <option value="@c.SuburbId">@c.SuburbName</option>
+                    }
+                </select>
+
             </div>
             <div class="form-group">
-                <label asp-for="ContactNumber" class="control-label"></label>
+                <label asp-for="PostalCodeId" class="control-label">Postal Code</label>
+                <select class="form-control" id="pagePostalCodeElement" asp-for="PostalCodeId">
+                    <option>---select postal code---</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNumber" class="control-label">Contact Number</label>
                 <input asp-for="ContactNumber" class="form-control" />
                 <span asp-validation-for="ContactNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label"></label>
+                <label asp-for="EmailAddress" class="control-label">Email Address</label>
                 <input asp-for="EmailAddress" class="form-control" />
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
@@ -76,3 +93,122 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+    <script>
+
+        var srlProvs = "@(ViewBag.Prov_s)";
+    var srlCities = "@(ViewBag.City_s)";
+    var srlSuburbs = "@(ViewBag.Suburb_s)";
+    var srlPostalCodes = "@ViewBag.PostalCode_s";
+
+    var thisProvinces = document.getElementById('pageProvinceElement');
+    var thisCities = document.getElementById('pageCityElement');
+    var thisSuburbs = document.getElementById('pageSuburbElement');
+    var thisPostalCodes = document.getElementById('pagePostalCodeElement');
+    if (typeof srlProvs !== "undefined") {
+        const allProvs = JSON.parse(srlProvs.replace(/&quot;/g, '"'));
+        const allCities = JSON.parse(srlCities.replace(/&quot;/g, '"'));
+        const allSuburbs = JSON.parse(srlSuburbs.replace(/&quot;/g, '"'));
+        const allPostalCodes = JSON.parse(srlPostalCodes.replace(/&quot;/g, '"'));
+        //thisCities.innerHTML = "";
+        for (var i = 0; i < allCities.length; i++) {
+            var obj = allCities[i];
+            let selectedProvince = thisProvinces.options[thisProvinces.selectedIndex].value;
+            if (selectedProvince == obj["ProvinceId"]) {
+                let newOption = new Option(obj["CityName"], obj["CityId"]);
+                thisCities.add(newOption, undefined);
+            }
+        }
+        thisSuburbs.innerHTML = "";
+        for (var i = 0; i < allSuburbs.length; i++) {
+            var obj = allSuburbs[i];
+            let selectedCity = thisCities.options[thisCities.selectedIndex].value;
+            if (selectedCity == obj["CityId"]) {
+                let newOption = new Option(obj["SuburbName"], obj["SuburbId"]);
+                thisSuburbs.add(newOption, undefined);
+            }
+        }
+        thisPostalCodes.innerHTML = "";
+        for (var i = 0; i < allPostalCodes.length; i++) {
+            var obj = allPostalCodes[i];
+            let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+            if (selectedSuburb == obj["PostalCodeId"]) {
+                let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                thisPostalCodes.add(newOption, undefined);
+            }
+        }
+
+        if (thisProvinces) {
+            thisProvinces.addEventListener("change", function () {
+                thisCities.innerHTML = "";
+                for (var i = 0; i < allCities.length; i++) {
+                    var obj = allCities[i];
+                    let selectedProvince = thisProvinces.options[thisProvinces.selectedIndex].value;
+                    if (selectedProvince == obj["ProvinceId"]) {
+                        let newOption = new Option(obj["CityName"], obj["CityId"]);
+                        thisCities.add(newOption, undefined);
+                    }
+                }
+                thisSuburbs.innerHTML = "";
+                for (var i = 0; i < allSuburbs.length; i++) {
+                    var obj = allSuburbs[i];
+                    let selectedCity = thisCities.options[thisCities.selectedIndex].value;
+                    if (selectedCity == obj["CityId"]) {
+                        let newOption = new Option(obj["SuburbName"], obj["SuburbId"]);
+                        thisSuburbs.add(newOption, undefined);
+                    }
+                }
+                thisPostalCodes.innerHTML = "";
+                for (var i = 0; i < allPostalCodes.length; i++) {
+                    var obj = allPostalCodes[i];
+                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                    if (selectedSuburb == obj["PostalCodeId"]) {
+                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                        thisPostalCodes.add(newOption, undefined);
+                    }
+                }
+            })
+        }
+        if (thisCities) {
+            thisCities.addEventListener("change", function () {
+                thisSuburbs.innerHTML = "";
+                for (var i = 0; i < allSuburbs.length; i++) {
+                    var obj = allSuburbs[i];
+                    let selectedCity = thisCities.options[thisCities.selectedIndex].value;
+                    console.log(selectedCity);
+                    if (selectedCity == obj["CityId"]) {
+                        let newOption = new Option(obj["SuburbName"], obj["SuburbId"]);
+                        thisSuburbs.add(newOption, undefined);
+                    }
+                }
+                thisPostalCodes.innerHTML = "";
+                for (var i = 0; i < allPostalCodes.length; i++) {
+                    var obj = allPostalCodes[i];
+                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                    if (selectedSuburb == obj["PostalCodeId"]) {
+                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                        thisPostalCodes.add(newOption, undefined);
+                    }
+                }
+            });
+        }
+        if (thisSuburbs) {
+            thisSuburbs.addEventListener("change", function () {
+                thisPostalCodes.innerHTML = "";
+                for (var i = 0; i < allPostalCodes.length; i++) {
+                    var obj = allPostalCodes[i];
+                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                    if (selectedSuburb == obj["PostalCodeId"]) {
+                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                        thisPostalCodes.add(newOption, undefined);
+                    }
+                }
+            });
+        }
+    }
+</script>               

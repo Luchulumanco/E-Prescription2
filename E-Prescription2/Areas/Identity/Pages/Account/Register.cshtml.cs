@@ -23,7 +23,8 @@ using E_Prescription2.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Prescription2.Areas.Identity.Pages.Account
 {
@@ -102,7 +103,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name ="Date Of Birth*")]
+            [Display(Name = "Date Of Birth*")]
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
             public DateTime DOB { get; set; }
@@ -149,7 +150,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password*")]
-            
+
             public string Password { get; set; }
 
             /// <summary>
@@ -170,19 +171,19 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             public string AddressLine2 { get; set; }
 
             [Required]
-            [Display(Name ="Province")]
+            [Display(Name = "Province")]
             [ForeignKey("Provinces")]
             public int ProvinceId { get; set; }
             public virtual Province Province { get; set; }
 
             [Required]
             [Display(Name = "City / Town")]
-            [ForeignKey("Cities")]
+            [ForeignKey("City")]
             public int CityId { get; set; }
             public virtual City City { get; set; }
 
             [Required]
-            [Display(Name ="Suburb")]
+            [Display(Name = "Suburb")]
             [ForeignKey("Suburbs")]
             public int SuburbId { get; set; }
             public virtual Suburb Suburb { get; set; }
@@ -196,13 +197,14 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
 
 
-           
+
         }
         public List<SelectListItem> GenderItem { set; get; }
         public List<SelectListItem> ProvinceItem { set; get; }
-        public List<SelectListItem> CityItem { set;get; }
+
+        public List<SelectListItem> CityItem { set; get; }
         public List<SelectListItem> SuburbItem { set; get; }
-        public List <SelectListItem> PostalCodeItem { set; get; }
+        public List<SelectListItem> PostalCodeItem { set; get; }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -211,29 +213,39 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                 Value = g.GenderId.ToString(),
                 Text = g.GenderType
             }).ToList();
-            ProvinceItem = _context.Provinces.Select(p => new SelectListItem
-            { 
-                Value = p.ProvinceId.ToString(),
-                Text = p.ProvinceName
-            }).ToList();
-            CityItem = _context.Cities.Select(c => new SelectListItem
-            {
-                Value = c.CityId.ToString(),
-                Text = c.CityName,
-                
-            }).ToList();
-            SuburbItem = _context.Suburbs.Select(s => new SelectListItem 
-            { 
-                Value = s.SuburbId.ToString(), 
-                Text = s.SuburbName 
-            }).ToList();
-            PostalCodeItem = _context.PostalCodes.Select(c => new SelectListItem 
-            { 
-                Value = c.PostalCodeId.ToString(), 
-                Text = c.PostalCodeName
-            }).ToList();
+            //ProvinceItem = _context.Provinces.Select(p => new SelectListItem
+            //{ 
+            //    Value = p.ProvinceId.ToString(),
+            //    Text = p.ProvinceName
+            //}).ToList();
 
-                                                           
+            //CityItem = _context.Cities.Select(c => new SelectListItem
+            //{
+            //    Value = c.CityId.ToString(),
+            //    Text = c.CityName,
+
+            //}).ToList();
+            //SuburbItem = _context.Suburbs.Select(s => new SelectListItem 
+            //{ 
+            //    Value = s.SuburbId.ToString(), 
+            //    Text = s.SuburbName 
+            //}).ToList();
+            //PostalCodeItem = _context.PostalCodes.Select(c => new SelectListItem 
+            //{ 
+            //    Value = c.PostalCodeId.ToString(), 
+            //    Text = c.PostalCodeName
+            //}).ToList();
+
+            ViewData["Provinces"] = await _context.Provinces.ToListAsync();
+            ViewData["Prov_s"] = JsonConvert.SerializeObject(_context.Provinces.ToList());
+            ViewData["Cities"] = await _context.Cities.ToListAsync();
+            ViewData["City_s"] = JsonConvert.SerializeObject(_context.Cities.ToList());
+            ViewData["Suburbs"] = await _context.Suburbs.ToListAsync();
+            ViewData["Suburb_s"] = JsonConvert.SerializeObject(_context.Suburbs.ToList());
+            ViewData["PostalCodes"] = await _context.PostalCodes.ToListAsync();
+            ViewData["PostalCode_s"] = JsonConvert.SerializeObject(_context.PostalCodes.ToList());
+
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -261,13 +273,13 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                     DOB = Input.DOB,
                     PhoneNumber = Input.PhoneNumber,
                     GenderId = SelectedGenderId,
-                    AddressLine1 =Input.AddressLine1,
-                    AddressLine2 =Input.AddressLine2,
+                    AddressLine1 = Input.AddressLine1,
+                    AddressLine2 = Input.AddressLine2,
                     ProvinceId = SelectedProvinceId,
                     CityId = SelectedCityId,
                     SuburbId = SelectedSuburbId,
                     PostalCodeId = SelectedPostalCodeId,
-                    
+
                 };
 
                 //var user = CreateUser();
