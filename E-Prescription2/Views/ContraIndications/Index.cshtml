@@ -16,7 +16,10 @@
                 @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Conditions)
+                @Html.DisplayNameFor(model => model.Conditions.ICD_10_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Conditions.Diagnosis)
             </th>
             <th></th>
         </tr>
@@ -25,11 +28,14 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientId)
+                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Conditions.ConditionId)
+                @Html.DisplayFor(modelItem => item.Conditions.ICD_10_CODE)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Conditions.Diagnosis)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ContraId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ContraId">Details</a> |

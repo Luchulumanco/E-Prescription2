@@ -14,13 +14,19 @@
             @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActiveIngredientRecords.ActiveIngredientId)
+            @Html.DisplayFor(model => model.ActiveIngredientRecords.ActiveIngredientName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Conditions)
+            @Html.DisplayNameFor(model => model.Conditions.ICD_10_CODE)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Conditions.ConditionId)
+            @Html.DisplayFor(model => model.Conditions.ICD_10_CODE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Conditions.Diagnosis)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Conditions.Diagnosis)
         </dd>
     </dl>
 </div>

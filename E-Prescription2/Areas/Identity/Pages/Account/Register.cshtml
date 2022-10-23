@@ -128,7 +128,7 @@
               <div class="col-md-3">
              <label asp-for="Input.Province" class="form-control" autocomplete="provinceId" aria-required="true">
                   Province:
-                <select class="form-control" id="pageProvinceElement">
+                <select class="form-control" id="pageProvinceElement" asp-for="Input.ProvinceId">
 
                     @foreach (Province p in province)
                     {
@@ -145,7 +145,7 @@
               <div class="col-md-3">
              <label asp-for="Input.City" class="form-control" autocomplete="cityId" aria-required="true">
                  City:
-                <select class="form-control" id="pageCityElement">
+                <select class="form-control" id="pageCityElement" asp-for="Input.CityId">
 
                     @foreach (City c in cities)
                     {
@@ -159,7 +159,7 @@
               <div class="col-md-3">
                   <label asp-for="Input.Suburb" class="form-control" autocomplete="suburbId" aria-required="true">
                       Suburb:
-                <select class="form-control" id="pageSuburbElement">
+                <select class="form-control" id="pageSuburbElement" asp-for="Input.SuburbId">
                     @foreach (Suburb c in suburbs)
                     {
                         <option value="@c.SuburbId">@c.SuburbName</option>
@@ -172,8 +172,11 @@
                    <div class="col-md-3">
                   <label asp-for="Input.PostalCode" class="form-control" autocomplete="postalcodeId" aria-required="true">
                        Postal Code:
-                <select class="form-control" id="pagePostalCodeElement">
-                    <option>---select postal code---</option>
+                <select class="form-control" id="pagePostalCodeElement" asp-for="Input.PostalCodeId">
+                    @foreach (PostalCode c in postalCodes)
+                    {
+                        <option value="@c.PostalCodeId">@c.PostalCodeName</option>
+                    }
                 </select>
                   </label>
                   </div>

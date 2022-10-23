@@ -57,17 +57,17 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         [BindProperty]
         public int SelectedGenderId { get; set; }
 
-        [BindProperty]
-        public int SelectedProvinceId { set; get; }
+        //[BindProperty]
+        //public int SelectedProvinceId { set; get; }
 
-        [BindProperty]
-        public int SelectedCityId { set; get; }
+        //[BindProperty]
+        //public int SelectedCityId { set; get; }
 
-        [BindProperty]
-        public int SelectedSuburbId { set; get; }
+        //[BindProperty]
+        //public int SelectedSuburbId { set; get; }
 
-        [BindProperty]
-        public int SelectedPostalCodeId { set; get; }
+        //[BindProperty]
+        //public int SelectedPostalCodeId { set; get; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -178,7 +178,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "City / Town")]
-            [ForeignKey("City")]
+            [ForeignKey("Cities")]
             public int CityId { get; set; }
             public virtual City City { get; set; }
 
@@ -200,11 +200,11 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
         }
         public List<SelectListItem> GenderItem { set; get; }
-        public List<SelectListItem> ProvinceItem { set; get; }
+        //public List<SelectListItem> ProvinceItem { set; get; }
 
-        public List<SelectListItem> CityItem { set; get; }
-        public List<SelectListItem> SuburbItem { set; get; }
-        public List<SelectListItem> PostalCodeItem { set; get; }
+        //public List<SelectListItem> CityItem { set; get; }
+        //public List<SelectListItem> SuburbItem { set; get; }
+        //public List<SelectListItem> PostalCodeItem { set; get; }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -252,16 +252,17 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            var SelectedGenderId = this.SelectedGenderId;
-            var SelectedProvinceId = this.SelectedProvinceId;
-            var SelectedCityId = this.SelectedCityId;
-            var SelectedSuburbId = this.SelectedSuburbId;
-            var SelectedPostalCodeId = this.SelectedPostalCodeId;
+            //var SelectedGenderId = this.SelectedGenderId;
+            //var SelectedProvinceId = this.SelectedProvinceId;
+            //var SelectedCityId = this.SelectedCityId;
+            //var SelectedSuburbId = this.SelectedSuburbId;
+            //var SelectedPostalCodeId = this.SelectedPostalCodeId;
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 MailAddress address = new MailAddress(Input.Email);
+                
                 string userName = address.User;
                 var user = new ApplicationUser
                 {
@@ -275,10 +276,10 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                     GenderId = SelectedGenderId,
                     AddressLine1 = Input.AddressLine1,
                     AddressLine2 = Input.AddressLine2,
-                    ProvinceId = SelectedProvinceId,
-                    CityId = SelectedCityId,
-                    SuburbId = SelectedSuburbId,
-                    PostalCodeId = SelectedPostalCodeId,
+                    ProvinceId = Input.ProvinceId,
+                    CityId = Input.CityId,
+                    SuburbId = Input.SuburbId,
+                    PostalCodeId = Input.PostalCodeId,
 
                 };
 

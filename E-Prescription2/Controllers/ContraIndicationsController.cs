@@ -49,8 +49,9 @@ namespace E_Prescription2.Controllers
         // GET: ContraIndications/Create
         public IActionResult Create()
         {
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientId");
-            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ConditionId");
+            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
+            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ICD_10_CODE");
+            ViewData["ConditionIds"] = new SelectList(_context.Conditions, "ConditionId", "Diagnosis");
             return View();
         }
 
@@ -67,8 +68,9 @@ namespace E_Prescription2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientId", contraIndication.ActiveIngredientId);
-            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ConditionId", contraIndication.ConditionId);
+            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", contraIndication.ActiveIngredientId);
+            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ICD_10_CODE", contraIndication.ConditionId);
+            ViewData["ConditionIds"] = new SelectList(_context.Conditions, "ConditionId", "Diagnosis", contraIndication.ConditionId);
             return View(contraIndication);
         }
 
@@ -85,8 +87,9 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientId", contraIndication.ActiveIngredientId);
-            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ConditionId", contraIndication.ConditionId);
+            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", contraIndication.ActiveIngredientId);
+            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ICD_10_CODE", contraIndication.ConditionId);
+            ViewData["ConditionIds"] = new SelectList(_context.Conditions, "ConditionId", "Diagnosis", contraIndication.ConditionId);
             return View(contraIndication);
         }
 
@@ -122,8 +125,9 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientId", contraIndication.ActiveIngredientId);
-            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ConditionId", contraIndication.ConditionId);
+            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", contraIndication.ActiveIngredientId);
+            ViewData["ConditionId"] = new SelectList(_context.Conditions, "ConditionId", "ICD_10_CODE", contraIndication.ConditionId);
+            ViewData["ConditionIds"] = new SelectList(_context.Conditions, "ConditionId", "Diagnosis", contraIndication.ConditionId);
             return View(contraIndication);
         }
 

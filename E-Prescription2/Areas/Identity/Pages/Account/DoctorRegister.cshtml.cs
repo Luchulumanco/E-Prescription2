@@ -164,7 +164,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
             [Required]
             [ForeignKey("MedicalPracticeRecord")]
-            public int PracticeNumber { get; set; }
+            public string PracticeNumber { get; set; }
             public virtual MedicalPracticeRecord MedicalPracticeRecords { get; set; }
 
             //[Required]
@@ -210,8 +210,8 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         {
             PracticeNumberItem = _context.MedicalPracticeRecords.Select(g => new SelectListItem
             {
-                Value = g.PracticeNumber.ToString(),
-                Text = g.PracticeName
+                Value = g.PracticeNumberId.ToString(),
+                Text = g.PracticeNumber
             }).ToList();
             
 

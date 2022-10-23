@@ -30,7 +30,7 @@ namespace E_Prescription2.Models
         public virtual Suburb? Suburbs { get; set; }
 
         //[Required]
-        [ForeignKey("City")]
+        [ForeignKey("Cities")]
         public int? CityId { get; set; }
         public virtual City? Cities { get; set; }
 
