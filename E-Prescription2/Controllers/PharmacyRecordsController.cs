@@ -61,7 +61,7 @@ namespace E_Prescription2.Controllers
             ViewBag.Suburb_s = JsonConvert.SerializeObject(_context.Suburbs.ToList());
             ViewBag.PostalCodes = await _context.PostalCodes.ToListAsync();
             ViewBag.PostalCode_s = JsonConvert.SerializeObject(_context.PostalCodes.ToList());
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName");
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace E_Prescription2.Controllers
             ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", pharmacyRecord.PostalCodeId);
             ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", pharmacyRecord.ProvinceId);
             ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", pharmacyRecord.SuburbId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", pharmacyRecord.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", pharmacyRecord.UserId);
             return View(pharmacyRecord);
         }
 
@@ -103,7 +103,7 @@ namespace E_Prescription2.Controllers
             ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", pharmacyRecord.PostalCodeId);
             ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", pharmacyRecord.ProvinceId);
             ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", pharmacyRecord.SuburbId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", pharmacyRecord.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", pharmacyRecord.UserId);
             return View(pharmacyRecord);
         }
 
@@ -143,7 +143,7 @@ namespace E_Prescription2.Controllers
             ViewData["PostalCodeId"] = new SelectList(_context.PostalCodes, "PostalCodeId", "PostalCodeName", pharmacyRecord.PostalCodeId);
             ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "ProvinceName", pharmacyRecord.ProvinceId);
             ViewData["SuburbId"] = new SelectList(_context.Suburbs, "SuburbId", "SuburbName", pharmacyRecord.SuburbId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", pharmacyRecord.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", pharmacyRecord.UserId);
             return View(pharmacyRecord);
         }
 

@@ -40,7 +40,7 @@
                 @Html.DisplayNameFor(model => model.LicenseNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                <label @Html.DisplayNameFor(model => model.User)>Pharmacist </label>
             </th>
             <th></th>
         </tr>
@@ -76,7 +76,7 @@
                 @Html.DisplayFor(modelItem => item.LicenseNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.FirstName)
+                @Html.DisplayFor(modelItem => item.User.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PharmacyId">Edit</a> |

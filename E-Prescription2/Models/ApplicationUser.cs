@@ -9,7 +9,8 @@ namespace E_Prescription2.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public DateTime? DOB { get; set; }
-        
+        public string FullName => $"{FirstName} {LastName}";
+
         public string? IdNumber { get; set; }
 
         [ForeignKey("Gender")]
