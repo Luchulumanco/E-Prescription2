@@ -58,6 +58,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany()
             .HasForeignKey(ba => ba.ConditionId);
 
+        
         //builder.Entity<City>()
         //    .HasOne(ba=>ba.Provinces)
         //    .WithMany()
