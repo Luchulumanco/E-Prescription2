@@ -61,6 +61,7 @@ namespace E_Prescription2.Controllers
             ViewBag.Suburb_s = JsonConvert.SerializeObject(_context.Suburbs.ToList());
             ViewBag.PostalCodes = await _context.PostalCodes.ToListAsync();
             ViewBag.PostalCode_s = JsonConvert.SerializeObject(_context.PostalCodes.ToList());
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName");
             return View();
         }
 
