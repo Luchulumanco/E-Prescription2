@@ -257,7 +257,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             //var SelectedCityId = this.SelectedCityId;
             //var SelectedSuburbId = this.SelectedSuburbId;
             //var SelectedPostalCodeId = this.SelectedPostalCodeId;
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Patient/Index");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {

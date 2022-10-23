@@ -217,7 +217,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         {
             var SelectedPharmacyId = this.SelectedPharmacyId;
 
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Pharmacist/Index");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {

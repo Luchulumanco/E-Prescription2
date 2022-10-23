@@ -23,7 +23,7 @@ using E_Prescription2.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using E_Prescription2.Areas.Identity.Enums;
 
 namespace E_Prescription2.Areas.Identity.Pages.Account
 {
@@ -57,6 +57,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         public int SelectedPracticeNumberId { get; set; }
 
         
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -160,7 +161,9 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name= "Highest Qualification")]
+            [ForeignKey("HighestQualificationEnum")]
             public string HighestQualification { get; set; }
+            public virtual HighestQualificationEnum HighestQualifications { get; set; }
 
             [Required]
             [ForeignKey("MedicalPracticeRecord")]
@@ -213,6 +216,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                 Value = g.PracticeNumberId.ToString(),
                 Text = g.PracticeNumber
             }).ToList();
+
             
 
                                                            
@@ -224,7 +228,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         {
             var SelectedPracticeId = this.SelectedPracticeNumberId;
             
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Doctor/Index");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
