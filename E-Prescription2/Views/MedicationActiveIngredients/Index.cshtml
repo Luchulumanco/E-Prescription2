@@ -3,8 +3,51 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
 
-<h1>Index</h1>
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    fieldset {
+        border: 1px solid #ddd !important;
+        margin: 0;
+        xmin-width: 0;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        padding-left: 10px !important;
+    }
+
+    legand {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        width: 35%;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        padding: 5px 5px 5px 10px;
+        background-color: #ffffff;
+    }
+</style>
+
+<fieldset>
+<legend><h1>Medication</h1></legend>
 <a class="" href="~/Admin/Index">Back to Admin </a>
 <p>
     <a asp-action="Create">Create New</a>
@@ -68,3 +111,4 @@
 }
     </tbody>
 </table>
+</fieldset>

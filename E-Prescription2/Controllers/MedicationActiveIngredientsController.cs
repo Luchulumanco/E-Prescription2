@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
+using Newtonsoft.Json;
 
 namespace E_Prescription2.Controllers
 {
@@ -79,10 +80,17 @@ namespace E_Prescription2.Controllers
         // GET: MedicationActiveIngredients/Create
         public IActionResult Create()
         {
+            //ViewBag.ActiveIngredients = _context.ActiveIngredientRecords.ToList();
+            //ViewBag.ActiveIngredient_s = JsonConvert.SerializeObject(_context.ActiveIngredientRecords.ToList());
+            //ViewBag.Stregnths=_context.MedicationActiveIngredient.ToList();
+            //ViewBag.Stregnth_s=JsonConvert.SerializeObject(_context.MedicationActiveIngredient.ToList());
+           
+
             ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName");
             ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName");
             ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName");
+            ViewData["AciveIngredient"] = _context.ActiveIngredientRecords;
             return View();
         }
 
@@ -210,5 +218,6 @@ namespace E_Prescription2.Controllers
         {
           return _context.MedicationActiveIngredient.Any(e => e.MediActiveId == id);
         }
+
     }
 }

@@ -8,8 +8,50 @@
     List<Suburb> suburbs = (List<Suburb>)ViewData["Suburbs"];
     List<PostalCode> postalCodes = (List<PostalCode>)ViewData["PostalCodes"];
 }
+<style>
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
 
-<h1>@ViewData["Title"]</h1>
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    fieldset {
+        border: 1px solid #ddd !important;
+        margin: 0;
+        xmin-width: 0;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        padding-left: 10px !important;
+    }
+
+    legand {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        width: 35%;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        padding: 5px 5px 5px 10px;
+        background-color: #ffffff;
+    }
+</style>
+<fieldset>
+<legend><@ViewData["Title"]</legend>
 
 
    
@@ -76,7 +118,7 @@
                  <div class="form-floating">
                 
                 <input asp-for="Input.DOB" class="form-control" autocomplete="dateofbirth" aria-required="true" />
-                <label asp-for="Input.DOB"></label>
+                <label asp-for="Input.DOB" style="margin-bottom:20 px;"></label>
                
              </div>
              </div>
@@ -188,9 +230,10 @@
           </div>
           
            <div class="form-floating">
-               <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="margin-top:20px;">Register</button>
            </div> 
         </form>
+        </fieldset>
 <script>
 
     var srlProvs = "@(ViewData["Prov_s"])";

@@ -12,7 +12,7 @@ namespace E_Prescription2.Models
         public int? MedicationId { get; set; }
         public virtual MedicationRecord? MedicationRecords { get; set; }
 
-        public string Strength { get; set; }
+        public string? Strength { get; set; }
 
         [ForeignKey("ActiveIngredientRecord")]
         public int? ActiveIngredientId { get; set; }
