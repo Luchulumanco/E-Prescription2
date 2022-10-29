@@ -27,7 +27,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<Schedule>? Schedule { get; set; }
     public virtual DbSet<Condition>? Conditions { get; set; }
     public virtual DbSet<ContraIndication>? ContraIndications { get; set; }
-   
+   public virtual DbSet<Prescription>? Prescriptions { get; set; }
+    public virtual DbSet<PrescriptionLine>? PrescriptionLines { get; set; }
+    public virtual DbSet<DispenseDetails>? DispenseDetails { get; set; }
+
    
  
 
@@ -57,8 +60,41 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasOne(ba => ba.Conditions)
             .WithMany()
             .HasForeignKey(ba => ba.ConditionId);
-
+        //one-to-many relationship between Prescription and DoctorUser
+        builder.Entity<Prescription>()
+            .HasOne(ba => ba.DoctorUser)
+            .WithMany()
+            .HasForeignKey(ba => ba.DoctorId);
+        //one-to-many relationship between Prescription and PatientUser
+        builder.Entity<Prescription>()
+            .HasOne(ba => ba.PatientUser)
+            .WithMany()
+            .HasForeignKey(ba => ba.PatientID);
+        //one-to-many relationship between PrescriptionLine and MedicationActive
+        builder.Entity<PrescriptionLine>()
+            .HasOne(ba => ba.medicationActive)
+            .WithMany()
+            .HasForeignKey(ba => ba.MedicationId);
+        //one-to-many relationship between PrescriptionLine and Dispense
+        builder.Entity<PrescriptionLine>()
+            .HasOne(ba => ba.dispenseDetails)
+            .WithMany()
+            .HasForeignKey(ba => ba.DispenseId);
+        //one-to-many relationship between PrescriptionLine and MedicationActive
+        builder.Entity<DispenseDetails>()
+            .HasOne(ba => ba.PharmacistUser)
+            .WithMany()
+            .HasForeignKey(ba => ba.PharmacistId);
+        //one-to-many relationship between PrescriptionLine and MedicationActive
+        builder.Entity<DispenseDetails>()
+            .HasOne(ba => ba.PharmacyRecords)
+            .WithMany()
+            .HasForeignKey(ba => ba.PharmacyId);
+        //one-to-many relationship between PrescriptionLine and MedicationActive
         
+
+
+
         //builder.Entity<City>()
         //    .HasOne(ba=>ba.Provinces)
         //    .WithMany()
@@ -74,8 +110,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         //    .WithMany()
         //    .HasForeignKey(ba=>ba.PostalCodeId);
         //builder.Entity<PostalCode>();
-          
-           
+
+
 
 
 
@@ -112,4 +148,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.ToTable("UserTokens");
         });
     }
+   
+   
+ 
+
+
+   
 }
