@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
 using Newtonsoft.Json;
+using E_Prescription2.ViewModel;
 
 namespace E_Prescription2.Controllers
 {
@@ -18,6 +19,7 @@ namespace E_Prescription2.Controllers
         public MedicationActiveIngredientsController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
 
         // GET: MedicationActiveIngredients
@@ -76,6 +78,17 @@ namespace E_Prescription2.Controllers
 
             return View(medicationActiveIngredient);
         }
+        //[HttpGet]
+        //public IActionResult IngredientsStrength()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult IngredientsStrength(IndexViewModel va)
+        //{
+        //    return View();
+        //}
 
         // GET: MedicationActiveIngredients/Create
         public IActionResult Create()
@@ -85,7 +98,7 @@ namespace E_Prescription2.Controllers
             //ViewBag.Stregnths=_context.MedicationActiveIngredient.ToList();
             //ViewBag.Stregnth_s=JsonConvert.SerializeObject(_context.MedicationActiveIngredient.ToList());
            
-
+           
             ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName");
             ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName");
@@ -101,6 +114,7 @@ namespace E_Prescription2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MediActiveId,MedicationId,Strength,ActiveIngredientId,ScheduleId,DosageFormId")] MedicationActiveIngredient medicationActiveIngredient)
         {
+            IndexViewModel index = new IndexViewModel();
             if (ModelState.IsValid)
             {
                 _context.Add(medicationActiveIngredient);

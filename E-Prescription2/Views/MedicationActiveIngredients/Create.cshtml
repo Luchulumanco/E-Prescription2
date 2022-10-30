@@ -1,4 +1,4 @@
-﻿@model E_Prescription2.Models.MedicationActiveIngredient
+﻿@model E_Prescription2.Models.MedicationActiveIngredient;
 
 @{
     ViewData["Title"] = "Create";
@@ -71,15 +71,18 @@
             <fieldset style="margin-top:20px;" class="col-md-80">
                 <legend>Active Ingredients</legend>
                   
-           @* <div class="form-group">
+@*            <div class="form-group">
                 <label asp-for="ActiveIngredientId" class="control-label">Active Ingredient Name</label>
                    <select asp-for="ActiveIngredientId" style="text-align:left" class="form-control" asp-items="ViewBag.ActiveIngredientId"><option></option></select>
             </div>
 
 
-                    <div class="form-group" style="text-align:left">
+                    <div class="form-group" style="text-align:left" id="firstdiv">
                 <label asp-for="Strength" class="control-label"></label>
-                <input asp-for="Strength" style="text-align:left" class="form-control" />
+                        <input asp-for="Strength" style="text-align:left" class="form-control" type="text" name="testinput" />
+                    <button  value="add dynamic" type="button" class="btn btn-sm btn-secondary visible" onclick="DynamicText()">
+                    Add
+                    </button>
                 <span asp-validation-for="Strength" class="text-danger"></span>
             </div>*@
                 <table id="CodesTable" class="table table-borderless table-sn mb-0 pb-0">
@@ -92,7 +95,7 @@
                                 Strength
                             </th>
                             <th style="width:60px;">
-                                <button id="btnAddDetailRow" type="button" class="btn btn-sm btn-secondary visible" onclick="AddItem(this)">
+                                <button  value="add dynamic" type="button" class="btn btn-sm btn-secondary visible" onclick="AddItem(this)">
                                     Add
                                 </button>
                             </th>
@@ -106,7 +109,7 @@
                                     <select asp-for="ActiveIngredientId" class="form-control" asp-items="ViewBag.ActiveIngredientId"><option></option></select>
                                 </td>
                                 <td>
-                                    <input asp-for="Strength" class="form-control"/> 
+                                    <input asp-for="Strength" class="form-control" type="text" name="testinput"/> 
                                 </td>
                                 <td style="width:60px;">
                                         <button id='btnremove-@i' type="button" class="btn btn-sm btn-danger visible">
@@ -133,6 +136,7 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@*<script src="~/js/site.js"></script>*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>

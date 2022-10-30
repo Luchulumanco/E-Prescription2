@@ -20,10 +20,27 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: ContraIndications
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var applicationDbContext = _context.ContraIndications.Include(c => c.ActiveIngredientRecords).Include(c => c.Conditions);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CurrentFilter"] = SearchString;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                ViewData["CurrentFilter"] = SearchString;
+                var applicationDbContext = _context.ContraIndications
+                .Include(c => c.ActiveIngredientRecords)
+                .Include(c => c.Conditions)
+                .Where(c => c.ActiveIngredientRecords.ActiveIngredientName.Contains(SearchString));
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.ContraIndications
+               .Include(c => c.ActiveIngredientRecords)
+               .Include(c => c.Conditions);
+                return View(await applicationDbContext.ToListAsync());
+            }
+               
         }
 
         // GET: ContraIndications/Details/5

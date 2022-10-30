@@ -20,9 +20,25 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: ActiveIngredientRecords
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-              return View(await _context.ActiveIngredientRecords.ToListAsync());
+            ViewData["CurrentFilter"] = SearchString;
+
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                ViewData["CurrentFilter"] = SearchString;
+                var applicationDbContexts = _context.ActiveIngredientRecords
+                    .Where(b => b.ActiveIngredientName.Contains(SearchString));
+                return View(await applicationDbContexts.ToListAsync());
+            }
+            else
+            {
+               
+                return View(await _context.ActiveIngredientRecords.ToListAsync());
+            }
+
+                
         }
 
         // GET: ActiveIngredientRecords/Details/5
