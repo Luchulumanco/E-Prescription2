@@ -1,0 +1,30 @@
+﻿@model E_Prescription2.Models.PrescriptionLine
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PrescriptionLine</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.medicationActive)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.medicationActive.MediActiveId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dispenseDetails)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dispenseDetails.DispenseId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.PrescriptionLineId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
