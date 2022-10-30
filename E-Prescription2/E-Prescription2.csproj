@@ -28,6 +28,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Admin\" />
+    <Folder Include="wwwroot\Doctor\" />
+    <Folder Include="wwwroot\Patient\" />
+    <Folder Include="wwwroot\Pharmacist\" />
   </ItemGroup>
 
 </Project>
