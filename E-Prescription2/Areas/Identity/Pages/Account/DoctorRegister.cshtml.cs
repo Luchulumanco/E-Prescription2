@@ -154,8 +154,8 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Health Council Registration Number*")]
-            [MaxLength(10)]
-            [MinLength(10, ErrorMessage = "A minimum of 10 characters is needed for a Health Council Registration number")]
+            [MaxLength(6)]
+            [MinLength(6, ErrorMessage = "A minimum of 6 characters is needed for a Health Council Registration number")]
             [RegularExpression("([0-9]+)", ErrorMessage = "Please enter a valid Health Council Registration")]
             public string HealthCouncilRegistrationNumber { get; set; }
 

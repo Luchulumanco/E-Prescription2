@@ -29,7 +29,12 @@ namespace E_Prescription2.Models
         public virtual PostalCode? PostalCodes { get; set; }
         public string? ContactNumber { get; set; }
         public string? EmailAddress { get; set; }
-        public string? PracticeNumber { get; set; }
+
+        [Required]
+        [MaxLength(8)]
+        [MinLength(8, ErrorMessage = "A minimum of 8 characters is needed for a Practice Number")]
+        [RegularExpression("^([P-Rp-r0-9])*$", ErrorMessage = "Only Practice Numbers starting with letters P,R and six succeeding numbers are valid")]
+        public string PracticeNumber { get; set; }
 
 
     }

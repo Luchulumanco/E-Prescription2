@@ -3,14 +3,67 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
 
-<h1>Index</h1>
-<a class="" href="~/Admin/Index">Back to Admin </a>
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    fieldset {
+        border: 1px solid #ddd !important;
+        margin: 0;
+        xmin-width: 0;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        padding-left: 10px !important;
+    }
+
+    legand {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        width: 35%;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        padding: 5px 5px 5px 10px;
+        background-color: #ffffff;
+    }
+</style>
+<fieldset>
+    <legend> Pharmacy Records</legend>
+    <a class="" href="~/Admin/Index">Back to Admin </a>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+ <div class="form-control">
+        <form asp-action="Index" method="get">
+            <label for="SearchString">Search by License Number:</label>
+            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-primary" />
+
+        </form>
+        <a asp-action="Index">Back to full list</a>
+        <hr />
+
+    </div>
 <table class="table">
-    <thead class="table-primary">
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.PharmacyName)
@@ -20,6 +73,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AddressLine2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Provinces)
@@ -40,7 +96,7 @@
                 @Html.DisplayNameFor(model => model.LicenseNumber)
             </th>
             <th>
-                <label @Html.DisplayNameFor(model => model.User)>Pharmacist </label>
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
         </tr>
@@ -58,16 +114,19 @@
                 @Html.DisplayFor(modelItem => item.AddressLine2)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provinces.ProvinceName)
+                @Html.DisplayFor(modelItem => item.ContactNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Suburbs.SuburbName)
+                @Html.DisplayFor(modelItem => item.Provinces.ProvinceId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cities.CityName)
+                @Html.DisplayFor(modelItem => item.Suburbs.SuburbId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PostalCodes.PostalCodeName)
+                @Html.DisplayFor(modelItem => item.Cities.CityId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCodes.PostalCodeId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EmailAddress)
@@ -76,7 +135,7 @@
                 @Html.DisplayFor(modelItem => item.LicenseNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
+                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PharmacyId">Edit</a> |
@@ -87,3 +146,4 @@
 }
     </tbody>
 </table>
+</fieldset>

@@ -10,6 +10,7 @@ namespace E_Prescription2.Models
         public string? PharmacyName { get; set; }
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
+        public string? ContactNumber { get; set; }
         [ForeignKey("Province")]
         public int? ProvinceId { get; set; }
         public virtual Province? Provinces { get; set; }
@@ -28,6 +29,10 @@ namespace E_Prescription2.Models
         public int? PostalCodeId { get; set; }
         public virtual PostalCode? PostalCodes { get; set; }
         public string? EmailAddress { get; set; }
+        [Required]
+        [MaxLength(8)]
+        [MinLength(8, ErrorMessage = "A minimum of 8 characters is needed for a Practice Number")]
+        [RegularExpression("^([Y-y0-9])*$", ErrorMessage = "Only License Numbers starting with letter Y and seven succeeding numbers are valid")]
         public string? LicenseNumber { get; set; }
        
         [ForeignKey("ApplicatiionUser")]

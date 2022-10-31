@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221030195626_Pete")]
-    partial class Pete
+    [Migration("20221031144855_Zete")]
+    partial class Zete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -327,7 +327,9 @@ namespace E_Prescription2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PracticeNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<int?>("ProvinceId")
                         .HasColumnType("int");
@@ -426,6 +428,9 @@ namespace E_Prescription2.Migrations
 
                     b.Property<int?>("CityId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");

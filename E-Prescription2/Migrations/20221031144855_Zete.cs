@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class Pete : Migration
+    public partial class Zete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -342,7 +342,7 @@ namespace E_Prescription2.Migrations
                     PostalCodeId = table.Column<int>(type: "int", nullable: true),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PracticeNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PracticeNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -464,6 +464,7 @@ namespace E_Prescription2.Migrations
                     PharmacyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProvinceId = table.Column<int>(type: "int", nullable: true),
                     SuburbId = table.Column<int>(type: "int", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: true),

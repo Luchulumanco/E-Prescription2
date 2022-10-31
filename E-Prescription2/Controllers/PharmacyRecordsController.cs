@@ -21,10 +21,32 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: PharmacyRecords
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var applicationDbContext = _context.PharmacyRecords.Include(p => p.Cities).Include(p => p.PostalCodes).Include(p => p.Provinces).Include(p => p.Suburbs).Include(p => p.User);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CurrentFilter"] = SearchString;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                var applicationDbContext = _context.PharmacyRecords
+                    .Include(p => p.Cities)
+                    .Include(p => p.PostalCodes)
+                    .Include(p => p.Provinces)
+                    .Include(p => p.Suburbs)
+                    .Include(p => p.User)
+                    .Where(p => p.LicenseNumber.Contains(SearchString));
+                       
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.PharmacyRecords
+                    .Include(p => p.Cities)
+                    .Include(p => p.PostalCodes)
+                    .Include(p => p.Provinces)
+                    .Include(p => p.Suburbs)
+                    .Include(p => p.User);
+                return View(await applicationDbContext.ToListAsync());
+            }
+                
         }
 
         // GET: PharmacyRecords/Details/5
@@ -51,7 +73,7 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: PharmacyRecords/Create
-        public async Task<IActionResult> Create()
+        public async  Task<IActionResult> Create()
         {
             ViewBag.Provinces = await _context.Provinces.ToListAsync();
             ViewBag.Prov_s = JsonConvert.SerializeObject(_context.Provinces.ToList());
@@ -70,7 +92,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
+        public async Task<IActionResult> Create([Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ContactNumber,ProvinceId,SuburbId,CityId,PostalCodeId,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +134,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ProvinceId,SuburbId,CityId,PostalCodeId,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
+        public async Task<IActionResult> Edit(int id, [Bind("PharmacyId,PharmacyName,AddressLine1,AddressLine2,ContactNumber,ProvinceId,SuburbId,CityId,PostalCodeId,EmailAddress,LicenseNumber,UserId")] PharmacyRecord pharmacyRecord)
         {
             if (id != pharmacyRecord.PharmacyId)
             {

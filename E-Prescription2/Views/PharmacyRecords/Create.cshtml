@@ -3,33 +3,79 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
 
-<h1>Create</h1>
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
 
-<h4>PharmacyRecord</h4>
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    fieldset {
+        border: 1px solid #ddd !important;
+        margin: 0;
+        xmin-width: 0;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        padding-left: 10px !important;
+    }
+
+    legand {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        width: 35%;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        padding: 5px 5px 5px 10px;
+        background-color: #ffffff;
+    }
+</style>
+<fieldset>
+    <legend>Create Pharmacy Record</legend>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PharmacyName" class="control-label">Pharmacy Name</label>
+                <label asp-for="PharmacyName" class="control-label"></label>
                 <input asp-for="PharmacyName" class="form-control" />
                 <span asp-validation-for="PharmacyName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressLine1" class="control-label">Address Line 1</label>
+                <label asp-for="AddressLine1" class="control-label"></label>
                 <input asp-for="AddressLine1" class="form-control" />
                 <span asp-validation-for="AddressLine1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressLine2" class="control-label">Address Line 2</label>
+                <label asp-for="AddressLine2" class="control-label"></label>
                 <input asp-for="AddressLine2" class="form-control" />
                 <span asp-validation-for="AddressLine2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProvinceId" class="control-label">Province </label>
-                 <select class="form-control" id="pageProvinceElement" asp-for="ProvinceId">
+                <label asp-for="ContactNumber" class="control-label"></label>
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinceId" class="control-label"></label>
+                <select class="form-control" id="pageProvinceElement" asp-for="ProvinceId">
 
                     @foreach (Province p in ViewBag.Provinces)
                     {
@@ -38,7 +84,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="CityId" class="control-label">City / Town</label>
+                <label asp-for="CityId" class="control-label"></label>
                 <select class="form-control" id="pageCityElement" asp-for="CityId">
                     @foreach (City c in ViewBag.Cities)
                     {
@@ -47,7 +93,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="SuburbId" class="control-label">Suburb </label>
+                <label asp-for="SuburbId" class="control-label"></label>
                 <select class="form-control" id="pageSuburbElement" asp-for="SuburbId">
                     @foreach (Suburb c in ViewBag.Suburbs)
                     {
@@ -57,14 +103,13 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="PostalCodeId" class="control-label"> Postal Code</label>
+                <label asp-for="PostalCodeId" class="control-label"></label>
                 <select class="form-control" id="pagePostalCodeElement" asp-for="PostalCodeId">
                     <option>---select postal code---</option>
                 </select>
-
             </div>
             <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label">Email Address</label>
+                <label asp-for="EmailAddress" class="control-label"></label>
                 <input asp-for="EmailAddress" class="form-control" />
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
@@ -74,12 +119,8 @@
                 <span asp-validation-for="LicenseNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserId" class="control-label">
-                    Pharmacist Responsible:
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId">
-                     <option value="0">--Please choose a pharmacist--</option>
-                </select>
-                </label>
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -91,10 +132,13 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</fieldset>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
     <script>
 
         var srlProvs = "@(ViewBag.Prov_s)";
@@ -207,4 +251,4 @@
             });
         }
     }
-</script>
+</script>              

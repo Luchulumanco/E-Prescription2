@@ -21,10 +21,29 @@ namespace E_Prescription2.Controllers
         }
 
         // GET: MedicalPracticeRecords
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var applicationDbContext = _context.MedicalPracticeRecords.Include(m => m.Cities).Include(m => m.PostalCodes).Include(m => m.Provinces).Include(m => m.Suburbs);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CurrentFilter"] = SearchString;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                var applicationDbContext = _context.MedicalPracticeRecords
+                    .Include(m => m.Cities)
+                    .Include(m => m.PostalCodes)
+                    .Include(m => m.Provinces)
+                    .Include(m => m.Suburbs)
+                    .Where(m => m.PracticeNumber.Contains(SearchString));
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.MedicalPracticeRecords
+                    .Include(m => m.Cities)
+                    .Include(m => m.PostalCodes)
+                    .Include(m => m.Provinces)
+                    .Include(m => m.Suburbs);
+                return View(await applicationDbContext.ToListAsync());
+            }
+                
         }
 
         // GET: MedicalPracticeRecords/Details/5
