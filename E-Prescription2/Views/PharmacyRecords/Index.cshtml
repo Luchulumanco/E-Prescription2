@@ -62,7 +62,10 @@
         <hr />
 
     </div>
-<table class="table">
+</fieldset>
+<div class="table-responsive">
+
+    <table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -104,41 +107,41 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+                <td>
                 @Html.DisplayFor(modelItem => item.PharmacyName)
             </td>
-            <td>
+                <td>
                 @Html.DisplayFor(modelItem => item.AddressLine1)
             </td>
-            <td>
+                <td>
                 @Html.DisplayFor(modelItem => item.AddressLine2)
             </td>
-            <td>
+                <td>
                 @Html.DisplayFor(modelItem => item.ContactNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provinces.ProvinceId)
+            <td >
+                @Html.DisplayFor(modelItem => item.Provinces.ProvinceName)
+            </td >
+            <td >
+                @Html.DisplayFor(modelItem => item.Suburbs.SuburbName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suburbs.SuburbId)
+            <td >
+                @Html.DisplayFor(modelItem => item.Cities.CityName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cities.CityId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostalCodes.PostalCodeId)
+            <td >
+                @Html.DisplayFor(modelItem => item.PostalCodes.PostalCodeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
+            </td >
             <td>
                 @Html.DisplayFor(modelItem => item.LicenseNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.User.FullName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PharmacyId">Edit</a> |
+                        <i class="fa-sharp fa-solid fa-trash"><a asp-action="Edit" asp-route-id="@item.PharmacyId">Edit</a></i> |
                 <a asp-action="Details" asp-route-id="@item.PharmacyId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.PharmacyId">Delete</a>
             </td>
@@ -146,4 +149,4 @@
 }
     </tbody>
 </table>
-</fieldset>
+</div>

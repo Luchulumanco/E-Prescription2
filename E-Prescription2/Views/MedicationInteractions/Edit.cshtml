@@ -1,0 +1,36 @@
+﻿@model E_Prescription2.Models.MedicationInteraction
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MedicationInteraction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MediInteractionId" />
+            <div class="form-group">
+                <label asp-for="ActiveOne" class="control-label"></label>
+                <select asp-for="ActiveOne" class="form-control" asp-items="ViewBag.ActiveOne"></select>
+                <span asp-validation-for="ActiveOne" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActiveTwo" class="control-label"></label>
+                <select asp-for="ActiveTwo" class="form-control" asp-items="ViewBag.ActiveTwo"></select>
+                <span asp-validation-for="ActiveTwo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

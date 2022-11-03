@@ -30,6 +30,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
    public virtual DbSet<Prescription>? Prescriptions { get; set; }
     public virtual DbSet<PrescriptionLine>? PrescriptionLines { get; set; }
     public virtual DbSet<DispenseDetails>? DispenseDetails { get; set; }
+    public virtual DbSet<MedicationInteraction>? MedicationInteractions { get; set; }
+    public virtual DbSet<DrugAllergy>? DrugAllergies { get; set; }
+    public virtual DbSet<ChronicCondition>? ChricConditions { get; set; }
 
    
  
@@ -90,15 +93,43 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasOne(ba => ba.PharmacyRecords)
             .WithMany()
             .HasForeignKey(ba => ba.PharmacyId);
-        //one-to-many relationship between PrescriptionLine and MedicationActive
-        
+        //one-to-many relationship between ActiveIngredients and MedicationInteractions
 
+        builder.Entity<MedicationInteraction>()
+            .HasOne(ba => ba.ActiveIngredientOne)
+            .WithMany()
+            .HasForeignKey(ba => ba.ActiveOne);
+
+        builder.Entity<MedicationInteraction>()
+            .HasOne(ba=>ba.ActiveIngredientTwo)
+            .WithMany()
+            .HasForeignKey(ba=>ba.ActiveTwo);
+
+        builder.Entity<DrugAllergy>()
+            .HasOne(ba=>ba.ActiveIngredientRecords)
+            .WithMany()
+            .HasForeignKey(ba => ba.ActiveIngredientId);
+
+        builder.Entity<DrugAllergy>()
+            .HasOne(ba=>ba.User)
+            .WithMany()
+            .HasForeignKey(ba=>ba.UserId);
+
+        builder.Entity<ChronicCondition>()
+            .HasOne(ba=>ba.Conditions)
+            .WithMany()
+            .HasForeignKey(ba=>ba.ConditionId);
+
+        builder.Entity<ChronicCondition>()
+            .HasOne(ba => ba.User)
+            .WithMany()
+            .HasForeignKey(ba => ba.UserId);
 
 
         //builder.Entity<City>()
-        //    .HasOne(ba=>ba.Provinces)
+        //    .HasOne(ba => ba.Provinces)
         //    .WithMany()
-        //    .HasForeignKey(ba=>ba.ProvinceId);
+        //    .HasForeignKey(ba => ba.ProvinceId);
         //builder.Entity<Province>();
 
         //builder.Entity<Suburb>()

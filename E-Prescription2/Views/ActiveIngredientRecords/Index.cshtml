@@ -47,22 +47,27 @@
 </style>
 <fieldset>
     <legend>Active Ingredients</legend>
-<a class="" href="~/Admin/Index">Back to Admin </a>
+    <p>
+        
+        <a class="" href="~/Admin/Index"></a>
+    </p>
+    
 <p>
-    <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Create New</a>
+        
 </p>
     <div class="form-control">
         <form asp-action="Index" method="get">
             <label for="SearchString">Search by Active Ingredient Name:</label>
             <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-primary" />
+            <input type="submit" value="Search" class="btn btn-info "  />
 
         </form>
-        <a asp-action="Index">Back to full list</a>
+        <a asp-action="Index"><i class="fa-sharp fa-solid   fa-arrows-rotate"></i></a>
         <hr />
 
     </div>
-<table class="table">
+<table class="table table-bordered">
     <thead class="table-primary">
         <tr>
             <th>
@@ -78,9 +83,9 @@
                 @Html.DisplayFor(modelItem => item.ActiveIngredientName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ActiveIngredientId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ActiveIngredientId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ActiveIngredientId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.ActiveIngredientId"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i></a> |
+                        <a asp-action="Details" asp-route-id="@item.ActiveIngredientId"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.ActiveIngredientId"><i class="fa-sharp fa-solid fa-trash text-danger"></i></a>
             </td>
         </tr>
 }

@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "Index";
+
+}
+@if(TempData["Message"] != null)
+{
+    <script>
+        window.alert("@TempData["Message"]");
+    </script>
 }
 <style>
     .modal {
@@ -65,7 +72,7 @@
 
     </div>
 <table class="table">
-    <thead class="table-primary">
+    <thead class="table-primary table-bordered">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ICD_10_CODE)

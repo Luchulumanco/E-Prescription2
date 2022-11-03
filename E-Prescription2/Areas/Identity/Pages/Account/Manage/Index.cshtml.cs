@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
 {
@@ -33,17 +35,17 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public int SelectedGenderId { get; set; }
 
-        [BindProperty]
-        public int SelectedProvinceId { set; get; }
+        //[BindProperty]
+        //public int SelectedProvinceId { set; get; }
 
-        [BindProperty]
-        public int SelectedCityId { set; get; }
+        //[BindProperty]
+        //public int SelectedCityId { set; get; }
 
-        [BindProperty]
-        public int SelectedSuburbId { set; get; }
+        //[BindProperty]
+        //public int SelectedSuburbId { set; get; }
 
-        [BindProperty]
-        public int SelectedPostalCodeId { set; get; }
+        //[BindProperty]
+        //public int SelectedPostalCodeId { set; get; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -138,10 +140,10 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
             
         }
         public List<SelectListItem> GenderItem { set; get; }
-        public List<SelectListItem> ProvinceItem { set; get; }
-        public List<SelectListItem> CityItem { set; get; }
-        public List<SelectListItem> SuburbItem { set; get; }
-        public List<SelectListItem> PostalCodeItem { set; get; }
+        //public List<SelectListItem> ProvinceItem { set; get; }
+        //public List<SelectListItem> CityItem { set; get; }
+        //public List<SelectListItem> SuburbItem { set; get; }
+        //public List<SelectListItem> PostalCodeItem { set; get; }
 
         private async Task LoadAsync(ApplicationUser user)
         {
@@ -156,10 +158,10 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
             var addressLine1 = user.AddressLine1;
             var addressLine2 = user.AddressLine2;
             var SelectedGenderId = this.SelectedGenderId;
-            var SelectedProvinceId = this.SelectedProvinceId;
-            var SelectedCityId = this.SelectedCityId;
-            var SelectedSuburbId = this.SelectedSuburbId;
-            var SelectedPostalCodeId = this.SelectedPostalCodeId;
+            var SelectedProvince = user.ProvinceId;
+            var SelectedCity = user.CityId;
+            var SelectedSuburb = user.SuburbId;
+            var SelectedPostalCode = user.PostalCodeId;
             
             Username = userName;
 
@@ -170,10 +172,10 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
                 AddressLine1 = addressLine1,
                 AddressLine2 = addressLine2,
                 GenderID = SelectedGenderId,
-                ProvinceId = SelectedProvinceId,
-                CityId = SelectedCityId,
-                SuburbId = SelectedSuburbId,
-                PostalCodeId = SelectedPostalCodeId,
+                ProvinceId = (int)SelectedProvince,
+                CityId = (int)SelectedCity,
+                SuburbId = (int)SelectedSuburb,
+                PostalCodeId = (int)SelectedPostalCode,
                 PhoneNumber = phoneNumber,
                 Username = userName,
                 FirstName = firstName,
@@ -189,26 +191,14 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
                 Value = g.GenderId.ToString(),
                 Text = g.GenderType
             }).ToList();
-            ProvinceItem = _context.Provinces.Select(p => new SelectListItem
-            {
-                Value = p.ProvinceId.ToString(),
-                Text = p.ProvinceName
-            }).ToList();
-            CityItem = _context.Cities.Select(c => new SelectListItem
-            {
-                Value = c.CityId.ToString(),
-                Text = c.CityName
-            }).ToList();
-            SuburbItem = _context.Suburbs.Select(s => new SelectListItem
-            {
-                Value = s.SuburbId.ToString(),
-                Text = s.SuburbName
-            }).ToList();
-            PostalCodeItem = _context.PostalCodes.Select(c => new SelectListItem
-            {
-                Value = c.PostalCodeId.ToString(),
-                Text = c.PostalCodeName
-            }).ToList();
+            ViewData["Provinces"] = await _context.Provinces.ToListAsync();
+            ViewData["Prov_s"] = JsonConvert.SerializeObject(_context.Provinces.ToList());
+            ViewData["Cities"] = await _context.Cities.ToListAsync();
+            ViewData["City_s"] = JsonConvert.SerializeObject(_context.Cities.ToList());
+            ViewData["Suburbs"] = await _context.Suburbs.ToListAsync();
+            ViewData["Suburb_s"] = JsonConvert.SerializeObject(_context.Suburbs.ToList());
+            ViewData["PostalCodes"] = await _context.PostalCodes.ToListAsync();
+            ViewData["PostalCode_s"] = JsonConvert.SerializeObject(_context.PostalCodes.ToList());
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -242,10 +232,10 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
             var addressLine2 = user.AddressLine2;
             var profilePicture = user.ProfilePicture;
             var selectedGenderId = this.SelectedGenderId;
-            var selectedProvinceId = this.SelectedProvinceId;
-            var selectedCityId = this.SelectedCityId;
-            var selectedSuburbId = this.SelectedSuburbId;
-            var selectedPostalCodeId = this.SelectedPostalCodeId;
+            var selectedProvinceId = user.ProvinceId;
+            var selectedCityId = user.CityId;
+            var selectedSuburbId = user.SuburbId;
+            var selectedPostalCodeId = user.PostalCodeId;
 
             if (Request.Form.Files.Count > 0)
             {
@@ -283,24 +273,24 @@ namespace E_Prescription2.Areas.Identity.Pages.Account.Manage
                 this.SelectedGenderId = SelectedGenderId;
                 await _userManager.UpdateAsync(user);
             }
-            if(SelectedProvinceId != selectedProvinceId)
+            if(Input.ProvinceId != selectedProvinceId)
             {
-                this.SelectedProvinceId = SelectedProvinceId;
+                user.ProvinceId = Input.ProvinceId;
                 await _userManager.UpdateAsync(user);
             }
-            if(SelectedCityId != selectedCityId)
+            if(Input.CityId != selectedCityId)
             {
-                this.SelectedCityId = SelectedCityId;
+                user.CityId = Input.CityId;
                 await _userManager.UpdateAsync(user);
             }
-            if(SelectedSuburbId != selectedSuburbId)
+            if(Input.SuburbId != selectedSuburbId)
             {
-                this.SelectedSuburbId = SelectedSuburbId;
+                user.SuburbId = Input.SuburbId;
                 await _userManager.UpdateAsync(user);
             }
-            if(SelectedPostalCodeId != selectedPostalCodeId)
+            if(Input.PostalCodeId != selectedPostalCodeId)
             {
-                this.SelectedPostalCodeId = SelectedPostalCodeId;
+                user.PostalCodeId = Input.PostalCodeId;
                 await _userManager.UpdateAsync(user);
             }
             

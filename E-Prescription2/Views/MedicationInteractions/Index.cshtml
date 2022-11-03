@@ -1,4 +1,4 @@
-﻿@model IEnumerable<E_Prescription2.Models.ContraIndication>
+﻿@model IEnumerable<E_Prescription2.Models.MedicationInteraction>
 
 @{
     ViewData["Title"] = "Index";
@@ -46,16 +46,16 @@
     }
 </style>
 <fieldset>
-<legend>
-    Contra-Indication
-</legend>
-<a class="" href="~/Admin/Index">Back to Admin </a>
+    <legend>Medication Interaction</legend>
+
+
+    <a class="" href="~/Admin/Index">Back to Admin </a>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
- <div class="form-control">
+    <div class="form-control">
         <form asp-action="Index" method="get">
-            <label for="SearchString">Search by Active Ingredient:</label>
+            <label for="SearchString">Search by Active Ingredient Name:</label>
             <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Search" class="btn btn-primary" />
 
@@ -65,16 +65,13 @@
 
     </div>
 <table class="table table-bordered">
-    <thead class="table-primary">
+    <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
+                @Html.DisplayNameFor(model => model.ActiveIngredientOne)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Conditions.ICD_10_CODE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Conditions.Diagnosis)
+                @Html.DisplayNameFor(model => model.ActiveIngredientTwo)
             </th>
             <th></th>
         </tr>
@@ -83,18 +80,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientName)
+                @Html.DisplayFor(modelItem => item.ActiveIngredientOne.ActiveIngredientName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Conditions.ICD_10_CODE)
+                @Html.DisplayFor(modelItem => item.ActiveIngredientTwo.ActiveIngredientName)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Conditions.Diagnosis)
-                </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ContraId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ContraId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ContraId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MediInteractionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MediInteractionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MediInteractionId">Delete</a>
             </td>
         </tr>
 }

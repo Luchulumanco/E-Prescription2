@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
+using E_Prescription2.Areas.Identity.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Prescription2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ConditionsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,13 +26,24 @@ namespace E_Prescription2.Controllers
         public async Task<IActionResult> Index(string SearchString)
         {
             ViewData["CurrentFilter"] = SearchString;
+            var applicationDbContextss = _context.Conditions;
+                
 
             if (!String.IsNullOrEmpty(SearchString))
             {
-                ViewData["CurrentFilter"] = SearchString;
+                if(ModelState.IsValid)
+                {
+                    ViewData["CurrentFilter"] = SearchString;
                 var applicationDbContexts = _context.Conditions
                     .Where(b => b.ICD_10_CODE.Contains(SearchString));
-                return View(await applicationDbContexts.ToListAsync()); 
+                return View(await applicationDbContexts.ToListAsync());
+                }
+                else
+                {
+                    TempData["Message"] = "Please enter a valid ICD 10 CODE";
+                    return View(await applicationDbContextss.ToListAsync());
+                }
+                 
             }
             else
             {

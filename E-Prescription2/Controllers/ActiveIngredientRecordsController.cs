@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Prescription2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ActiveIngredientRecordsController : Controller
     {
         private readonly ApplicationDbContext _context;

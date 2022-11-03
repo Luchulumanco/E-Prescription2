@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Prescription2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

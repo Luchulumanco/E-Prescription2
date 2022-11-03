@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
+using E_Prescription2.Areas.Identity.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Prescription2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MedicationRecordsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,8 +52,8 @@ namespace E_Prescription2.Controllers
         // GET: MedicationRecords/Create
         public IActionResult Create()
         {
-            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId");
-            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId");
+            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName");
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName");
             return View();
         }
 
@@ -67,8 +70,8 @@ namespace E_Prescription2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId", medicationRecord.DosageFormId);
-            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId", medicationRecord.ScheduleId);
+            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName", medicationRecord.DosageFormId);
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationRecord.ScheduleId);
             return View(medicationRecord);
         }
 
@@ -85,8 +88,8 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId", medicationRecord.DosageFormId);
-            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId", medicationRecord.ScheduleId);
+            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName", medicationRecord.DosageFormId);
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationRecord.ScheduleId);
             return View(medicationRecord);
         }
 
@@ -122,8 +125,8 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormId", medicationRecord.DosageFormId);
-            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleId", medicationRecord.ScheduleId);
+            ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName", medicationRecord.DosageFormId);
+            ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationRecord.ScheduleId);
             return View(medicationRecord);
         }
 

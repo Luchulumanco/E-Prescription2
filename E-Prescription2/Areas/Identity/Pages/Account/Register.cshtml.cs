@@ -104,8 +104,9 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Date Of Birth*")]
+            
             [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+            [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}")]
             public DateTime DOB { get; set; }
 
             [Required]
