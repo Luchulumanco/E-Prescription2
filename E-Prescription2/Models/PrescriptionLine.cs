@@ -17,5 +17,8 @@ namespace E_Prescription2.Models
         public int? DispenseId { get; set; }
         public DispenseDetails dispenseDetails { get; set; }
 
+        public int Quantity { get; set; }
+        public string Instruction { get; set; }
+        public int Repeats { get; set; }
     }
 }

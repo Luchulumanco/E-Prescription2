@@ -482,6 +482,62 @@ namespace E_Prescription2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ChricConditions",
+                schema: "Identity",
+                columns: table => new
+                {
+                    ChronicId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ConditionId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChricConditions", x => x.ChronicId);
+                    table.ForeignKey(
+                        name: "FK_ChricConditions_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Identity",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ChricConditions_Conditions_ConditionId",
+                        column: x => x.ConditionId,
+                        principalSchema: "Identity",
+                        principalTable: "Conditions",
+                        principalColumn: "ConditionId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChronicMedications",
+                schema: "Identity",
+                columns: table => new
+                {
+                    ChronicMedi = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    MedicationId = table.Column<int>(type: "int", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChronicMedications", x => x.ChronicMedi);
+                    table.ForeignKey(
+                        name: "FK_ChronicMedications_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Identity",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ChronicMedications_MedicationActiveIngredient_MedicationId",
+                        column: x => x.MedicationId,
+                        principalSchema: "Identity",
+                        principalTable: "MedicationActiveIngredient",
+                        principalColumn: "MediActiveId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DrugAllergies",
                 schema: "Identity",
                 columns: table => new
@@ -571,10 +627,7 @@ namespace E_Prescription2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PatientID = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Instruction = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Repeats = table.Column<int>(type: "int", nullable: false)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -723,7 +776,10 @@ namespace E_Prescription2.Migrations
                     PrescriptionLineId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MedicationId = table.Column<int>(type: "int", nullable: true),
-                    DispenseId = table.Column<int>(type: "int", nullable: true)
+                    DispenseId = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Instruction = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Repeats = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -791,6 +847,30 @@ namespace E_Prescription2.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChricConditions_ConditionId",
+                schema: "Identity",
+                table: "ChricConditions",
+                column: "ConditionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChricConditions_UserId",
+                schema: "Identity",
+                table: "ChricConditions",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChronicMedications_MedicationId",
+                schema: "Identity",
+                table: "ChronicMedications",
+                column: "MedicationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChronicMedications_UserId",
+                schema: "Identity",
+                table: "ChronicMedications",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_ProvinceId",
@@ -1009,6 +1089,14 @@ namespace E_Prescription2.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ChricConditions",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "ChronicMedications",
+                schema: "Identity");
+
             migrationBuilder.DropTable(
                 name: "ContraIndications",
                 schema: "Identity");

@@ -10,16 +10,7 @@
 }
     <h1>@ViewData["Title"] </h1>
 
-<script type="text/javascript">
-    $(function () {
-        $(".date-picker").datepicker({
-            dateFormat: 'dd-mm-yyyy',
-            minDate: '05-Jan-1900',
-            maxDate: '05-Aug-2000'
-        });
 
-    });
-</script>
    
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>

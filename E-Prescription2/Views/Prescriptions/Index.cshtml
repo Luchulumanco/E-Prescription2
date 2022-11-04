@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-bordered">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -21,15 +21,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Instruction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Repeats)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,22 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DoctorUser.FirstName)
+                @Html.DisplayFor(modelItem => item.DoctorUser.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientUser.FirstName)
+                @Html.DisplayFor(modelItem => item.PatientUser.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Instruction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Repeats)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PrescriptionID">Edit</a> |

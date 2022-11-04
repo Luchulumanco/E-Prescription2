@@ -59,7 +59,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrescriptionLineId,MedicationId,DispenseId")] PrescriptionLine prescriptionLine)
+        public async Task<IActionResult> Create([Bind("PrescriptionLineId,MedicationId,DispenseId,Quantity,Instruction,Repeats")] PrescriptionLine prescriptionLine)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionLineId,MedicationId,DispenseId")] PrescriptionLine prescriptionLine)
+        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionLineId,MedicationId,DispenseId,Quantity,Instruction,Repeats")] PrescriptionLine prescriptionLine)
         {
             if (id != prescriptionLine.PrescriptionLineId)
             {

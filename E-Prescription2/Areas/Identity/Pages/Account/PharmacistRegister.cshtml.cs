@@ -217,7 +217,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
         {
             var SelectedPharmacyId = this.SelectedPharmacyId;
 
-            returnUrl ??= Url.Content("~/Pharmacist/Index");
+            returnUrl ??= Url.Content("~/UserRoles/Index");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -267,7 +267,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        //await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
                 }

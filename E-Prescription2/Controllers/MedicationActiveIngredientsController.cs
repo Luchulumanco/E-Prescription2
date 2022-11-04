@@ -117,10 +117,13 @@ namespace E_Prescription2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MediActiveId,MedicationId,Strength,ActiveIngredientId,ScheduleId,DosageFormId")] MedicationActiveIngredient medicationActiveIngredient)
         {
+
+
             IndexViewModel index = new IndexViewModel();
             if (ModelState.IsValid)
             {
                 _context.Add(medicationActiveIngredient);
+                TempData["Message"] = "Medication Added";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -129,6 +132,7 @@ namespace E_Prescription2.Controllers
             ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName", medicationActiveIngredient.MedicationId);
             ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationActiveIngredient.ScheduleId);
             return View(medicationActiveIngredient);
+
         }
 
         // GET: MedicationActiveIngredients/Edit/5

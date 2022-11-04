@@ -23,6 +23,24 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.dispenseDetails.DispenseId)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Instruction)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Instruction)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Repeats)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Repeats)
+        </dd>
     </dl>
     
     <form asp-action="Delete">

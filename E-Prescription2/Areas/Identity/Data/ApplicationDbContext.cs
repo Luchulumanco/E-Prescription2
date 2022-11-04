@@ -33,6 +33,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<MedicationInteraction>? MedicationInteractions { get; set; }
     public virtual DbSet<DrugAllergy>? DrugAllergies { get; set; }
     public virtual DbSet<ChronicCondition>? ChricConditions { get; set; }
+    public virtual DbSet<ChronicMedication>? ChronicMedications { get; set; }
 
    
  
@@ -125,22 +126,32 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany()
             .HasForeignKey(ba => ba.UserId);
 
+        builder.Entity<ChronicMedication>()
+            .HasOne(ba => ba.PatientUser)
+            .WithMany()
+            .HasForeignKey(ba => ba.UserId);
+        builder.Entity<ChronicMedication>()
+            .HasOne(ba => ba.MediActiveIngredient)
+            .WithMany()
+            .HasForeignKey(ba => ba.MedicationId);
 
-        //builder.Entity<City>()
-        //    .HasOne(ba => ba.Provinces)
-        //    .WithMany()
-        //    .HasForeignKey(ba => ba.ProvinceId);
-        //builder.Entity<Province>();
 
-        //builder.Entity<Suburb>()
-        //    .HasOne(ba => ba.Cities)
-        //    .WithMany()
-        //    .HasForeignKey(ba => ba.CityId);
-        //builder.Entity<Suburb>()
-        //    .HasOne(ba=>ba.PostalCodes)
-        //    .WithMany()
-        //    .HasForeignKey(ba=>ba.PostalCodeId);
-        //builder.Entity<PostalCode>();
+
+        builder.Entity<City>()
+            .HasOne(ba => ba.Provinces)
+            .WithMany()
+            .HasForeignKey(ba => ba.ProvinceId);
+        builder.Entity<Province>();
+
+        builder.Entity<Suburb>()
+            .HasOne(ba => ba.Cities)
+            .WithMany()
+            .HasForeignKey(ba => ba.CityId);
+        builder.Entity<Suburb>()
+            .HasOne(ba => ba.PostalCodes)
+            .WithMany()
+            .HasForeignKey(ba => ba.PostalCodeId);
+        
 
 
 

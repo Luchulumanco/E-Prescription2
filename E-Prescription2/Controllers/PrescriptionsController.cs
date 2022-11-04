@@ -49,8 +49,8 @@ namespace E_Prescription2.Controllers
         // GET: Prescriptions/Create
         public IActionResult Create()
         {
-            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "FullName");
+            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "FullName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrescriptionID,DoctorId,PatientID,DateTime,Quantity,Instruction,Repeats")] Prescription prescription)
+        public async Task<IActionResult> Create([Bind("PrescriptionID,DoctorId,PatientID,DateTime")] Prescription prescription)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,14 @@ namespace E_Prescription2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "Id", prescription.DoctorId);
-            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "Id", prescription.PatientID);
+            else
+            {
+                _context.Add(prescription);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "FullName", prescription.DoctorId);
+            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "FullName", prescription.PatientID);
             return View(prescription);
         }
 
@@ -85,8 +91,8 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "Id", prescription.DoctorId);
-            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "Id", prescription.PatientID);
+            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "FullName", prescription.DoctorId);
+            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "FullName", prescription.PatientID);
             return View(prescription);
         }
 
@@ -95,7 +101,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionID,DoctorId,PatientID,DateTime,Quantity,Instruction,Repeats")] Prescription prescription)
+        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionID,DoctorId,PatientID,DateTime")] Prescription prescription)
         {
             if (id != prescription.PrescriptionID)
             {
@@ -122,8 +128,8 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "Id", prescription.DoctorId);
-            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "Id", prescription.PatientID);
+            ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "FullName", prescription.DoctorId);
+            ViewData["PatientID"] = new SelectList(_context.Users, "Id", "FullName", prescription.PatientID);
             return View(prescription);
         }
 

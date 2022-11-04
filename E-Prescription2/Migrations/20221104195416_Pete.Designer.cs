@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221103131949_Pete")]
+    [Migration("20221104195416_Pete")]
     partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,6 +173,58 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("SuburbId");
 
                     b.ToTable("AspNetUsers", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ChronicCondition", b =>
+                {
+                    b.Property<int>("ChronicId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChronicId"), 1L, 1);
+
+                    b.Property<int?>("ConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ChronicId");
+
+                    b.HasIndex("ConditionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChricConditions", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ChronicMedication", b =>
+                {
+                    b.Property<int>("ChronicMedi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChronicMedi"), 1L, 1);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MedicationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ChronicMedi");
+
+                    b.HasIndex("MedicationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChronicMedications", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.City", b =>
@@ -548,18 +600,8 @@ namespace E_Prescription2.Migrations
                     b.Property<string>("DoctorId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Instruction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PatientID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Repeats")
-                        .HasColumnType("int");
 
                     b.HasKey("PrescriptionID");
 
@@ -581,7 +623,17 @@ namespace E_Prescription2.Migrations
                     b.Property<int?>("DispenseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Instruction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("MedicationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Repeats")
                         .HasColumnType("int");
 
                     b.HasKey("PrescriptionLineId");
@@ -875,6 +927,36 @@ namespace E_Prescription2.Migrations
                     b.Navigation("Provinces");
 
                     b.Navigation("Suburbs");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ChronicCondition", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.Condition", "Conditions")
+                        .WithMany()
+                        .HasForeignKey("ConditionId");
+
+                    b.HasOne("E_Prescription2.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Conditions");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.ChronicMedication", b =>
+                {
+                    b.HasOne("E_Prescription2.Models.MedicationActiveIngredient", "MediActiveIngredient")
+                        .WithMany()
+                        .HasForeignKey("MedicationId");
+
+                    b.HasOne("E_Prescription2.Models.ApplicationUser", "PatientUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("MediActiveIngredient");
+
+                    b.Navigation("PatientUser");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.City", b =>
