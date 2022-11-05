@@ -4,14 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+<h1 class="mb-3 row justify-content-center"><i class="fa-sharp fa-3x fa-solid fa-person-dots-from-line text-primary"></i>Allergies</h1>
+<hr/>
+
+<h2 class="mb-3 row justify-content-left">Doctor </h2>
+    
+    
+   
+
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><button type="button" class="btn btn-outline-info">Create New</button></a>
 </p>
 <table class="table table-bordered">
     <thead>
+        
         <tr>
+           
             <th>
                 @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
             </th>
@@ -25,15 +35,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientId)
+                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.User.FullName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DrugId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DrugId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DrugId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.DrugId"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DrugId"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DrugId"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</a>
             </td>
         </tr>
 }

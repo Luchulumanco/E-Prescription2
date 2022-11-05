@@ -48,9 +48,9 @@
 <fieldset>
     <legend>Dosage Forms</legend>
 
-<a class="" href="~/Admin/Index">Back to Admin </a>
+    <a class="" href="~/Admin/Index"><button type="button" class="btn btn-outline-primary">Back to Admin</button></ </a>
 <p>
-    <a asp-action="Create">Create New</a>
+        <a asp-action="Create"><button type="button" class="btn btn-outline-info">Create New</button></a>
 </p>
 <table class="table table-bordered">
     <thead class="table-primary">
@@ -68,9 +68,9 @@
                 @Html.DisplayFor(modelItem => item.DosageFormName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DosageFormId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DosageFormId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DosageFormId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.DosageFormId"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.DosageFormId"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.DosageFormId"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</a>
             </td>
         </tr>
 }

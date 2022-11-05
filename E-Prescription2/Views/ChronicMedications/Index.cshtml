@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><button type="button" class="btn btn-outline-info">Create New</button></a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ChronicMedi">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ChronicMedi">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ChronicMedi">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.ChronicMedi"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ChronicMedi"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ChronicMedi"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</a>
             </td>
         </tr>
 }
