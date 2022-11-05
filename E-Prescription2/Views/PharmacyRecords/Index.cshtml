@@ -47,9 +47,9 @@
 </style>
 <fieldset>
     <legend> Pharmacy Records</legend>
-    <a class="" href="~/Admin/Index">Back to Admin </a>
+    <a class="" href="~/Admin/Index"><button type="button" class="btn btn-outline-primary">Back to Admin</button></a>
 <p>
-    <a asp-action="Create">Create New</a>
+        <a asp-action="Create"><button type="button" class="btn btn-outline-info">Create New</button></a>
 </p>
  <div class="form-control">
         <form asp-action="Index" method="get">
@@ -58,7 +58,7 @@
             <input type="submit" value="Search" class="btn btn-primary" />
 
         </form>
-        <a asp-action="Index">Back to full list</a>
+        <a asp-action="Index"><i class="fa-sharp fa-solid   fa-arrows-rotate"></i></a>
         <hr />
 
     </div>
@@ -141,9 +141,9 @@
                 @Html.DisplayFor(modelItem => item.User.FullName)
             </td>
             <td>
-                        <i class="fa-sharp fa-solid fa-trash"><a asp-action="Edit" asp-route-id="@item.PharmacyId">Edit</a></i> |
-                <a asp-action="Details" asp-route-id="@item.PharmacyId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PharmacyId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.PharmacyId"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PharmacyId"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PharmacyId"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</a>
             </td>
         </tr>
 }

@@ -48,9 +48,9 @@
 
 <fieldset>
 <legend>Medication</legend>
-<a class="" href="~/Admin/Index">Back to Admin </a>
+    <a class="" href="~/Admin/Index"><button type="button" class="btn btn-outline-primary">Back to Admin</button> </a>
 <p>
-    <a asp-action="Create">Create New</a>
+        <a asp-action="Create"><button type="button" class="btn btn-outline-info">Create New</button></a>
 </p>
 <div class="form-control">
     <form asp-action="Index" method="get">
@@ -59,10 +59,11 @@
         <input type="submit" value="Search" class="btn btn-primary"/>
 
     </form>
-    <a asp-action="Index">Back to full list</a>
+        <a asp-action="Index"><i class="fa-sharp fa-solid   fa-arrows-rotate"></i></a>
     <hr/>
     
 </div>
+</fieldset>
     <div class="table-responsive">
     <table class="table table-bordered">
     <thead class="table-primary ">
@@ -104,13 +105,13 @@
                 @Html.DisplayFor(modelItem => item.DosageForms.DosageFormName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MediActiveId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MediActiveId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MediActiveId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.MediActiveId"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.MediActiveId"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.MediActiveId"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
 </div>
-</fieldset>
+
