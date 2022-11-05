@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class init : Migration
+    public partial class Pushy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

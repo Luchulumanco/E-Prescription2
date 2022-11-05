@@ -1,0 +1,43 @@
+﻿@model IEnumerable<E_Prescription2.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p class="h2">View Consulted Patients</p>
+
+<p>
+    <a asp-action="Create" button type="button" class="btn btn-success">Create New</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+               View Patients
+            </th>
+            <th>
+              
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+
+            </td>
+            <td>
+               
+                
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+}
