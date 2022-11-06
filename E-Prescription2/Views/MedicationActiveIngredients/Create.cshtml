@@ -56,8 +56,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MedicationId" class="control-label">Medication Name</label>
-                <select asp-for="MedicationId" class ="form-control" asp-items="ViewBag.MedicationId"><><option></option></select>
+                <label asp-for="MedicationName" class="control-label">Medication Name</label>
+                <input asp-for="MedicationName" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="ScheduleId" class="control-label">Schedule</label>

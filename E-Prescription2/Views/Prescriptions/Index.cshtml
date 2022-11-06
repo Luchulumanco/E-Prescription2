@@ -21,25 +21,38 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateTime)
             </th>
-            <th></th>
+            <th>
+                 Prescription Line
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DoctorUser.Id)
+                @Html.DisplayFor(modelItem => item.DoctorUser.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientUser.Id)
+                @Html.DisplayFor(modelItem => item.PatientUser.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PrescriptionID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrescriptionID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrescriptionID">Delete</a>
+                 <a asp-action="Index" asp-controller="PrescriptionLines">
+                     <button type="button" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-prescription-bottle"></i>  Prescription Line  </button>
+                     </a>
+            </td>
+            <td>
+                  <a asp-action="Edit" asp-route-id="@item.PrescriptionID">
+                   <button type="button" class="btn btn-light"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</button>
+                    </a> |
+               <a asp-action="Details" asp-route-id="@item.PrescriptionID">
+                    <button type="button" class="btn btn-info"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</button>
+                    </a>  |
+                <a asp-action="Delete" asp-route-id="@item.PrescriptionID">
+                    <button type="button" class="btn btn-danger"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</button>
+                    </a>
             </td>
         </tr>
 }

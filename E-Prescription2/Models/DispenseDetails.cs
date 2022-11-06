@@ -17,5 +17,7 @@ namespace E_Prescription2.Models
         [ForeignKey("PharmacyRecord")]
         public int? PharmacyId { get; set; }
         public PharmacyRecord PharmacyRecords { get; set; }
+
+        public int? RepeatsLeft { get; set; }
     }
 }

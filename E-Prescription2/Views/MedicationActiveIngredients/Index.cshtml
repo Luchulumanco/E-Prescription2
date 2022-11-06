@@ -69,7 +69,7 @@
     <thead class="table-primary ">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MedicationRecords)
+                @Html.DisplayNameFor(model => model.MedicationName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Strength)
@@ -90,7 +90,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MedicationRecords.MedicationName)
+                @Html.DisplayFor(modelItem => item.MedicationName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Strength)

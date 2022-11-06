@@ -8,9 +8,8 @@ namespace E_Prescription2.Models
         [Key]
         public int MediActiveId { get; set; }
 
-        [ForeignKey("MedicationRecord")]
-        public int? MedicationId { get; set; }
-        public virtual MedicationRecord? MedicationRecords { get; set; }
+        
+      
 
         public string? Strength { get; set; }
 
@@ -27,7 +26,7 @@ namespace E_Prescription2.Models
         public int? DosageFormId { get; set; }
         public virtual DosageForm? DosageForms { get; set; }
         
-       
+       public string? MedicationName { get; set; }
 
 
         
