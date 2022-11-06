@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221105123325_Pushy")]
-    partial class Pushy
+    [Migration("20221106160429_Pete")]
+    partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -307,6 +307,9 @@ namespace E_Prescription2.Migrations
                     b.Property<int?>("PharmacyId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RepeatsLeft")
+                        .HasColumnType("int");
+
                     b.HasKey("DispenseId");
 
                     b.HasIndex("PharmacistId");
@@ -433,14 +436,23 @@ namespace E_Prescription2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MediActiveId"), 1L, 1);
 
-                    b.Property<int?>("ActiveIngredientId")
+                    b.Property<int?>("ActiveIngredientId1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActiveIngredientId2")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActiveIngredientId3")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActiveIngredientId4")
                         .HasColumnType("int");
 
                     b.Property<int?>("DosageFormId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MedicationId")
-                        .HasColumnType("int");
+                    b.Property<string>("MedicationName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ScheduleId")
                         .HasColumnType("int");
@@ -448,13 +460,26 @@ namespace E_Prescription2.Migrations
                     b.Property<string>("Strength")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Strength2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Strength3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Strength4")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MediActiveId");
 
-                    b.HasIndex("ActiveIngredientId");
+                    b.HasIndex("ActiveIngredientId1");
+
+                    b.HasIndex("ActiveIngredientId2");
+
+                    b.HasIndex("ActiveIngredientId3");
+
+                    b.HasIndex("ActiveIngredientId4");
 
                     b.HasIndex("DosageFormId");
-
-                    b.HasIndex("MedicationId");
 
                     b.HasIndex("ScheduleId");
 
@@ -482,32 +507,6 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("ActiveTwo");
 
                     b.ToTable("MedicationInteractions", "Identity");
-                });
-
-            modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
-                {
-                    b.Property<int>("MedicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedicationId"), 1L, 1);
-
-                    b.Property<int?>("DosageFormId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MedicationName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ScheduleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MedicationId");
-
-                    b.HasIndex("DosageFormId");
-
-                    b.HasIndex("ScheduleId");
-
-                    b.ToTable("MedicationRecords", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>
@@ -1048,27 +1047,39 @@ namespace E_Prescription2.Migrations
 
             modelBuilder.Entity("E_Prescription2.Models.MedicationActiveIngredient", b =>
                 {
-                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecords")
+                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecord1")
                         .WithMany()
-                        .HasForeignKey("ActiveIngredientId");
+                        .HasForeignKey("ActiveIngredientId1");
+
+                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecord2")
+                        .WithMany()
+                        .HasForeignKey("ActiveIngredientId2");
+
+                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecord3")
+                        .WithMany()
+                        .HasForeignKey("ActiveIngredientId3");
+
+                    b.HasOne("E_Prescription2.Models.ActiveIngredientRecord", "ActiveIngredientRecord4")
+                        .WithMany()
+                        .HasForeignKey("ActiveIngredientId4");
 
                     b.HasOne("E_Prescription2.Models.DosageForm", "DosageForms")
                         .WithMany()
                         .HasForeignKey("DosageFormId");
 
-                    b.HasOne("E_Prescription2.Models.MedicationRecord", "MedicationRecords")
-                        .WithMany()
-                        .HasForeignKey("MedicationId");
-
                     b.HasOne("E_Prescription2.Models.Schedule", "Schedules")
                         .WithMany()
                         .HasForeignKey("ScheduleId");
 
-                    b.Navigation("ActiveIngredientRecords");
+                    b.Navigation("ActiveIngredientRecord1");
+
+                    b.Navigation("ActiveIngredientRecord2");
+
+                    b.Navigation("ActiveIngredientRecord3");
+
+                    b.Navigation("ActiveIngredientRecord4");
 
                     b.Navigation("DosageForms");
-
-                    b.Navigation("MedicationRecords");
 
                     b.Navigation("Schedules");
                 });
@@ -1086,21 +1097,6 @@ namespace E_Prescription2.Migrations
                     b.Navigation("ActiveIngredientOne");
 
                     b.Navigation("ActiveIngredientTwo");
-                });
-
-            modelBuilder.Entity("E_Prescription2.Models.MedicationRecord", b =>
-                {
-                    b.HasOne("E_Prescription2.Models.DosageForm", "DosageForms")
-                        .WithMany()
-                        .HasForeignKey("DosageFormId");
-
-                    b.HasOne("E_Prescription2.Models.Schedule", "Schedules")
-                        .WithMany()
-                        .HasForeignKey("ScheduleId");
-
-                    b.Navigation("DosageForms");
-
-                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>

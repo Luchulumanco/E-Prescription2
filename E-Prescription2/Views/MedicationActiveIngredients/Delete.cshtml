@@ -12,10 +12,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicationRecords)
+            @Html.DisplayNameFor(model => model.MedicationName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicationRecords.MedicationName)
+            @Html.DisplayFor(model => model.MedicationName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Strength)
@@ -23,11 +23,29 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Strength)
         </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Strength2)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Strength3)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Strength4)
+        </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
+            Active Ingredient
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActiveIngredientRecords.ActiveIngredientName)
+            @Html.DisplayFor(model => model.ActiveIngredientRecord1.ActiveIngredientName)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActiveIngredientRecord2.ActiveIngredientName)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActiveIngredientRecord3.ActiveIngredientName)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActiveIngredientRecord4.ActiveIngredientName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Schedules)

@@ -50,7 +50,7 @@ namespace E_Prescription2.Controllers
         public IActionResult Create()
         {
             ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyId");
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DispenseId,Date,PharmacistId,PharmacyId")] DispenseDetails dispenseDetails)
+        public async Task<IActionResult> Create([Bind("DispenseId,Date,PharmacistId,PharmacyId,RepeatsLeft")] DispenseDetails dispenseDetails)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace E_Prescription2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id", dispenseDetails.PharmacistId);
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyId", dispenseDetails.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
         }
 
@@ -86,7 +86,7 @@ namespace E_Prescription2.Controllers
                 return NotFound();
             }
             ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id", dispenseDetails.PharmacistId);
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyId", dispenseDetails.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
         }
 
@@ -95,7 +95,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DispenseId,Date,PharmacistId,PharmacyId")] DispenseDetails dispenseDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("DispenseId,Date,PharmacistId,PharmacyId,RepeatsLeft")] DispenseDetails dispenseDetails)
         {
             if (id != dispenseDetails.DispenseId)
             {
@@ -123,7 +123,7 @@ namespace E_Prescription2.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id", dispenseDetails.PharmacistId);
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyId", dispenseDetails.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
         }
 

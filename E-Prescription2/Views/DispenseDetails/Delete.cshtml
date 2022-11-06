@@ -27,7 +27,13 @@
             @Html.DisplayNameFor(model => model.PharmacyRecords)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PharmacyRecords.PharmacyId)
+            @Html.DisplayFor(model => model.PharmacyRecords.LicenseNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RepeatsLeft)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RepeatsLeft)
         </dd>
     </dl>
     

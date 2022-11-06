@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Prescription2.Migrations
 {
-    public partial class Pushy : Migration
+    public partial class Pete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -254,27 +254,59 @@ namespace E_Prescription2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicationRecords",
+                name: "MedicationActiveIngredient",
                 schema: "Identity",
                 columns: table => new
                 {
-                    MedicationId = table.Column<int>(type: "int", nullable: false)
+                    MediActiveId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MedicationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Strength = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Strength2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Strength3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Strength4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActiveIngredientId1 = table.Column<int>(type: "int", nullable: true),
+                    ActiveIngredientId2 = table.Column<int>(type: "int", nullable: true),
+                    ActiveIngredientId3 = table.Column<int>(type: "int", nullable: true),
+                    ActiveIngredientId4 = table.Column<int>(type: "int", nullable: true),
                     ScheduleId = table.Column<int>(type: "int", nullable: true),
-                    DosageFormId = table.Column<int>(type: "int", nullable: true)
+                    DosageFormId = table.Column<int>(type: "int", nullable: true),
+                    MedicationName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicationRecords", x => x.MedicationId);
+                    table.PrimaryKey("PK_MedicationActiveIngredient", x => x.MediActiveId);
                     table.ForeignKey(
-                        name: "FK_MedicationRecords_DosageForms_DosageFormId",
+                        name: "FK_MedicationActiveIngredient_ActiveIngredientRecords_ActiveIngredientId1",
+                        column: x => x.ActiveIngredientId1,
+                        principalSchema: "Identity",
+                        principalTable: "ActiveIngredientRecords",
+                        principalColumn: "ActiveIngredientId");
+                    table.ForeignKey(
+                        name: "FK_MedicationActiveIngredient_ActiveIngredientRecords_ActiveIngredientId2",
+                        column: x => x.ActiveIngredientId2,
+                        principalSchema: "Identity",
+                        principalTable: "ActiveIngredientRecords",
+                        principalColumn: "ActiveIngredientId");
+                    table.ForeignKey(
+                        name: "FK_MedicationActiveIngredient_ActiveIngredientRecords_ActiveIngredientId3",
+                        column: x => x.ActiveIngredientId3,
+                        principalSchema: "Identity",
+                        principalTable: "ActiveIngredientRecords",
+                        principalColumn: "ActiveIngredientId");
+                    table.ForeignKey(
+                        name: "FK_MedicationActiveIngredient_ActiveIngredientRecords_ActiveIngredientId4",
+                        column: x => x.ActiveIngredientId4,
+                        principalSchema: "Identity",
+                        principalTable: "ActiveIngredientRecords",
+                        principalColumn: "ActiveIngredientId");
+                    table.ForeignKey(
+                        name: "FK_MedicationActiveIngredient_DosageForms_DosageFormId",
                         column: x => x.DosageFormId,
                         principalSchema: "Identity",
                         principalTable: "DosageForms",
                         principalColumn: "DosageFormId");
                     table.ForeignKey(
-                        name: "FK_MedicationRecords_Schedule_ScheduleId",
+                        name: "FK_MedicationActiveIngredient_Schedule_ScheduleId",
                         column: x => x.ScheduleId,
                         principalSchema: "Identity",
                         principalTable: "Schedule",
@@ -309,48 +341,6 @@ namespace E_Prescription2.Migrations
                         principalTable: "PostalCodes",
                         principalColumn: "PostalCodeId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MedicationActiveIngredient",
-                schema: "Identity",
-                columns: table => new
-                {
-                    MediActiveId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MedicationId = table.Column<int>(type: "int", nullable: true),
-                    Strength = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ActiveIngredientId = table.Column<int>(type: "int", nullable: true),
-                    ScheduleId = table.Column<int>(type: "int", nullable: true),
-                    DosageFormId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicationActiveIngredient", x => x.MediActiveId);
-                    table.ForeignKey(
-                        name: "FK_MedicationActiveIngredient_ActiveIngredientRecords_ActiveIngredientId",
-                        column: x => x.ActiveIngredientId,
-                        principalSchema: "Identity",
-                        principalTable: "ActiveIngredientRecords",
-                        principalColumn: "ActiveIngredientId");
-                    table.ForeignKey(
-                        name: "FK_MedicationActiveIngredient_DosageForms_DosageFormId",
-                        column: x => x.DosageFormId,
-                        principalSchema: "Identity",
-                        principalTable: "DosageForms",
-                        principalColumn: "DosageFormId");
-                    table.ForeignKey(
-                        name: "FK_MedicationActiveIngredient_MedicationRecords_MedicationId",
-                        column: x => x.MedicationId,
-                        principalSchema: "Identity",
-                        principalTable: "MedicationRecords",
-                        principalColumn: "MedicationId");
-                    table.ForeignKey(
-                        name: "FK_MedicationActiveIngredient_Schedule_ScheduleId",
-                        column: x => x.ScheduleId,
-                        principalSchema: "Identity",
-                        principalTable: "Schedule",
-                        principalColumn: "ScheduleId");
                 });
 
             migrationBuilder.CreateTable(
@@ -749,7 +739,8 @@ namespace E_Prescription2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PharmacistId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PharmacyId = table.Column<int>(type: "int", nullable: true)
+                    PharmacyId = table.Column<int>(type: "int", nullable: true),
+                    RepeatsLeft = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -939,22 +930,34 @@ namespace E_Prescription2.Migrations
                 column: "SuburbId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicationActiveIngredient_ActiveIngredientId",
+                name: "IX_MedicationActiveIngredient_ActiveIngredientId1",
                 schema: "Identity",
                 table: "MedicationActiveIngredient",
-                column: "ActiveIngredientId");
+                column: "ActiveIngredientId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicationActiveIngredient_ActiveIngredientId2",
+                schema: "Identity",
+                table: "MedicationActiveIngredient",
+                column: "ActiveIngredientId2");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicationActiveIngredient_ActiveIngredientId3",
+                schema: "Identity",
+                table: "MedicationActiveIngredient",
+                column: "ActiveIngredientId3");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicationActiveIngredient_ActiveIngredientId4",
+                schema: "Identity",
+                table: "MedicationActiveIngredient",
+                column: "ActiveIngredientId4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicationActiveIngredient_DosageFormId",
                 schema: "Identity",
                 table: "MedicationActiveIngredient",
                 column: "DosageFormId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicationActiveIngredient_MedicationId",
-                schema: "Identity",
-                table: "MedicationActiveIngredient",
-                column: "MedicationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicationActiveIngredient_ScheduleId",
@@ -973,18 +976,6 @@ namespace E_Prescription2.Migrations
                 schema: "Identity",
                 table: "MedicationInteractions",
                 column: "ActiveTwo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicationRecords_DosageFormId",
-                schema: "Identity",
-                table: "MedicationRecords",
-                column: "DosageFormId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicationRecords_ScheduleId",
-                schema: "Identity",
-                table: "MedicationRecords",
-                column: "ScheduleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PharmacyRecords_CityId",
@@ -1166,19 +1157,15 @@ namespace E_Prescription2.Migrations
                 schema: "Identity");
 
             migrationBuilder.DropTable(
-                name: "MedicationRecords",
-                schema: "Identity");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers",
-                schema: "Identity");
-
-            migrationBuilder.DropTable(
                 name: "DosageForms",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "Schedule",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers",
                 schema: "Identity");
 
             migrationBuilder.DropTable(

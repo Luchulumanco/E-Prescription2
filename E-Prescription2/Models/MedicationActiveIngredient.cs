@@ -8,16 +8,32 @@ namespace E_Prescription2.Models
         [Key]
         public int MediActiveId { get; set; }
 
-        [ForeignKey("MedicationRecord")]
-        public int? MedicationId { get; set; }
-        public virtual MedicationRecord? MedicationRecords { get; set; }
+        
+      
 
         public string? Strength { get; set; }
 
-        [ForeignKey("ActiveIngredientRecord")]
-        public int? ActiveIngredientId { get; set; }
-        public virtual ActiveIngredientRecord? ActiveIngredientRecords { get; set; }
+        public string? Strength2 { get; set; }
 
+        public string? Strength3 { get; set; }
+
+        public string? Strength4 { get; set; }
+
+        [ForeignKey("ActiveIngredientRecord")]
+        public int? ActiveIngredientId1 { get; set; }
+        public virtual ActiveIngredientRecord? ActiveIngredientRecord1 { get; set; }
+
+        [ForeignKey("ActiveIngredientRecord")]
+        public int? ActiveIngredientId2 { get; set; }
+        public virtual ActiveIngredientRecord? ActiveIngredientRecord2 { get; set; }
+
+        [ForeignKey("ActiveIngredientRecord")]
+        public int? ActiveIngredientId3 { get; set; }
+        public virtual ActiveIngredientRecord? ActiveIngredientRecord3 { get; set; }
+
+        [ForeignKey("ActiveIngredientRecord")]
+        public int? ActiveIngredientId4 { get; set; }
+        public virtual ActiveIngredientRecord? ActiveIngredientRecord4 { get; set; }
 
         [ForeignKey("Schedule")]
         public int? ScheduleId { get; set; }
@@ -27,7 +43,7 @@ namespace E_Prescription2.Models
         public int? DosageFormId { get; set; }
         public virtual DosageForm? DosageForms { get; set; }
         
-       
+       public string? MedicationName { get; set; }
 
 
         

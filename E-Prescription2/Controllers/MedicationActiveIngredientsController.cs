@@ -37,11 +37,14 @@ namespace E_Prescription2.Controllers
             {
                 ViewData["CurrentFilter"] = SearchString;
                 var applicationDbContexts = _context.MedicationActiveIngredient
-                  .Include(m => m.ActiveIngredientRecords)
+                  .Include(m => m.ActiveIngredientRecord1)
+                  .Include(m => m.ActiveIngredientRecord2)
+                  .Include(m => m.ActiveIngredientRecord3)
+                  .Include(m => m.ActiveIngredientRecord4)
                   .Include(m => m.DosageForms)
-                  .Include(m => m.MedicationRecords)
+                  
                   .Include(m => m.Schedules)
-                  .Where(b=>b.MedicationRecords.MedicationName.Contains(SearchString));
+                  .Where(b=>b.MedicationName.Contains(SearchString));
 
                 return View(await applicationDbContexts.ToListAsync());
 
@@ -49,9 +52,12 @@ namespace E_Prescription2.Controllers
             else
             {
                 var applicationDbContext = _context.MedicationActiveIngredient
-                .Include(m => m.ActiveIngredientRecords)
+                .Include(m => m.ActiveIngredientRecord1)
+                .Include(m => m.ActiveIngredientRecord2)
+                  .Include(m => m.ActiveIngredientRecord3)
+                  .Include(m => m.ActiveIngredientRecord4)
                 .Include(m => m.DosageForms)
-                .Include(m => m.MedicationRecords)
+                
                 .Include(m => m.Schedules);
                 return View(await applicationDbContext.ToListAsync());
             }
@@ -69,9 +75,12 @@ namespace E_Prescription2.Controllers
             }
 
             var medicationActiveIngredient = await _context.MedicationActiveIngredient
-                .Include(m => m.ActiveIngredientRecords)
+                .Include(m => m.ActiveIngredientRecord1)
+                .Include(m => m.ActiveIngredientRecord2)
+                .Include(m=>m.ActiveIngredientRecord3)
+                .Include(m=>m.ActiveIngredientRecord4)
                 .Include(m => m.DosageForms)
-                .Include(m => m.MedicationRecords)
+                
                 .Include(m => m.Schedules)
                 .FirstOrDefaultAsync(m => m.MediActiveId == id);
             if (medicationActiveIngredient == null)
@@ -102,9 +111,12 @@ namespace E_Prescription2.Controllers
             //ViewBag.Stregnth_s=JsonConvert.SerializeObject(_context.MedicationActiveIngredient.ToList());
            
            
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
+            ViewData["ActiveIngredientId1"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
+            ViewData["ActiveIngredientId2"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
+            ViewData["ActiveIngredientId3"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
+            ViewData["ActiveIngredientId4"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName");
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName");
-            ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName");
+            
             ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName");
             ViewData["AciveIngredient"] = _context.ActiveIngredientRecords;
             return View();
@@ -115,7 +127,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MediActiveId,MedicationId,Strength,ActiveIngredientId,ScheduleId,DosageFormId")] MedicationActiveIngredient medicationActiveIngredient)
+        public async Task<IActionResult> Create([Bind("MediActiveId,MedicationName,Strength,Strength2, Strength3, Strength4 ,ActiveIngredientId1,ActiveIngredientId2,ActiveIngredientId3,ActiveIngredientId4,ScheduleId,DosageFormId")] MedicationActiveIngredient medicationActiveIngredient)
         {
 
 
@@ -127,9 +139,12 @@ namespace E_Prescription2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId);
+            ViewData["ActiveIngredientId1"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId1);
+            ViewData["ActiveIngredientId2"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId2);
+            ViewData["ActiveIngredientId3"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId3);
+            ViewData["ActiveIngredientId4"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId4);
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName", medicationActiveIngredient.DosageFormId);
-            ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName", medicationActiveIngredient.MedicationId);
+            
             ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationActiveIngredient.ScheduleId);
             return View(medicationActiveIngredient);
 
@@ -148,9 +163,12 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId);
+            ViewData["ActiveIngredientId1"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId1);
+            ViewData["ActiveIngredientId2"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId2);
+            ViewData["ActiveIngredientId3"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId3);
+            ViewData["ActiveIngredientId4"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId4);
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName", medicationActiveIngredient.DosageFormId);
-            ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName", medicationActiveIngredient.MedicationId);
+            
             ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationActiveIngredient.ScheduleId);
             return View(medicationActiveIngredient);
         }
@@ -160,7 +178,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MediActiveId,MedicationId,Strength,ActiveIngredientId,ScheduleId,DosageFormId")] MedicationActiveIngredient medicationActiveIngredient)
+        public async Task<IActionResult> Edit(int id, [Bind("MediActiveId,MedicationName,Strength,Strength2, Strength3, Strength4,ActiveIngredientId1,ActiveIngredientId2,ActiveIngredientId3,ActiveIngredientId4,ScheduleId,DosageFormId")] MedicationActiveIngredient medicationActiveIngredient)
         {
             if (id != medicationActiveIngredient.MediActiveId)
             {
@@ -187,9 +205,12 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId);
+            ViewData["ActiveIngredientId1"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId1);
+            ViewData["ActiveIngredientId2"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId2);
+            ViewData["ActiveIngredientId3"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId3);
+            ViewData["ActiveIngredientId4"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId4);
             ViewData["DosageFormId"] = new SelectList(_context.DosageForms, "DosageFormId", "DosageFormName", medicationActiveIngredient.DosageFormId);
-            ViewData["MedicationId"] = new SelectList(_context.MedicationRecords, "MedicationId", "MedicationName", medicationActiveIngredient.MedicationId);
+            
             ViewData["ScheduleId"] = new SelectList(_context.Schedule, "ScheduleId", "ScheduleName", medicationActiveIngredient.ScheduleId);
             return View(medicationActiveIngredient);
         }
@@ -203,9 +224,12 @@ namespace E_Prescription2.Controllers
             }
 
             var medicationActiveIngredient = await _context.MedicationActiveIngredient
-                .Include(m => m.ActiveIngredientRecords)
+                .Include(m => m.ActiveIngredientRecord1)
+                .Include(m => m.ActiveIngredientRecord2)
+                .Include(m => m.ActiveIngredientRecord3)
+                .Include(m => m.ActiveIngredientRecord4)
                 .Include(m => m.DosageForms)
-                .Include(m => m.MedicationRecords)
+              
                 .Include(m => m.Schedules)
                 .FirstOrDefaultAsync(m => m.MediActiveId == id);
             if (medicationActiveIngredient == null)
