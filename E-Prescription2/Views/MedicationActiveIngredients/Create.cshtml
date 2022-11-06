@@ -102,22 +102,61 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @for(int i=0;i<3; i++)
-                            {
+                          
                             <tr>
                                 <td>
-                                    <select asp-for="ActiveIngredientId" class="form-control" asp-items="ViewBag.ActiveIngredientId"><option></option></select>
+                                    <select asp-for="ActiveIngredientId1" class="form-control" asp-items="ViewBag.ActiveIngredientId1"><option></option></select>
                                 </td>
                                 <td>
                                     <input asp-for="Strength" class="form-control" /> 
                                 </td>
                                 <td style="width:60px;">
-                                        <button id='btnremove-@i' type="button" class="btn btn-sm btn-danger visible">
+                                        <button id='btnremove' type="button" class="btn btn-sm btn-danger visible">
                                             Delete
                                     </button>
                                 </td>
                             </tr>
-                        }
+                            <tr>
+                                <td>
+                                    <select asp-for="ActiveIngredientId2" class="form-control" asp-items="ViewBag.ActiveIngredientId2"><option></option></select>
+                                </td>
+                                <td>
+                                    <input asp-for="Strength2" class="form-control" />
+                                </td>
+                                <td style="width:60px;">
+                                    <button id='btnremove' type="button" class="btn btn-sm btn-danger visible">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select asp-for="ActiveIngredientId3" class="form-control" asp-items="ViewBag.ActiveIngredientId3"><option></option></select>
+                                </td>
+                                <td>
+                                    <input asp-for="Strength3" class="form-control" />
+                                </td>
+                                <td style="width:60px;">
+                                    <button id='btnremove' type="button" class="btn btn-sm btn-danger visible">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select asp-for="ActiveIngredientId4" class="form-control" asp-items="ViewBag.ActiveIngredientId4"><option></option></select>
+                                </td>
+                                <td>
+                                    <input asp-for="Strength4" class="form-control" />
+                                </td>
+                                <td style="width:60px;">
+                                    <button id='btnremove' type="button" class="btn btn-sm btn-danger visible">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+
+                        
                     </tbody>
                 </table>
             </fieldset>

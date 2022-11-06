@@ -75,7 +75,7 @@
                 @Html.DisplayNameFor(model => model.Strength)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
+                Active Ingredients
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Schedules)
@@ -93,10 +93,20 @@
                 @Html.DisplayFor(modelItem => item.MedicationName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Strength)
+                        <p>@Html.DisplayFor(modelItem => item.Strength) </p>
+                        <p>@Html.DisplayFor(modelItem => item.Strength2) </p>
+                        <p>@Html.DisplayFor(modelItem => item.Strength3) </p>
+                        <p>@Html.DisplayFor(modelItem => item.Strength4) </p>
+
+
+
+               
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientName)
+                        <p>@Html.DisplayFor(modelItem => item.ActiveIngredientRecord1.ActiveIngredientName) </p>
+                        <p>@Html.DisplayFor(modelItem => item.ActiveIngredientRecord2.ActiveIngredientName) </p>
+                        <p>@Html.DisplayFor(modelItem => item.ActiveIngredientRecord3.ActiveIngredientName) </p>
+                        <p>@Html.DisplayFor(modelItem => item.ActiveIngredientRecord4.ActiveIngredientName) </p>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Schedules.ScheduleName)

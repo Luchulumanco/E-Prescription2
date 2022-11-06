@@ -51,9 +51,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         //    .HasForeignKey(ba => ba.MedicationId);
         //one-to-many relationship between ActiveIngredientRecords and MedicationRecordsActiveIngredient
         builder.Entity<MedicationActiveIngredient>()
-            .HasOne(ba => ba.ActiveIngredientRecords)
+            .HasOne(ba => ba.ActiveIngredientRecord1)
             .WithMany()
-            .HasForeignKey(ba => ba.ActiveIngredientId);
+            .HasForeignKey(ba => ba.ActiveIngredientId1);
+
+        builder.Entity<MedicationActiveIngredient>()
+            .HasOne(ba => ba.ActiveIngredientRecord2)
+            .WithMany()
+            .HasForeignKey(ba => ba.ActiveIngredientId2);
+
+        builder.Entity<MedicationActiveIngredient>()
+            .HasOne(ba => ba.ActiveIngredientRecord3)
+            .WithMany()
+            .HasForeignKey(ba => ba.ActiveIngredientId3);
+        builder.Entity<MedicationActiveIngredient>()
+            .HasOne(ba => ba.ActiveIngredientRecord4)
+            .WithMany()
+            .HasForeignKey(ba => ba.ActiveIngredientId4);
+
         //one-to-many relationship between ActiveIngredientRecords and ContraIndication
         builder.Entity<ContraIndication>()
             .HasOne(ba => ba.ActiveIngredientRecords)
