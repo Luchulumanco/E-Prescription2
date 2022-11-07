@@ -225,15 +225,15 @@
                 thisSuburbs.add(newOption, undefined);
             }
         }
-        thisPostalCodes.innerHTML = "";
-        for (var i = 0; i < allPostalCodes.length; i++) {
-            var obj = allPostalCodes[i];
-            let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-            if (selectedSuburb == obj["PostalCodeId"]) {
-                let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                thisPostalCodes.add(newOption, undefined);
-            }
-        }
+        //thisPostalCodes.innerHTML = "";
+        //for (var i = 0; i < allPostalCodes.length; i++) {
+        //    var obj = allPostalCodes[i];
+        //    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+        //    if (selectedSuburb == obj["PostalCodeId"]) {
+        //        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+        //        thisPostalCodes.add(newOption, undefined);
+        //    }
+        //}
 
         if (thisProvinces) {
             thisProvinces.addEventListener("change", function () {
@@ -255,15 +255,15 @@
                         thisSuburbs.add(newOption, undefined);
                     }
                 }
-                thisPostalCodes.innerHTML = "";
-                for (var i = 0; i < allPostalCodes.length; i++) {
-                    var obj = allPostalCodes[i];
-                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-                    if (selectedSuburb == obj["PostalCodeId"]) {
-                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                        thisPostalCodes.add(newOption, undefined);
-                    }
-                }
+                //thisPostalCodes.innerHTML = "";
+                //for (var i = 0; i < allPostalCodes.length; i++) {
+                //    var obj = allPostalCodes[i];
+                //    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                //    if (selectedSuburb == obj["PostalCodeId"]) {
+                //        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                //        thisPostalCodes.add(newOption, undefined);
+                //    }
+                //}
             })
         }
         if (thisCities) {
@@ -278,30 +278,30 @@
                         thisSuburbs.add(newOption, undefined);
                     }
                 }
-                thisPostalCodes.innerHTML = "";
-                for (var i = 0; i < allPostalCodes.length; i++) {
-                    var obj = allPostalCodes[i];
-                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-                    if (selectedSuburb == obj["PostalCodeId"]) {
-                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                        thisPostalCodes.add(newOption, undefined);
-                    }
-                }
+                //thisPostalCodes.innerHTML = "";
+                //for (var i = 0; i < allPostalCodes.length; i++) {
+                //    var obj = allPostalCodes[i];
+                //    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                //    if (selectedSuburb == obj["PostalCodeId"]) {
+                //        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                //        thisPostalCodes.add(newOption, undefined);
+                //    }
+                //}
             });
         }
-        if (thisSuburbs) {
-            thisSuburbs.addEventListener("change", function () {
-                thisPostalCodes.innerHTML = "";
-                for (var i = 0; i < allPostalCodes.length; i++) {
-                    var obj = allPostalCodes[i];
-                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-                    if (selectedSuburb == obj["PostalCodeId"]) {
-                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                        thisPostalCodes.add(newOption, undefined);
-                    }
-                }
-            });
-        }
+        //if (thisSuburbs) {
+        //    thisSuburbs.addEventListener("change", function () {
+        //        thisPostalCodes.innerHTML = "";
+        //        for (var i = 0; i < allPostalCodes.length; i++) {
+        //            var obj = allPostalCodes[i];
+        //            let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+        //            if (selectedSuburb == obj["PostalCodeId"]) {
+        //                let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+        //                thisPostalCodes.add(newOption, undefined);
+        //            }
+        //        }
+        //    });
+        //}
     }
 </script>
  @*   <div class="col-md-6 col-md-offset-2">
