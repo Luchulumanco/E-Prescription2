@@ -32,7 +32,7 @@ namespace E_Prescription2.Controllers
             //.Where(b => b.MedicationRecords.MedicationName.Equals("Concerta"));
 
             ViewData["CurrentFilter"] = SearchString;
-
+            ViewBag.mssg = TempData["mssg"] as string;
             if (!String.IsNullOrEmpty(SearchString))
             {
                 ViewData["CurrentFilter"] = SearchString;
@@ -135,8 +135,8 @@ namespace E_Prescription2.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(medicationActiveIngredient);
-                TempData["Message"] = "Medication Added";
                 await _context.SaveChangesAsync();
+                TempData["mssg"] = "Medication Added";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActiveIngredientId1"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationActiveIngredient.ActiveIngredientId1);

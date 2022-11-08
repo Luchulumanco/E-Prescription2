@@ -22,6 +22,7 @@ namespace E_Prescription2.Controllers
         // GET: DispenseDetails
         public async Task<IActionResult> Index()
         {
+            ViewBag.mssg = TempData["mssg"] as string;
             var applicationDbContext = _context.DispenseDetails.Include(d => d.PharmacistUser).Include(d => d.PharmacyRecords);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -65,7 +66,8 @@ namespace E_Prescription2.Controllers
             //{
                 _context.Add(dispenseDetails);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            TempData["mssg"] = "Dispensed Medication, Thank you ";
+            return RedirectToAction(nameof(Index));
             //}
             ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "FullName", dispenseDetails.PharmacistId);
             ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyName", dispenseDetails.PharmacyId);

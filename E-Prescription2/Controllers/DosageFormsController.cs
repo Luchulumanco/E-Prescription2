@@ -25,7 +25,8 @@ namespace E_Prescription2.Controllers
         // GET: DosageForms
         public async Task<IActionResult> Index()
         {
-              return View(await _context.DosageForms.ToListAsync());
+            ViewBag.mssg = TempData["mssg"] as string;
+            return View(await _context.DosageForms.ToListAsync());
         }
 
         // GET: DosageForms/Details/5
@@ -63,6 +64,7 @@ namespace E_Prescription2.Controllers
             {
                 _context.Add(dosageForm);
                 await _context.SaveChangesAsync();
+                TempData["mssg"] = "Dosage Form Added";
                 return RedirectToAction(nameof(Index));
             }
             return View(dosageForm);

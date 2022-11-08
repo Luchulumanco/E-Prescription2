@@ -143,4 +143,14 @@
     </tbody>
 </table>
     </div>
+@section scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        var strValue = "@((string)ViewBag.mssg)";
+        if (strValue !== null && strValue !== '') {
+            swal("", strValue, "success");
+        }
+    </script>
+}
 

@@ -25,6 +25,7 @@ namespace E_Prescription2.Controllers
         // GET: MedicationInteractions
         public async Task<IActionResult> Index(string SearchString)
         {
+            ViewBag.mssg = TempData["mssg"] as string;
             ViewData["CurrentFilter"] = SearchString;
 
             if (!String.IsNullOrEmpty(SearchString))
@@ -85,7 +86,9 @@ namespace E_Prescription2.Controllers
             {
                 _context.Add(medicationInteraction);
                 await _context.SaveChangesAsync();
+                TempData["mssg"] = "Medication Interactions Added, Thank you ";
                 return RedirectToAction(nameof(Index));
+
             }
             ViewData["ActiveOne"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationInteraction.ActiveOne);
             ViewData["ActiveTwo"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", medicationInteraction.ActiveTwo);

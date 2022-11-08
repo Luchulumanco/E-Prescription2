@@ -4,12 +4,7 @@
     ViewData["Title"] = "Index";
 
 }
-@if(TempData["Message"] != null)
-{
-    <script>
-        window.alert("@TempData["Message"]");
-    </script>
-}
+
 <style>
     .modal {
         text-align: center;
@@ -102,3 +97,14 @@
     </tbody>
 </table>
 </fieldset>
+
+@section scripts{
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+            var strValue = "@((string)ViewBag.mssg)";
+            if (strValue !== null && strValue !== '') {
+                swal("", strValue, "success");
+            }
+        </script>
+                        }

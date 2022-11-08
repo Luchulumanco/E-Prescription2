@@ -26,7 +26,7 @@ namespace E_Prescription2.Controllers
         public async Task<IActionResult> Index(string SearchString)
         {
             ViewData["CurrentFilter"] = SearchString;
-
+            ViewBag.mssg = TempData["mssg"] as string;
             if (!String.IsNullOrEmpty(SearchString))
             {
                 ViewData["CurrentFilter"] = SearchString;
@@ -86,6 +86,7 @@ namespace E_Prescription2.Controllers
             {
                 _context.Add(contraIndication);
                 await _context.SaveChangesAsync();
+                TempData["mssg"] = "Contra-Indication Added";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActiveIngredientId"] = new SelectList(_context.ActiveIngredientRecords, "ActiveIngredientId", "ActiveIngredientName", contraIndication.ActiveIngredientId);

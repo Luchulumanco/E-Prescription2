@@ -25,6 +25,7 @@ namespace E_Prescription2.Controllers
         // GET: Conditions
         public async Task<IActionResult> Index(string SearchString)
         {
+            ViewBag.mssg = TempData["mssg"] as string;
             ViewData["CurrentFilter"] = SearchString;
             var applicationDbContextss = _context.Conditions;
                 
@@ -87,6 +88,7 @@ namespace E_Prescription2.Controllers
             {
                 _context.Add(condition);
                 await _context.SaveChangesAsync();
+                TempData["mssg"] = "Condition Added, Thank you ";
                 return RedirectToAction(nameof(Index));
             }
             return View(condition);

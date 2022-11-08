@@ -27,6 +27,7 @@ namespace E_Prescription2.Controllers
         public async Task<IActionResult> Index(string SearchString)
         {
             ViewData["CurrentFilter"] = SearchString;
+            ViewBag.mssg = TempData["mssg"] as string;
             if (!String.IsNullOrEmpty(SearchString))
             {
                 var applicationDbContext = _context.MedicalPracticeRecords
@@ -96,6 +97,7 @@ namespace E_Prescription2.Controllers
             {
                 _context.Add(medicalPracticeRecord);
                 await _context.SaveChangesAsync();
+                TempData["mssg"] = "Medical Practice Record Added";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CityId"] = new SelectList(_context.Cities, "CityId", "CityName", medicalPracticeRecord.CityId);
