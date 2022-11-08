@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<a class="" href="~/Patient/Index"><button type="button" class="btn btn-outline-primary">Back to Patient</button></ </a>
+<div><a class="btn btn-outline-primary" href="~/Patient/Index">Back to Patien</a> </div>
 <style>
     .modal {
         text-align: center;
@@ -53,8 +53,8 @@
     
 
 
-<table class="table">
-    <thead>
+<table class="table table-bordered">
+        <thead class="table-primary ">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.DoctorUser)
@@ -62,9 +62,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PatientUser)
             </th>
-            <th>
-                    <label>@Html.DisplayNameFor(model => model.PrescriptionLines) Status</label>
-                </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.DateTime)
             </th>
@@ -82,9 +80,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PatientUser.FullName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrescriptionLines.dispenseDetails.Status)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>

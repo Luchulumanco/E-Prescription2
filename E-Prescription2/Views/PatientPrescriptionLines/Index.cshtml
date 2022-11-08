@@ -48,17 +48,17 @@
 <fieldset>
     <legend>Patient Prescription Line </legend>
 
-    <a class="" href="~/Patient/Index"><button type="button" class="btn btn-outline-primary">Back to Patient</button></ </a>
+    <div><a class="btn btn-outline-primary" href="~/Patient/Index">Back to Patien</a> </div>
+
+
     <div class="table-responsive">
-<table class="table">
-    <thead>
+        <table class="table table-bordered">
+            <thead class="table-primary ">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.medicationActive)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dispenseDetails)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
@@ -78,10 +78,10 @@
                     @Html.DisplayNameFor(model => model.dispenseDetails.Status)
                 </th>
             <th>
-                <label>Pharmacist @Html.DisplayNameFor(model => model.dispenseDetails.PharmacistId)</label>
+                <label>Pharmacist</label>
             </th>
             <th>
-                <label>Pharmacy Name @Html.DisplayNameFor(model => model.dispenseDetails.PharmacyRecords.PharmacyName)</label>
+                <label>Pharmacy Name </label>
             </th>
         </tr>
     </thead>
@@ -91,9 +91,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.medicationActive.MedicationName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dispenseDetails.Date)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>

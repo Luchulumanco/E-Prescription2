@@ -22,7 +22,10 @@ namespace E_Prescription2.Controllers
         // GET: PrescriptionLines
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PrescriptionLines.Include(p => p.dispenseDetails).Include(p => p.medicationActive);
+            var applicationDbContext = _context.PrescriptionLines
+                .Include(p => p.dispenseDetails.PharmacistUser)
+                .Include(p => p.medicationActive)
+                .Include(p => p.dispenseDetails.PharmacyRecords);
             return View(await applicationDbContext.ToListAsync());
         }
 

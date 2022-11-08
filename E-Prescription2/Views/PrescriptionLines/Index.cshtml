@@ -7,16 +7,14 @@
 
 
     <p class="h2">Create New Prescription Line</p>
-
-<table class="table">
-    <thead>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="table-primary ">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.medicationActive)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dispenseDetails)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
@@ -36,22 +34,21 @@
                 @Html.DisplayNameFor(model => model.dispenseDetails.Status)
             </th>
             <th>
-                <label>Pharmacist @Html.DisplayNameFor(model => model.dispenseDetails.PharmacistId)</label>
+                <label>Pharmacist</label>
             </th>
             <th>
-                <label>Pharmacy Name @Html.DisplayNameFor(model => model.dispenseDetails.PharmacyRecords.PharmacyName)</label>
+                <label>Pharmacy Name </label>
             </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+            
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.medicationActive.MediActiveId)
+                @Html.DisplayFor(modelItem => item.medicationActive.MedicationName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dispenseDetails.DispenseId)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
@@ -88,4 +85,5 @@
     
     
 </table>
+</div>
 <button type="button" class="btn btn-warning">Back to Home</button>
