@@ -1,7 +1,10 @@
-﻿@model IEnumerable<E_Prescription2.Models.PrescriptionLine>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<E_Prescription2.Models.PrescriptionLine>
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
+   
 }
 <style>
     .modal {
@@ -55,8 +58,9 @@
         <table class="table table-bordered">
             <thead class="table-primary ">
         <tr>
+                    
             <th>
-                @Html.DisplayNameFor(model => model.medicationActive)
+                Medication 
             </th>
             
             <th>
@@ -85,47 +89,54 @@
             </th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.medicationActive.MedicationName)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Instruction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Repeats)
-            </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dispenseDetails.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dispenseDetails.RepeatsLeft)
-                </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.dispenseDetails.Status)
-                    </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dispenseDetails.PharmacistUser.FullName)
-                </td>
-               
-                <td>
-                    @Html.DisplayFor(modelItem => item.dispenseDetails.PharmacyRecords.PharmacyName)
-                </td>
-            <td>
-                        <a asp-action="Edit" asp-route-id="@item.PrescriptionLineId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrescriptionLineId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.PrescriptionLineId">Delete</a> |
-                
-            </td>
-        </tr>
-}
-    </tbody>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    
+                    
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.medicationActive.MedicationName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instruction)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Repeats)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dispenseDetails.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dispenseDetails.RepeatsLeft)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dispenseDetails.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dispenseDetails.PharmacistUser.FullName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dispenseDetails.PharmacyRecords.PharmacyName)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.PrescriptionLineId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.PrescriptionLineId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.PrescriptionLineId">Delete</a> |
+
+                            </td>
+
+                        </tr>
+                    
+
+                }
+            </tbody>
 </table>
 </div>
 </fieldset>

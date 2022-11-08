@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var Count = 1;
 }
 
 <p class="h1">View Prescription</p>
@@ -12,23 +13,25 @@
 <table class="table">
     <thead>
         <tr>
+            
             <th>
-                @Html.DisplayNameFor(model => model.DoctorUser)
+                PRESCRIBING DOCTOR
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PatientUser)
+                PATIENT
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateTime)
+                PRESCRIPTION DATE
             </th>
             <th>
-                 Prescription Line
+                 PRESCRIPTION LINE
             </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                
             <td>
                 @Html.DisplayFor(modelItem => item.DoctorUser.FullName)
             </td>

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<E_Prescription2.Models.Prescription>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<E_Prescription2.Models.Prescription>
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -57,14 +59,15 @@
         <thead class="table-primary ">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DoctorUser)
+                PRESCRIBING DOCTOR
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PatientUser)
+                PATIENT
             </th>
+                
             
             <th>
-                @Html.DisplayNameFor(model => model.DateTime)
+                PRESCRIPTION DATE
             </th>
             <th>
                 Prescription Line
@@ -73,14 +76,17 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
+                @if (UserManager.GetUserAsync(User).Result.FullName == item.PatientUser.FullName)
+                {
+           <tr>
+             <td>
                 @Html.DisplayFor(modelItem => item.DoctorUser.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PatientUser.FullName)
             </td>
-            
+                        
+                                    
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
@@ -95,6 +101,7 @@
                 
             </td>
         </tr>
+        }
 }
     </tbody>
 </table>

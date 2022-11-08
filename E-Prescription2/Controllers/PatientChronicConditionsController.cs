@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
 using Microsoft.AspNetCore.Identity;
+using E_Prescription2.Areas.Identity.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Prescription2.Controllers
 {
+    [Authorize(Roles = "Patient")]
     public class PatientChronicConditionsController : Controller
     {
         private readonly ApplicationDbContext _context;

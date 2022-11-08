@@ -51,6 +51,7 @@ namespace E_Prescription2.Controllers
         {
             ViewData["DoctorId"] = new SelectList(_context.Users, "Id", "FullName");
             ViewData["PatientID"] = new SelectList(_context.Users, "Id", "FullName");
+            
             return View();
         }
 

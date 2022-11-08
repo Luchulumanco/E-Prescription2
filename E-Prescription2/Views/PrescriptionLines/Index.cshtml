@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    List<Prescription> postalCodes = (List<Prescription>)ViewData["Prescription"];
 }
 
 
@@ -11,40 +12,50 @@
     <table class="table table-bordered">
         <thead class="table-primary ">
         <tr>
+                <th>
+                    <label>NO: </label>
+                </th>
+                
             <th>
-                @Html.DisplayNameFor(model => model.medicationActive)
+                    <label>MEDICATION </label>
             </th>
             
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+                    <label>QUANTITY </label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Instruction)
+                    <label>INSTRUCTIONS </label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Repeats)
+                    <label>REPEATS </label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dispenseDetails.Date)
+                    <label>DISPENCING DATE </label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dispenseDetails.RepeatsLeft)
+                    <label>REPEATS LEFT </label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dispenseDetails.Status)
+                    <label>STATUS </label>
             </th>
             <th>
-                <label>Pharmacist</label>
+                <label>PHARMACIST</label>
             </th>
             <th>
-                <label>Pharmacy Name </label>
+                <label>PHARMACY NAME </label>
             </th>
         </tr>
     </thead>
     <tbody>
+        
 @foreach (var item in Model) {
+    
             
         <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrescriptionLineId)
+                    </td>
+                   
             <td>
                 @Html.DisplayFor(modelItem => item.medicationActive.MedicationName)
             </td>

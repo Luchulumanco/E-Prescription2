@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Prescription2.Areas.Identity.Data;
 using E_Prescription2.Models;
+using E_Prescription2.Areas.Identity.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Prescription2.Controllers
 {
+    [Authorize(Roles = "Patient")]
     public class PatientPrescriptionsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +25,7 @@ namespace E_Prescription2.Controllers
         // GET: PatientPrescriptions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Prescriptions.Include(p => p.DoctorUser).Include(p=>p.PrescriptionLines.dispenseDetails)
+            var applicationDbContext = _context.Prescriptions.Include(p => p.DoctorUser).Include(p=>p.PrescriptionLines)
                 .Include(p => p.PatientUser)
                 .Include(p => p.PrescriptionLines);
             return View(await applicationDbContext.ToListAsync());
