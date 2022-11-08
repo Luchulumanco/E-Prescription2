@@ -65,8 +65,8 @@
 </fieldset>
 <div class="table-responsive">
 
-    <table class="table table-striped table-bordered">
-    <thead>
+    <table class="table   table-striped table-bordered">
+        <thead class="table-primary">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.PharmacyName)
@@ -99,8 +99,8 @@
                 @Html.DisplayNameFor(model => model.LicenseNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
+                    <label>Pharmacist Responsible @Html.DisplayNameFor(model => model.User)</label>
+                </th>
             <th></th>
         </tr>
     </thead>

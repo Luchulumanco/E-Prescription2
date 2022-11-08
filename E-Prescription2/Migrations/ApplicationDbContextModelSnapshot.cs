@@ -600,11 +600,16 @@ namespace E_Prescription2.Migrations
                     b.Property<string>("PatientID")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("prescriptionLineId")
+                        .HasColumnType("int");
+
                     b.HasKey("PrescriptionID");
 
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientID");
+
+                    b.HasIndex("prescriptionLineId");
 
                     b.ToTable("Prescriptions", "Identity");
                 });
@@ -1140,9 +1145,15 @@ namespace E_Prescription2.Migrations
                         .WithMany()
                         .HasForeignKey("PatientID");
 
+                    b.HasOne("E_Prescription2.Models.PrescriptionLine", "PrescriptionLines")
+                        .WithMany()
+                        .HasForeignKey("prescriptionLineId");
+
                     b.Navigation("DoctorUser");
 
                     b.Navigation("PatientUser");
+
+                    b.Navigation("PrescriptionLines");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PrescriptionLine", b =>

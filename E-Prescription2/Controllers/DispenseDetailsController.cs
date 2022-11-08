@@ -49,8 +49,8 @@ namespace E_Prescription2.Controllers
         // GET: DispenseDetails/Create
         public IActionResult Create()
         {
-            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber");
+            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "FullName");
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyName");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace E_Prescription2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id", dispenseDetails.PharmacistId);
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber", dispenseDetails.PharmacyId);
+            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "FullName", dispenseDetails.PharmacistId);
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyName", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
         }
 
@@ -85,8 +85,8 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id", dispenseDetails.PharmacistId);
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber", dispenseDetails.PharmacyId);
+            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "FullName", dispenseDetails.PharmacistId);
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyName", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
         }
 
@@ -122,8 +122,8 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "Id", dispenseDetails.PharmacistId);
-            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "LicenseNumber", dispenseDetails.PharmacyId);
+            ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "FullName", dispenseDetails.PharmacistId);
+            ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyName", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
         }
 

@@ -1,6 +1,10 @@
 ﻿@model E_Prescription2.Models.MedicalPracticeRecord
 
 @{
+    List<Province> province = (List<Province>)ViewData["Provinces"];
+    List<City> cities = (List<City>)ViewData["Cities"];
+    List<Suburb> suburbs = (List<Suburb>)ViewData["Suburbs"];
+    List<PostalCode> postalCodes = (List<PostalCode>)ViewData["PostalCodes"];
     ViewData["Title"] = "Create";
 }
 <style>
@@ -106,7 +110,10 @@
             <div class="form-group">
                 <label asp-for="PostalCodeId" class="control-label">Postal Code</label>
                 <select class="form-control" id="pagePostalCodeElement" asp-for="PostalCodeId">
-                    <option>---select postal code---</option>
+                        @foreach (PostalCode c in postalCodes)
+                        {
+                            <option value="@c.PostalCodeId">@c.PostalCodeName</option>
+                        }
                 </select>
             </div>
             <div class="form-group">
@@ -144,10 +151,10 @@
 
     <script>
 
-        var srlProvs = "@(ViewBag.Prov_s)";
-    var srlCities = "@(ViewBag.City_s)";
-    var srlSuburbs = "@(ViewBag.Suburb_s)";
-    var srlPostalCodes = "@ViewBag.PostalCode_s";
+        var srlProvs = "@(ViewData["Prov_s"])";
+    var srlCities = "@(ViewData["City_s"])";
+    var srlSuburbs = "@(ViewData["Suburb_s"])";
+    var srlPostalCodes = "@ViewData["PostalCode_s"]";
 
     var thisProvinces = document.getElementById('pageProvinceElement');
     var thisCities = document.getElementById('pageCityElement');
@@ -176,15 +183,15 @@
                 thisSuburbs.add(newOption, undefined);
             }
         }
-        thisPostalCodes.innerHTML = "";
-        for (var i = 0; i < allPostalCodes.length; i++) {
-            var obj = allPostalCodes[i];
-            let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-            if (selectedSuburb == obj["PostalCodeId"]) {
-                let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                thisPostalCodes.add(newOption, undefined);
-            }
-        }
+        //thisPostalCodes.innerHTML = "";
+        //for (var i = 0; i < allPostalCodes.length; i++) {
+        //    var obj = allPostalCodes[i];
+        //    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+        //    if (selectedSuburb == obj["PostalCodeId"]) {
+        //        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+        //        thisPostalCodes.add(newOption, undefined);
+        //    }
+        //}
 
         if (thisProvinces) {
             thisProvinces.addEventListener("change", function () {
@@ -206,15 +213,15 @@
                         thisSuburbs.add(newOption, undefined);
                     }
                 }
-                thisPostalCodes.innerHTML = "";
-                for (var i = 0; i < allPostalCodes.length; i++) {
-                    var obj = allPostalCodes[i];
-                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-                    if (selectedSuburb == obj["PostalCodeId"]) {
-                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                        thisPostalCodes.add(newOption, undefined);
-                    }
-                }
+                //thisPostalCodes.innerHTML = "";
+                //for (var i = 0; i < allPostalCodes.length; i++) {
+                //    var obj = allPostalCodes[i];
+                //    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                //    if (selectedSuburb == obj["PostalCodeId"]) {
+                //        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                //        thisPostalCodes.add(newOption, undefined);
+                //    }
+                //}
             })
         }
         if (thisCities) {
@@ -229,29 +236,29 @@
                         thisSuburbs.add(newOption, undefined);
                     }
                 }
-                thisPostalCodes.innerHTML = "";
-                for (var i = 0; i < allPostalCodes.length; i++) {
-                    var obj = allPostalCodes[i];
-                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-                    if (selectedSuburb == obj["PostalCodeId"]) {
-                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                        thisPostalCodes.add(newOption, undefined);
-                    }
-                }
+                //thisPostalCodes.innerHTML = "";
+                //for (var i = 0; i < allPostalCodes.length; i++) {
+                //    var obj = allPostalCodes[i];
+                //    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+                //    if (selectedSuburb == obj["PostalCodeId"]) {
+                //        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+                //        thisPostalCodes.add(newOption, undefined);
+                //    }
+                //}
             });
         }
-        if (thisSuburbs) {
-            thisSuburbs.addEventListener("change", function () {
-                thisPostalCodes.innerHTML = "";
-                for (var i = 0; i < allPostalCodes.length; i++) {
-                    var obj = allPostalCodes[i];
-                    let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
-                    if (selectedSuburb == obj["PostalCodeId"]) {
-                        let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
-                        thisPostalCodes.add(newOption, undefined);
-                    }
-                }
-            });
-        }
+        //if (thisSuburbs) {
+        //    thisSuburbs.addEventListener("change", function () {
+        //        thisPostalCodes.innerHTML = "";
+        //        for (var i = 0; i < allPostalCodes.length; i++) {
+        //            var obj = allPostalCodes[i];
+        //            let selectedSuburb = thisSuburbs.options[thisSuburbs.selectedIndex].value;
+        //            if (selectedSuburb == obj["PostalCodeId"]) {
+        //                let newOption = new Option(obj["PostalCodeName"], obj["PostalCodeId"]);
+        //                thisPostalCodes.add(newOption, undefined);
+        //            }
+        //        }
+        //    });
+        //}
     }
-</script>               
+</script>              

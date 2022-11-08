@@ -154,7 +154,7 @@ namespace E_Prescription2.Areas.Identity.Pages.Account
             [Display(Name ="Registration Number*")]
             [MaxLength(6)]
             [MinLength(6, ErrorMessage = "A minimum of 6 characters is needed for a registration number")]
-            [RegularExpression("([0-6]+)", ErrorMessage = "Please enter a valid registration number")]
+           
             public string RegistrationNumber { get;set; }
 
             [ForeignKey("PharmacyRecords")]

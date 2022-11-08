@@ -166,6 +166,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasOne(ba => ba.PostalCodes)
             .WithMany()
             .HasForeignKey(ba => ba.PostalCodeId);
+        builder.Entity<Prescription>()
+            .HasOne(ba => ba.PrescriptionLines)
+            .WithMany()
+            .HasForeignKey(ba => ba.prescriptionLineId);
+
         
 
 
