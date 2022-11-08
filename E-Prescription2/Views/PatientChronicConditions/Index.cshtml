@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IEnumerable<E_Prescription2.Models.ChronicCondition>
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 
 @{
@@ -14,8 +15,8 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-@if ((SignInManager.IsSignedIn(User)) )
-{
+
+
     <table class="table">
         <thead>
             <tr>
@@ -37,6 +38,10 @@
         <tbody>
             @foreach (var item in Model)
             {
+                @if (UserManager.GetUserAsync(User).Result.FullName == item.User.FullName)
+                {
+
+
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Conditions.ICD_10_CODE)
@@ -46,8 +51,11 @@
                     </td>
                     <td>
 
-
+                    
+                    
                         @Html.DisplayFor(modelItem => item.User.FullName)
+                    
+                        
 
 
                     </td>
@@ -60,8 +68,9 @@
                         <a asp-action="Delete" asp-route-id="@item.ChronicId">Delete</a>
                     </td>
                 </tr>
+                }
             }
         </tbody>
     </table>
-}
+
 
