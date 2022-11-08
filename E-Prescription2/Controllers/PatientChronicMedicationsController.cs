@@ -10,23 +10,23 @@ using E_Prescription2.Models;
 
 namespace E_Prescription2.Controllers
 {
-    public class ChronicMedicationsController : Controller
+    public class PatientChronicMedicationsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChronicMedicationsController(ApplicationDbContext context)
+        public PatientChronicMedicationsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ChronicMedications
+        // GET: PatientChronicMedications
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.ChronicMedications.Include(c => c.MediActiveIngredient).Include(c => c.PatientUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: ChronicMedications/Details/5
+        // GET: PatientChronicMedications/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ChronicMedications == null)
@@ -46,7 +46,7 @@ namespace E_Prescription2.Controllers
             return View(chronicMedication);
         }
 
-        // GET: ChronicMedications/Create
+        // GET: PatientChronicMedications/Create
         public IActionResult Create()
         {
             ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MedicationName");
@@ -54,7 +54,7 @@ namespace E_Prescription2.Controllers
             return View();
         }
 
-        // POST: ChronicMedications/Create
+        // POST: PatientChronicMedications/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -72,7 +72,7 @@ namespace E_Prescription2.Controllers
             return View(chronicMedication);
         }
 
-        // GET: ChronicMedications/Edit/5
+        // GET: PatientChronicMedications/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ChronicMedications == null)
@@ -90,7 +90,7 @@ namespace E_Prescription2.Controllers
             return View(chronicMedication);
         }
 
-        // POST: ChronicMedications/Edit/5
+        // POST: PatientChronicMedications/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -127,7 +127,7 @@ namespace E_Prescription2.Controllers
             return View(chronicMedication);
         }
 
-        // GET: ChronicMedications/Delete/5
+        // GET: PatientChronicMedications/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ChronicMedications == null)
@@ -147,7 +147,7 @@ namespace E_Prescription2.Controllers
             return View(chronicMedication);
         }
 
-        // POST: ChronicMedications/Delete/5
+        // POST: PatientChronicMedications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -6,9 +6,8 @@
 
 
 
-<p>
-    <p class="h2">Create New Prescription</p>
-</p>
+    <p class="h2">Create New Prescription Line</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -27,7 +26,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Repeats)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.dispenseDetails.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dispenseDetails.RepeatsLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dispenseDetails.Status)
+            </th>
+            <th>
+                <label>Pharmacist @Html.DisplayNameFor(model => model.dispenseDetails.PharmacistId)</label>
+            </th>
+            <th>
+                <label>Pharmacy Name @Html.DisplayNameFor(model => model.dispenseDetails.PharmacyRecords.PharmacyName)</label>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -48,6 +61,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Repeats)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dispenseDetails.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dispenseDetails.RepeatsLeft)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dispenseDetails.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dispenseDetails.PharmacistUser.FullName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.dispenseDetails.PharmacyRecords.PharmacyName)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PrescriptionLineId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PrescriptionLineId">Details</a> |
@@ -56,7 +85,7 @@
         </tr>
 }
     </tbody>
-    <div>
-    <button type="button" class="btn btn-warning">Back to Home</button>
-</div>
+    
+    
 </table>
+<button type="button" class="btn btn-warning">Back to Home</button>

@@ -19,19 +19,20 @@
                 @Html.DisplayNameFor(model => model.MediActiveIngredient)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                <label> Taking Since @Html.DisplayNameFor(model => model.Date)</label>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientUser.Id)
+                @Html.DisplayFor(modelItem => item.PatientUser.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MediActiveIngredient.MediActiveId)
+                @Html.DisplayFor(modelItem => item.MediActiveIngredient.MedicationName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)

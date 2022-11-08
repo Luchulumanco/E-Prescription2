@@ -1,4 +1,5 @@
-﻿@model E_Prescription2.Models.DispenseDetails
+﻿@using E_Prescription2.Areas.Identity.Enums
+@model E_Prescription2.Models.DispenseDetails
 
 @{
     ViewData["Title"] = "Create";
@@ -30,6 +31,15 @@
                 <input asp-for="RepeatsLeft" class="form-control" />
                 <span asp-validation-for="RepeatsLeft" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<StatusEnum>()" class="form-select" aria-label="Default select example">
+                <option value="">--select prescription Status--</option>
+
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

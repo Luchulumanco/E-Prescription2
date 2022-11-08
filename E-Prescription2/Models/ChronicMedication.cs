@@ -16,6 +16,8 @@ namespace E_Prescription2.Models
         public int? MedicationId { get; set; }
         public MedicationActiveIngredient? MediActiveIngredient { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-mm-dd}")]
         public DateTime Date { get; set; }  
 
 

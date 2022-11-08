@@ -14,19 +14,19 @@
             @Html.DisplayNameFor(model => model.DoctorUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DoctorUser.Id)
+            @Html.DisplayFor(model => model.DoctorUser.FullName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PatientUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PatientUser.Id)
+            @Html.DisplayFor(model => model.PatientUser.FullName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PrescriptionLines)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrescriptionLines.PrescriptionLineId)
+            @Html.DisplayFor(model => model.PrescriptionLines.dispenseDetails.Status)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DateTime)

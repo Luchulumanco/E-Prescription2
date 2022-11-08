@@ -1,4 +1,6 @@
-﻿@model IEnumerable<E_Prescription2.Models.DrugAllergy>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<E_Prescription2.Models.ChronicMedication>
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -46,48 +48,53 @@
     }
 </style>
 <fieldset>
-<h1 class="mb-3 row justify-content-center"><i class="fa-sharp fa-3x fa-solid fa-person-dots-from-line text-primary"></i>Allergies</h1>
-<hr/>
+    <legend>Patient Chronic Medication </legend>
 
-<h2 class="mb-3 row justify-content-left">Doctor </h2>
-    
-    
-   
+    <a class="" href="~/Patient/Index"><button type="button" class="btn btn-outline-primary">Back to Patient</button></ </a>
+
 
 
 <p>
-    <a asp-action="Create"><button type="button" class="btn btn-outline-info">Create New</button></a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-bordered">
+<table class="table">
     <thead>
-        
         <tr>
-           
             <th>
-                @Html.DisplayNameFor(model => model.ActiveIngredientRecords)
+                <label>Patient @Html.DisplayNameFor(model => model.PatientUser)</label>
             </th>
             <th>
-                    <label> Patient @Html.DisplayNameFor(model => model.User)</label>
-                </th>
+                @Html.DisplayNameFor(model => model.MediActiveIngredient)
+            </th>
+            <th>
+                <label> Taking Since @Html.DisplayNameFor(model => model.Date)</label>
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            @if (UserManager.GetUserAsync(User).Result.FullName == item.PatientUser.FullName)
+            {
+                <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientRecords.ActiveIngredientName)
+                @Html.DisplayFor(modelItem => item.PatientUser.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
+                @Html.DisplayFor(modelItem => item.MediActiveIngredient.MedicationName)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.DrugId"><i class="fa-sharp fa-solid fa-pen-to-square text-info"></i>Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.DrugId"><i class="fa-sharp fa-solid fa-circle-info text-primary"></i>Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.DrugId"><i class="fa-sharp fa-solid fa-trash text-danger"></i>Delete</a>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                
+                <a asp-action="Details" asp-route-id="@item.ChronicMedi">Details</a> |
+               
             </td>
         </tr>
-}
+        }
+}       
     </tbody>
 </table>
 </fieldset>

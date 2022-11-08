@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<E_Prescription2.Models.ChronicCondition>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Chronic Conditions";
 }
 
 <h1>Index</h1>
@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.Conditions.Diagnosis)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                <label>Patient @Html.DisplayNameFor(model => model.User) </label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                <label>Date Diagnosed @Html.DisplayNameFor(model => model.Date)</label>
             </th>
             <th></th>
         </tr>

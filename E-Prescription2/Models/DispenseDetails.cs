@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using E_Prescription2.Areas.Identity.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Prescription2.Models
@@ -19,5 +20,21 @@ namespace E_Prescription2.Models
         public PharmacyRecord PharmacyRecords { get; set; }
 
         public int? RepeatsLeft { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public string Status
+        {
+            get
+            {
+                return this.Statuses.ToString();
+            }
+            set
+            {
+                Statuses = (StatusEnum)Enum.Parse(typeof(StatusEnum), value, true);
+            }
+        }
+
+        public StatusEnum Statuses { get; set; }
     }
 }

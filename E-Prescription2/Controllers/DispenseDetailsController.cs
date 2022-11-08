@@ -59,14 +59,14 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DispenseId,Date,PharmacistId,PharmacyId,RepeatsLeft")] DispenseDetails dispenseDetails)
+        public async Task<IActionResult> Create([Bind("DispenseId,Date,PharmacistId,PharmacyId,RepeatsLeft,Status")] DispenseDetails dispenseDetails)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(dispenseDetails);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["PharmacistId"] = new SelectList(_context.Users, "Id", "FullName", dispenseDetails.PharmacistId);
             ViewData["PharmacyId"] = new SelectList(_context.PharmacyRecords, "PharmacyId", "PharmacyName", dispenseDetails.PharmacyId);
             return View(dispenseDetails);
@@ -95,7 +95,7 @@ namespace E_Prescription2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DispenseId,Date,PharmacistId,PharmacyId,RepeatsLeft")] DispenseDetails dispenseDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("DispenseId,Date,PharmacistId,PharmacyId,RepeatsLeft,Status")] DispenseDetails dispenseDetails)
         {
             if (id != dispenseDetails.DispenseId)
             {

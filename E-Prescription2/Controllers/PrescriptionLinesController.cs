@@ -49,8 +49,8 @@ namespace E_Prescription2.Controllers
         // GET: PrescriptionLines/Create
         public IActionResult Create()
         {
-            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "DispenseId");
-            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MediActiveId");
+            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "Status");
+            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MedicationName");
             return View();
         }
 
@@ -61,14 +61,14 @@ namespace E_Prescription2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PrescriptionLineId,MedicationId,DispenseId,Quantity,Instruction,Repeats")] PrescriptionLine prescriptionLine)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(prescriptionLine);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "DispenseId", prescriptionLine.DispenseId);
-            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MediActiveId", prescriptionLine.MedicationId);
+            //}
+            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "Status", prescriptionLine.DispenseId);
+            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MedicationName", prescriptionLine.MedicationId);
             return View(prescriptionLine);
         }
 
@@ -85,8 +85,8 @@ namespace E_Prescription2.Controllers
             {
                 return NotFound();
             }
-            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "DispenseId", prescriptionLine.DispenseId);
-            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MediActiveId", prescriptionLine.MedicationId);
+            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "Status", prescriptionLine.DispenseId);
+            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MedicationName", prescriptionLine.MedicationId);
             return View(prescriptionLine);
         }
 
@@ -122,8 +122,8 @@ namespace E_Prescription2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "DispenseId", prescriptionLine.DispenseId);
-            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "MediActiveId", prescriptionLine.MedicationId);
+            ViewData["DispenseId"] = new SelectList(_context.DispenseDetails, "DispenseId", "Status", prescriptionLine.DispenseId);
+            ViewData["MedicationId"] = new SelectList(_context.MedicationActiveIngredient, "MediActiveId", "Medication", prescriptionLine.MedicationId);
             return View(prescriptionLine);
         }
 

@@ -16,6 +16,8 @@ namespace E_Prescription2.Models
         public string? UserId { get; set; }
         public ApplicationUser? User { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-mm-dd}")]
         public DateTime Date { get;set; }
     }
 }
