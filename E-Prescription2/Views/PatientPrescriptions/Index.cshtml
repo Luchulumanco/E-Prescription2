@@ -70,8 +70,11 @@
                 PRESCRIPTION DATE
             </th>
             <th>
-                Prescription Line
+                PRESCRIPTION LINE
             </th>
+                <th>
+                    ACTIONS
+                </th>
         </tr>
     </thead>
     <tbody>
@@ -90,6 +93,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.prescriptionLineId)
+                        </td>
                 <td>
                     <a asp-action="Index" asp-controller="PatientPrescriptionLines">
                         <button type="button" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-prescription-bottle"></i>  Prescription Line  </button>
