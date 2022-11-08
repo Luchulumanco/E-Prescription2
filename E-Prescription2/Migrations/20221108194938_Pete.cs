@@ -42,6 +42,26 @@ namespace E_Prescription2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Doctors",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contact_Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HighestQualification = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PracticeNumber = table.Column<int>(type: "int", nullable: true),
+                    HealthCouncilRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Doctors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DosageForms",
                 schema: "Identity",
                 columns: table => new
@@ -67,6 +87,49 @@ namespace E_Prescription2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Genders", x => x.GenderId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patients",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddressLine1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceId = table.Column<int>(type: "int", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: true),
+                    SuburbId = table.Column<int>(type: "int", nullable: true),
+                    PostalCodeId = table.Column<int>(type: "int", nullable: true),
+                    Contact_Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pharmacists",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contact_Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Registration_Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PharmacyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pharmacists", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -712,7 +775,9 @@ namespace E_Prescription2.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PharmacistId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PharmacyId = table.Column<int>(type: "int", nullable: true),
-                    RepeatsLeft = table.Column<int>(type: "int", nullable: true)
+                    RepeatsLeft = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Statuses = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1106,11 +1171,23 @@ namespace E_Prescription2.Migrations
                 schema: "Identity");
 
             migrationBuilder.DropTable(
+                name: "Doctors",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
                 name: "DrugAllergies",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "MedicationInteractions",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Patients",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Pharmacists",
                 schema: "Identity");
 
             migrationBuilder.DropTable(

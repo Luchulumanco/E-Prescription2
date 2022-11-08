@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescription2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221108093143_Dispense")]
-    partial class Dispense
+    [Migration("20221108194938_Pete")]
+    partial class Pete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -326,6 +326,44 @@ namespace E_Prescription2.Migrations
                     b.ToTable("DispenseDetails", "Identity");
                 });
 
+            modelBuilder.Entity("E_Prescription2.Models.Doctor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Contact_Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HealthCouncilRegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestQualification")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PracticeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Doctors", "Identity");
+                });
+
             modelBuilder.Entity("E_Prescription2.Models.DosageForm", b =>
                 {
                     b.Property<int>("DosageFormId")
@@ -514,6 +552,93 @@ namespace E_Prescription2.Migrations
                     b.HasIndex("ActiveTwo");
 
                     b.ToTable("MedicationInteractions", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.Patient", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddressLine1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Contact_Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostalCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SuburbId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Patients", "Identity");
+                });
+
+            modelBuilder.Entity("E_Prescription2.Models.Pharmacist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Contact_Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PharmacyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Registration_Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pharmacists", "Identity");
                 });
 
             modelBuilder.Entity("E_Prescription2.Models.PharmacyRecord", b =>

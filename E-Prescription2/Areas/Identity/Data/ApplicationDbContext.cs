@@ -34,6 +34,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<DrugAllergy>? DrugAllergies { get; set; }
     public virtual DbSet<ChronicCondition>? ChricConditions { get; set; }
     public virtual DbSet<ChronicMedication>? ChronicMedications { get; set; }
+    public virtual DbSet<Patient>? Patients { get; set; }
+    public virtual DbSet<Doctor>? Doctors { get; set; }
+    public virtual DbSet<Pharmacist>? Pharmacists { get; set; }
 
    
  
